@@ -86,4 +86,16 @@ export const photos: Photo[] = [
     height: 1350,
     date: "2026-02-13",
   },
+  {
+    code: "DUs0kPqgZfo",
+    width: 1080,
+    height: 1351,
+    date: "",
+  },
+  {
+    code: "DUqs1SpAZsV",
+    width: 1080,
+    height: 1440,
+    date: "",
+  },
 ];
