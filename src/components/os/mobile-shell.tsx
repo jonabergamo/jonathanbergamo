@@ -61,12 +61,12 @@ export function MobileShell() {
       <Wallpaper variant="mobile" />
 
       {/* Home screen */}
-      <div className="absolute inset-x-0 top-0 bottom-16 flex flex-col justify-end px-5 pb-4">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-16 flex flex-col justify-end px-5 pb-4">
         <MobileWidgets />
-        <p className="text-muted-foreground mt-4 mb-2 text-xs">
+        <p className="text-muted-foreground pointer-events-auto mt-4 mb-2 text-xs">
           {t("mobile.homeHint")}
         </p>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="pointer-events-auto grid grid-cols-4 gap-2">
           {WINDOW_LIST.map((w) => {
             const Icon = w.icon;
             return (

@@ -21,6 +21,8 @@ export default function AvatarScene({
 }) {
   const pointer = React.useRef({ x: 0, y: 0 });
   const wave = React.useRef(0);
+  const dance = React.useRef(0);
+  const taps = React.useRef<number[]>([]);
   const [visible, setVisible] = React.useState(true);
 
   // Follow the cursor anywhere on the page, not just over the canvas.
@@ -41,9 +43,9 @@ export default function AvatarScene({
   const mobile = variant === "mobile";
   // Camera is level (it looks at a point at its own height) so the avatar
   // stands perfectly vertical, no top-down perspective.
-  const eye = mobile ? 0.12 : 0.05;
+  const eye = mobile ? 0.14 : 0.05;
   const camera = mobile
-    ? { position: [0, eye, 2.9] as [number, number, number], fov: 28 }
+    ? { position: [0, eye, 1.75] as [number, number, number], fov: 30 }
     : { position: [0, eye, 2.6] as [number, number, number], fov: 26 };
 
   return (
@@ -57,7 +59,15 @@ export default function AvatarScene({
       performance={{ min: 0.5 }}
       onCreated={({ camera: cam }) => cam.lookAt(0, eye, 0)}
       onPointerDown={() => {
-        wave.current = 1;
+        // Six taps within a few seconds: he dances. Otherwise, a wave.
+        const now = performance.now();
+        taps.current = [...taps.current.filter((t) => now - t < 4000), now];
+        if (taps.current.length >= 6) {
+          taps.current = [];
+          dance.current = 1;
+        } else {
+          wave.current = 1;
+        }
       }}
       style={{ touchAction: "pan-y" }}
     >
@@ -112,7 +122,12 @@ export default function AvatarScene({
         position={[-1.5, 2.5, -3]}
       />
       <React.Suspense fallback={null}>
-        <Avatar pointer={pointer} waveRef={wave} animate={animate} />
+        <Avatar
+          pointer={pointer}
+          waveRef={wave}
+          danceRef={dance}
+          animate={animate}
+        />
       </React.Suspense>
       <ContactShadows
         position={[0, -1.52, 0]}

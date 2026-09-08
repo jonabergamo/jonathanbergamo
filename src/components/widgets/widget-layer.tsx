@@ -49,7 +49,7 @@ export function WidgetLayer() {
 /** Compact, non-draggable strip for the phone home screen. */
 export function MobileWidgets() {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="pointer-events-none grid grid-cols-2 gap-2">
       <ClockWidget inline />
       <WeatherWidget inline />
     </div>

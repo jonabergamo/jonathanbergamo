@@ -4,15 +4,19 @@ import * as React from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 
 export const MODEL_URL = "/models/jonathan.glb";
 export const WAVE_URL = "/animations/Waving.fbx";
+export const DANCE_URL = "/animations/HipHop.fbx";
 
 type Props = {
   /** Normalised pointer position in [-1, 1], updated by the parent. */
   pointer: React.RefObject<{ x: number; y: number }>;
   /** Set to 1 by the parent to trigger a wave. */
   waveRef: React.RefObject<number>;
+  /** Set to 1 by the parent to trigger the dance easter egg. */
+  danceRef: React.RefObject<number>;
   animate: boolean;
 };
 
@@ -54,9 +58,9 @@ function applyBlink(root: THREE.Object3D, v: number) {
 }
 
 /** Mixamo clips name bones "mixamorigHips"; the Ready Player Me rig uses "Hips". */
-function adaptClip(clip: THREE.AnimationClip) {
+function adaptClip(clip: THREE.AnimationClip, name: string) {
   const c = clip.clone();
-  c.name = "wave";
+  c.name = name;
   c.tracks = c.tracks
     // No root motion and no root rotation: the FBX hips carry a 90° export
     // rotation that would flip the avatar. The body stays where we put it.
@@ -72,11 +76,14 @@ function adaptClip(clip: THREE.AnimationClip) {
   return c;
 }
 
-export function Avatar({ pointer, waveRef, animate }: Props) {
+export function Avatar({ pointer, waveRef, danceRef, animate }: Props) {
   const group = React.useRef<THREE.Group>(null);
   const { scene } = useGLTF(MODEL_URL);
   const fbx = useFBX(WAVE_URL);
-  const clips = React.useMemo(() => [adaptClip(fbx.animations[0])], [fbx]);
+  const clips = React.useMemo(
+    () => [adaptClip(fbx.animations[0], "wave")],
+    [fbx],
+  );
   const { actions, mixer } = useAnimations(clips, group);
 
   const bones = React.useRef<{
@@ -94,7 +101,10 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
     headForward: new THREE.Quaternion(),
     neckForward: new THREE.Quaternion(),
   });
-  const phase = React.useRef<"idle" | "waving" | "restoring">("idle");
+  const phase = React.useRef<"idle" | "waving" | "restoring" | "loading">(
+    "idle",
+  );
+  const danceAction = React.useRef<THREE.AnimationAction | null>(null);
   const restoreT = React.useRef(0);
   const blink = React.useRef({ next: 2.5, t: 0 });
 
@@ -142,13 +152,13 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
     const action = actions.wave;
     if (!action) return;
     action.setLoop(THREE.LoopOnce, 1);
-    const onFinished = () => {
+    const onFinished = (e: { action: THREE.AnimationAction }) => {
       // stop() restores the bind pose, so pin the last animated frame first
       // and ease from there back to the rest pose.
       const b = bones.current;
       const last = new Map<THREE.Object3D, THREE.Quaternion>();
       for (const bone of b.rest.keys()) last.set(bone, bone.quaternion.clone());
-      action.stop();
+      e.action.stop();
       for (const [bone, q] of last) bone.quaternion.copy(q);
       phase.current = "restoring";
       restoreT.current = 0;
@@ -162,7 +172,27 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
     const b = bones.current;
     const t = state.clock.elapsedTime;
 
-    if (
+    if ((danceRef.current ?? 0) > 0 && phase.current === "idle") {
+      danceRef.current = 0;
+      waveRef.current = 0;
+      phase.current = "loading";
+      const start = (clip: THREE.AnimationClip) => {
+        if (!group.current) return;
+        const a = mixer.clipAction(clip, group.current);
+        a.setLoop(THREE.LoopOnce, 1);
+        danceAction.current = a;
+        phase.current = "waving";
+        a.reset().fadeIn(0.2).play();
+      };
+      if (danceAction.current) start(danceAction.current.getClip());
+      else
+        new FBXLoader()
+          .loadAsync(DANCE_URL)
+          .then((f) => start(adaptClip(f.animations[0], "dance")))
+          .catch(() => {
+            phase.current = "idle";
+          });
+    } else if (
       (waveRef.current ?? 0) > 0 &&
       phase.current === "idle" &&
       actions.wave
