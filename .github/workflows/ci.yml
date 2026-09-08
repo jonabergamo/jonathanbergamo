@@ -22,7 +22,7 @@ jobs:
         run: |
           if grep -rnE "#[0-9a-fA-F]{6}\b" src --include='*.tsx' --include='*.ts' \
             | grep -v "src/app/globals.css" \
-            | grep -v "avatar-materials.ts" \
+            | grep -v "avatar-scene.tsx" \
             | grep -v "avatar-fallback.tsx" \
             | grep -v "src/app/layout.tsx" \
             | grep -v "src/app/manifest.ts" \

@@ -1,4 +1,4 @@
-export type PaletteId = "natoora" | "sunset" | "amber" | "harbor" | "graphite";
+export type PaletteId = "natoora" | "graphite" | "forest" | "slate" | "plum";
 export type Mode = "light" | "dark";
 
 export type Palette = {
@@ -17,24 +17,24 @@ export const PALETTES: Palette[] = [
     swatches: ["#003049", "#669bbc", "#fdf0d5", "#c1121f", "#780000"],
   },
   {
-    id: "sunset",
-    name: { en: "Sunset", pt: "Pôr do sol" },
-    swatches: ["#264653", "#2a9d8f", "#e9c46a", "#e76f51", "#f4a261"],
-  },
-  {
-    id: "amber",
-    name: { en: "Amber", pt: "Âmbar" },
-    swatches: ["#14213d", "#e5e5e5", "#ffffff", "#fca311", "#000000"],
-  },
-  {
-    id: "harbor",
-    name: { en: "Harbor", pt: "Porto" },
-    swatches: ["#0b2545", "#8da9c4", "#eef4ed", "#134074", "#13315c"],
-  },
-  {
     id: "graphite",
     name: { en: "Graphite", pt: "Grafite" },
     swatches: ["#14110f", "#7e7f83", "#f3f3f4", "#d9c5b2", "#34312d"],
+  },
+  {
+    id: "forest",
+    name: { en: "Forest & brick", pt: "Floresta e tijolo" },
+    swatches: ["#1e2d24", "#7fa08a", "#f2efe6", "#b3402e", "#6e2418"],
+  },
+  {
+    id: "slate",
+    name: { en: "Slate & teal", pt: "Ardósia e turquesa" },
+    swatches: ["#1b2430", "#7c9bb5", "#f1f4f7", "#0e7c86", "#0a4f56"],
+  },
+  {
+    id: "plum",
+    name: { en: "Plum", pt: "Ameixa" },
+    swatches: ["#2a1b33", "#a68bbf", "#f7f1e9", "#8a2f5b", "#5a1c3b"],
   },
 ];
 

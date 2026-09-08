@@ -25,7 +25,7 @@ export function WindowLayer() {
     <div
       ref={ref}
       data-testid="window-layer"
-      className="absolute inset-0 bottom-12 overflow-hidden"
+      className="pointer-events-none absolute inset-0 bottom-12 overflow-hidden"
     >
       {order.map((id, i) => (
         <OsWindow key={id} id={id} zIndex={10 + i} />

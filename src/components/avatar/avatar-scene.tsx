@@ -2,10 +2,9 @@
 
 import * as React from "react";
 import { Canvas } from "@react-three/fiber";
+import { PCFShadowMap } from "three";
 import { AdaptiveDpr, ContactShadows } from "@react-three/drei";
 import { Avatar } from "./avatar";
-import { readBrand, type Brand } from "./avatar-materials";
-import { useTheme } from "next-themes";
 import type { AvatarVariant } from "./avatar-lazy";
 
 export default function AvatarScene({
@@ -18,12 +17,6 @@ export default function AvatarScene({
   const pointer = React.useRef({ x: 0, y: 0 });
   const wave = React.useRef(0);
   const [visible, setVisible] = React.useState(true);
-  const { theme } = useTheme();
-  // Re-read the CSS palette whenever the theme string changes.
-  const brand = React.useMemo<Brand>(() => {
-    void theme;
-    return readBrand();
-  }, [theme]);
 
   // Follow the cursor anywhere on the page, not just over the canvas.
   React.useEffect(() => {
@@ -42,14 +35,15 @@ export default function AvatarScene({
 
   const mobile = variant === "mobile";
   const camera = mobile
-    ? { position: [0, 0.45, 3.6] as [number, number, number], fov: 32 }
-    : { position: [0, 0.35, 3.4] as [number, number, number], fov: 30 };
+    ? { position: [0, 0.1, 2.9] as [number, number, number], fov: 28 }
+    : { position: [0, 0.05, 2.6] as [number, number, number], fov: 26 };
 
   return (
     <Canvas
       data-testid="avatar-canvas"
       dpr={mobile ? 1 : [1, 1.5]}
       camera={camera}
+      shadows={{ type: PCFShadowMap }}
       gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
       frameloop={animate && visible ? "always" : "demand"}
       performance={{ min: 0.5 }}
@@ -58,26 +52,24 @@ export default function AvatarScene({
       }}
       style={{ touchAction: "pan-y" }}
     >
-      <ambientLight color={brand.paper} intensity={0.9} />
+      <hemisphereLight args={["#ffffff", "#8899aa", 0.9]} />
       <directionalLight
-        color={brand.paper}
-        intensity={1.6}
-        position={[2.5, 4, 3]}
+        intensity={2.2}
+        position={[2, 3.5, 3]}
+        castShadow
+        shadow-mapSize={[1024, 1024]}
       />
-      <pointLight color={brand.mid} intensity={6} position={[-3, 1.5, -2]} />
-      <Avatar
-        pointer={pointer}
-        waveRef={wave}
-        animate={animate}
-        brand={brand}
-      />
+      <directionalLight intensity={0.8} position={[-3, 2, -2]} />
+      <React.Suspense fallback={null}>
+        <Avatar pointer={pointer} waveRef={wave} animate={animate} />
+      </React.Suspense>
       <ContactShadows
-        position={[0, -1.17, 0]}
+        position={[0, -1.52, 0]}
         opacity={0.35}
         scale={3}
         blur={2.2}
-        far={1.2}
-        color={brand.ink}
+        far={1.5}
+        color="#000000"
       />
       <AdaptiveDpr pixelated />
     </Canvas>

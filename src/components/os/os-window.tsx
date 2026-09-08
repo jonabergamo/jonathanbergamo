@@ -135,7 +135,7 @@ export function OsWindow({ id, zIndex }: Props) {
           data-focused={focused ? "true" : "false"}
           data-maximized={win.maximized ? "true" : "false"}
           className={cn(
-            "absolute flex flex-col outline-none",
+            "pointer-events-auto absolute flex flex-col outline-none",
             win.maximized ? "" : "will-change-transform",
           )}
           style={style}

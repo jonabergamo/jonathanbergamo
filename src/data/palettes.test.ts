@@ -11,8 +11,8 @@ describe("palettes", () => {
     expect(THEMES).toContain("graphite-dark");
   });
   it("parseTheme round-trips and falls back", () => {
-    expect(parseTheme(themeId("amber", "dark"))).toEqual({
-      palette: "amber",
+    expect(parseTheme(themeId("plum", "dark"))).toEqual({
+      palette: "plum",
       mode: "dark",
     });
     expect(parseTheme(undefined)).toEqual({

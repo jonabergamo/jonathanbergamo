@@ -53,7 +53,7 @@ export function WidgetFrame({ id, title, children, className, inline }: Props) {
       ref={ref}
       data-widget={id}
       className={cn(
-        "group border-brand-ink/70 bg-card/85 text-card-foreground shadow-hard w-56 overflow-hidden rounded-lg border-2 backdrop-blur-sm",
+        "group border-brand-ink/70 bg-card/85 text-card-foreground shadow-hard pointer-events-auto w-56 overflow-hidden rounded-lg border-2 backdrop-blur-sm",
         inline ? "relative w-full" : "absolute",
         className,
       )}

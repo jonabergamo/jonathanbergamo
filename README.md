@@ -1,6 +1,6 @@
 # jonathanbergamo
 
-Personal portfolio built as a small desktop OS: every section is a window you can drag, resize, minimise and maximise, with a taskbar, a Start menu and a procedural 3D avatar standing on the desktop. On phones the same windows become full-screen sheets with a bottom navigation.
+Personal portfolio built as a small desktop OS: every section is a window you can drag, resize, minimise and maximise, with a taskbar, a Start menu, floating widgets and a 3D avatar (Ready Player Me model, Mixamo wave) standing on the desktop. On phones the same windows become full-screen sheets with a bottom navigation.
 
 Live: https://jonathanbergamo.vercel.app
 
@@ -32,9 +32,11 @@ pnpm test:e2e     # Playwright (builds and serves out/ on :3100)
 - `src/store/window-store.ts` — window state (open/minimised/closed, rect, z-order) persisted to localStorage as `jb-windows`
 - `src/components/os/` — desktop shell, windows, taskbar, Start menu, drag/resize hooks, mobile shell
 - `src/components/windows/` — one component per section
-- `src/components/avatar/` — the avatar: materials, mesh tree, scene, SVG fallback, capability probe
+- `src/components/avatar/` — the avatar: GLB model in `public/models`, wave clip in `public/animations`, scene, SVG fallback, capability probe
+- `src/components/widgets/` — floating desktop widgets (clocks, weather, status, GitHub)
+- `src/data/photos.ts` + `public/photos/` — photography grid pulled from Instagram
 - `src/i18n/` — locale store, provider and typed `t()`
 
 ## Design rules
 
-Five colours only: `#780000 #c1121f #fdf0d5 #003049 #669bbc`, defined once in `src/app/globals.css`. CI fails on hex literals elsewhere, except the avatar materials (skin tone is the one documented exception).
+Every palette is five roles (ink, mid, paper, accent, deep) defined in `src/app/globals.css` and listed in `src/data/palettes.ts`. Components only use the semantic tokens, so CI fails on hex literals anywhere else.

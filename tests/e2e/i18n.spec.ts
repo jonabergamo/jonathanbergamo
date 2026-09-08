@@ -33,14 +33,14 @@ test("palette picker switches the palette and persists", async ({
   await page.goto("/");
   if (isMobile) await page.getByTestId("nav-start").click();
   await page.getByTestId("palette-picker").click();
-  await page.getByTestId("palette-sunset").click();
+  await page.getByTestId("palette-forest").click();
   await expect(page.locator("html")).toHaveAttribute(
     "data-theme",
-    "sunset-light",
+    "forest-light",
   );
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute(
     "data-theme",
-    "sunset-light",
+    "forest-light",
   );
 });

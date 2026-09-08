@@ -35,7 +35,7 @@ export function WidgetLayer() {
   if (!ready) return null;
   return (
     <div
-      className="absolute inset-0 bottom-12 z-[3]"
+      className="pointer-events-none absolute inset-0 bottom-12 z-[3]"
       data-testid="widget-layer"
     >
       {WIDGET_IDS.filter((id) => !hidden.includes(id)).map((id) => {
