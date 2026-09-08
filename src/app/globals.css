@@ -272,3 +272,35 @@
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* Custom range inputs for the music widget: a filled track in the palette. */
+@utility music-range {
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background:
+    linear-gradient(var(--color-brand-accent), var(--color-brand-accent)) 0 /
+      var(--fill, 0%) 100% no-repeat,
+    color-mix(in oklch, var(--color-brand-ink) 18%, transparent);
+  outline: none;
+  cursor: pointer;
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: var(--color-card);
+    border: 2px solid var(--color-brand-ink);
+  }
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: var(--color-card);
+    border: 2px solid var(--color-brand-ink);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-mid);
+    outline-offset: 2px;
+  }
+}

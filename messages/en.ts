@@ -131,8 +131,14 @@ export const en = {
     },
     music: {
       title: "Now playing",
-      hint: "Press play and watch the desktop.",
-      playing: "Playing. He dances.",
+      loading: "Warming up the speakers…",
+      play: "Play",
+      pause: "Pause",
+      next: "Next track",
+      prev: "Previous track",
+      seek: "Seek",
+      volume: "Volume",
+      mute: "Mute or unmute",
       toggle: "Show or hide the player",
     },
     github: {

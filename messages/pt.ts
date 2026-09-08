@@ -137,8 +137,14 @@ export const pt: Messages = {
     },
     music: {
       title: "Tocando agora",
-      hint: "Dê play e olhe para a área de trabalho.",
-      playing: "Tocando. Ele dança.",
+      loading: "Esquentando as caixas…",
+      play: "Tocar",
+      pause: "Pausar",
+      next: "Próxima faixa",
+      prev: "Faixa anterior",
+      seek: "Avançar",
+      volume: "Volume",
+      mute: "Silenciar ou ativar o som",
       toggle: "Mostrar ou esconder o player",
     },
     github: {

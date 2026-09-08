@@ -1,10 +1,10 @@
 /**
- * What the music widget plays. Swap the URI for your own playlist:
- * any `spotify:playlist:…`, `spotify:album:…` or `spotify:artist:…` URI works.
- * Visitors without a Spotify session hear 30-second previews; logged-in
- * Premium listeners get full tracks.
+ * What the music widget plays: a YouTube playlist id (the `list=` parameter).
+ * The video itself is never shown; the widget draws its own controls and uses
+ * the current track's thumbnail as cover art.
  */
 export const music = {
   title: "This is Jonathan Bergamo",
-  spotifyUri: "spotify:playlist:4ZP3cQQI1m4v69i9ZYyQMt",
+  youtubePlaylistId: "PLhf_RSaUvUVt5XeZEBdB_lirshAWDM5vd",
+  defaultVolume: 70,
 } as const;
