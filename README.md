@@ -35,6 +35,7 @@ pnpm test:e2e     # Playwright (builds and serves out/ on :3100)
 - `src/components/avatar/` — the avatar: GLB model in `public/models`, wave clip in `public/animations`, scene, SVG fallback, capability probe
 - `src/components/widgets/` — floating desktop widgets (clocks, weather, status, GitHub)
 - `src/data/photos.ts` + `public/photos/` — photography grid pulled from Instagram
+- `src/data/music.ts` + `src/data/playlist.json` — the music widget's YouTube playlist; run `pnpm music:sync` after changing the id to refresh track titles
 - `src/i18n/` — locale store, provider and typed `t()`
 
 ## Design rules
