@@ -4,7 +4,7 @@ import { ArrowRight, Mail } from "lucide-react";
 import { useI18n } from "@/i18n/context";
 import { profile } from "@/data/profile";
 import { useWindowStore } from "@/store/window-store";
-import { AvatarPortrait } from "@/components/avatar/avatar-fallback";
+import Image from "next/image";
 import { OpenToWorkBadge } from "@/components/open-to-work-badge";
 
 export default function AboutWindow() {
@@ -13,8 +13,15 @@ export default function AboutWindow() {
   return (
     <article className="flex h-full flex-col gap-6 p-6 sm:p-8">
       <header className="flex items-start gap-5">
-        <div className="border-brand-ink bg-brand-mid/20 hidden size-24 shrink-0 overflow-hidden rounded-lg border-2 sm:block">
-          <AvatarPortrait className="size-full" />
+        <div className="border-brand-ink bg-brand-mid/20 shadow-hard hidden size-24 shrink-0 overflow-hidden rounded-lg border-2 sm:block">
+          <Image
+            src="/portrait.webp"
+            alt={profile.shortName}
+            width={192}
+            height={192}
+            priority
+            className="size-full object-cover"
+          />
         </div>
         <div className="min-w-0 space-y-2">
           {profile.openToWork && <OpenToWorkBadge />}
