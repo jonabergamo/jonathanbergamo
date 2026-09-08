@@ -11,6 +11,7 @@ import { WeatherWidget } from "./weather-widget";
 import { StatusWidget } from "./status-widget";
 import { GithubWidget } from "./github-widget";
 import { MusicWidget } from "./music-widget";
+import { ExperienceWidget } from "./experience-widget";
 
 const COMPONENTS: Record<
   WidgetId,
@@ -21,6 +22,7 @@ const COMPONENTS: Record<
   status: StatusWidget,
   github: GithubWidget,
   music: MusicWidget,
+  experience: ExperienceWidget,
 };
 
 /** Floating widgets on the desktop wallpaper, below windows, above the grid. */
@@ -54,6 +56,9 @@ export function MobileWidgets() {
     <div className="pointer-events-none grid grid-cols-2 gap-2">
       <ClockWidget inline />
       <WeatherWidget inline />
+      <div className="col-span-2">
+        <ExperienceWidget inline />
+      </div>
       <div className="col-span-2">
         <MusicWidget inline />
       </div>

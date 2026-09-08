@@ -47,7 +47,7 @@ export default function AvatarScene({
   const eye = mobile ? 0.2 : 0.18;
   const offsetX = mobile ? 0 : 0.05;
   const camera = mobile
-    ? { position: [0, eye, 2.0] as [number, number, number], fov: 30 }
+    ? { position: [0, eye, 2.15] as [number, number, number], fov: 30 }
     : { position: [0, eye, 3.18] as [number, number, number], fov: 26 };
 
   return (

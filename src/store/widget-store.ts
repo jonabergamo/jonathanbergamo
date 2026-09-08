@@ -7,6 +7,7 @@ export const WIDGET_IDS = [
   "status",
   "github",
   "music",
+  "experience",
 ] as const;
 export type WidgetId = (typeof WIDGET_IDS)[number];
 
@@ -16,10 +17,11 @@ type Pos = { x: number; y: number };
 export function defaultWidgetPositions(width: number): Record<WidgetId, Pos> {
   const x = Math.max(680, Math.min(width - 560, width * 0.47));
   return {
-    clock: { x, y: 32 },
-    weather: { x, y: 172 },
-    status: { x, y: 356 },
-    github: { x, y: 484 },
+    experience: { x, y: 24 },
+    clock: { x, y: 292 },
+    weather: { x, y: 428 },
+    status: { x, y: 612 },
+    github: { x, y: 744 },
     music: { x: Math.max(x + 280, width - 352), y: 196 },
   };
 }

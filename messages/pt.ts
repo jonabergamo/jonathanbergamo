@@ -149,6 +149,15 @@ export const pt: Messages = {
       tracks: "Músicas",
       track: "Faixa {n}",
     },
+    experience: {
+      title: "Tempo de estrada",
+      years: "anos",
+      months: "meses",
+      days: "dias",
+      since: "entregando software desde dezembro de 2022, e contando",
+      yShort: "{n} a",
+      mShort: "{n} m",
+    },
     github: {
       title: "Visto por último no GitHub",
       pushed: "Enviou {count} commit(s) para",

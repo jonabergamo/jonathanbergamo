@@ -143,6 +143,15 @@ export const en = {
       tracks: "Songs",
       track: "Track {n}",
     },
+    experience: {
+      title: "Time in the industry",
+      years: "years",
+      months: "months",
+      days: "days",
+      since: "shipping software since December 2022, and counting",
+      yShort: "{n} yr",
+      mShort: "{n} mo",
+    },
     github: {
       title: "Last seen on GitHub",
       pushed: "Pushed {count} commit(s) to",

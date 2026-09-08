@@ -16,8 +16,8 @@ export const profile = {
     pt: "/cv/jonathan-bergamo-cv-pt.pdf",
   },
   summary: {
-    en: "I build products end to end: Django and DRF services, React and React Native apps, and the CI that keeps them honest. At Natoora I build features across internal systems and customer-facing apps for a global food-tech company. I like the unglamorous work too: finding root causes in production, migrating legacy code, writing the discovery that defines the next sprint.",
-    pt: "Construo produtos de ponta a ponta: serviços Django e DRF, apps React e React Native, e a CI que mantém tudo honesto. Na Natoora construo features em sistemas internos e apps voltados ao cliente para uma empresa global de food-tech. Também gosto do trabalho sem glamour: achar a causa raiz em produção, migrar código legado, escrever a discovery que define o próximo sprint.",
+    en: "Results-driven full-stack software engineer with over three years of experience architecting and deploying scalable web, mobile and distributed applications. Strong in the React and TypeScript ecosystem (Next.js, React Native) and in backend development with Node.js (NestJS), Python (Django) and Java. A track record of leading technical migrations, automating CI/CD pipelines and delivering features in high-scale environments, working in global, remote, English-speaking teams with a focus on software craftsmanship, clean architecture and SOLID principles.",
+    pt: "Engenheiro de software full-stack orientado a resultados, com mais de três anos de experiência arquitetando e publicando aplicações web, mobile e distribuídas escaláveis. Forte no ecossistema React e TypeScript (Next.js, React Native) e no backend com Node.js (NestJS), Python (Django) e Java. Histórico de liderar migrações técnicas, automatizar pipelines de CI/CD e entregar features em ambientes de alta escala, trabalhando em times globais, remotos e em inglês, com foco em software craftsmanship, arquitetura limpa e princípios SOLID.",
   } satisfies Localized,
   traits: {
     en: [
