@@ -30,15 +30,16 @@ export function WidgetLayer() {
   const hidden = useWidgetStore((s) => s.hidden);
   const [ready, setReady] = React.useState(false);
   React.useEffect(() => {
+    // Read before rehydrating: persist writes the state to storage as part of
+    // hydration, so afterwards the key always exists.
+    let firstVisit = true;
+    try {
+      firstVisit = localStorage.getItem("jb-widgets") === null;
+    } catch {
+      // storage blocked: keep defaults
+    }
     const unsub = useWidgetStore.persist.onFinishHydration(() => {
-      // First visit: lay out for this window rather than the server default.
-      let stored: string | null = null;
-      try {
-        stored = localStorage.getItem("jb-widgets");
-      } catch {
-        // storage blocked
-      }
-      if (!stored)
+      if (firstVisit)
         useWidgetStore.getState().reset(window.innerWidth, window.innerHeight);
       setReady(true);
     });

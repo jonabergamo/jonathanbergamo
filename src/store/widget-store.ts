@@ -23,7 +23,8 @@ export function defaultWidgetPositions(
   width: number,
   height = 1227,
 ): Record<WidgetId, Pos> {
-  const x = Math.max(680, Math.min(width - 560, width * 0.47));
+  // Anchored just right of the About window, whatever the window width.
+  const x = Math.min(680, Math.max(360, width - 600));
   const tall = height >= 1000;
   return tall
     ? {
@@ -65,8 +66,8 @@ export const useWidgetStore = create<WidgetStore>()(
             ? s.hidden.filter((w) => w !== id)
             : [...s.hidden, id],
         })),
-      reset: (width) =>
-        set({ positions: defaultWidgetPositions(width), hidden: [] }),
+      reset: (width, height) =>
+        set({ positions: defaultWidgetPositions(width, height), hidden: [] }),
     }),
     {
       name: "jb-widgets",
