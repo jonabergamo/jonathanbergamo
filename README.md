@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# jonathanbergamo
 
-## Getting Started
+Personal portfolio built as a small desktop OS: every section is a window you can drag, resize, minimise and maximise, with a taskbar, a Start menu and a procedural 3D avatar standing on the desktop. On phones the same windows become full-screen sheets with a bottom navigation.
 
-First, run the development server:
+Live: https://jonathanbergamo.vercel.app
+
+## Stack
+
+Next.js 16 (static export) · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui (base-nova) · Zustand · Motion · React Three Fiber + drei · Vitest · Playwright
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3008
+pnpm check        # lint + typecheck + unit tests
+pnpm build        # static export to out/
+pnpm test:e2e     # Playwright (builds and serves out/ on :3100)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/data/profile.ts` — name, links, status, CV paths
+- `src/data/experience.ts` — roles and bullets (EN + PT)
+- `src/data/projects.ts` — projects: title, summary, markdown description, tags, optional links and image, period, status, featured
+- `src/data/skills.ts` — grouped skills; `core: true` renders as a bold chip
+- `messages/en.ts` and `messages/pt.ts` — UI copy. `pt.ts` is typed against `en.ts`, so a missing key fails `pnpm typecheck`; a unit test also checks parity.
+- `public/cv/` — drop `jonathan-bergamo-cv-en.pdf` and `jonathan-bergamo-cv-pt.pdf` here
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Layout
 
-## Learn More
+- `src/store/window-store.ts` — window state (open/minimised/closed, rect, z-order) persisted to localStorage as `jb-windows`
+- `src/components/os/` — desktop shell, windows, taskbar, Start menu, drag/resize hooks, mobile shell
+- `src/components/windows/` — one component per section
+- `src/components/avatar/` — the avatar: materials, mesh tree, scene, SVG fallback, capability probe
+- `src/i18n/` — locale store, provider and typed `t()`
 
-To learn more about Next.js, take a look at the following resources:
+## Design rules
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Five colours only: `#780000 #c1121f #fdf0d5 #003049 #669bbc`, defined once in `src/app/globals.css`. CI fails on hex literals elsewhere, except the avatar materials (skin tone is the one documented exception).

@@ -1,26 +1,223 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Brand palette. The whole site is built from these five colours plus
+ * tints of them. Any other literal colour is a bug (see the avatar
+ * materials for the one documented exception: skin tone).
+ */
+@theme {
+  --color-brand-darkred: #780000;
+  --color-brand-red: #c1121f;
+  --color-brand-cream: #fdf0d5;
+  --color-brand-navy: #003049;
+  --color-brand-blue: #669bbc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-titlebar: var(--titlebar);
+  --color-titlebar-foreground: var(--titlebar-foreground);
+  --color-taskbar: var(--taskbar);
+  --color-taskbar-foreground: var(--taskbar-foreground);
+  --color-desktop: var(--desktop);
+  --color-desktop-grid: var(--desktop-grid);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-window: 6px 6px 0 0 var(--window-shadow);
+  --shadow-window-focus: 10px 10px 0 0 var(--window-shadow);
+  --shadow-hard: 3px 3px 0 0 var(--window-shadow);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.5rem;
+
+  --background: var(--color-brand-cream);
+  --foreground: var(--color-brand-navy);
+  --card: color-mix(in oklch, var(--color-brand-cream) 96%, white);
+  --card-foreground: var(--color-brand-navy);
+  --popover: color-mix(in oklch, var(--color-brand-cream) 96%, white);
+  --popover-foreground: var(--color-brand-navy);
+  --primary: var(--color-brand-red);
+  --primary-foreground: var(--color-brand-cream);
+  --secondary: var(--color-brand-blue);
+  --secondary-foreground: var(--color-brand-navy);
+  --muted: color-mix(
+    in oklch,
+    var(--color-brand-cream) 88%,
+    var(--color-brand-navy)
+  );
+  --muted-foreground: color-mix(
+    in oklch,
+    var(--color-brand-navy) 72%,
+    var(--color-brand-cream)
+  );
+  --accent: color-mix(
+    in oklch,
+    var(--color-brand-blue) 28%,
+    var(--color-brand-cream)
+  );
+  --accent-foreground: var(--color-brand-navy);
+  --destructive: var(--color-brand-darkred);
+  --border: color-mix(in oklch, var(--color-brand-navy) 18%, transparent);
+  --input: color-mix(in oklch, var(--color-brand-navy) 18%, transparent);
+  --ring: var(--color-brand-blue);
+  --chart-1: var(--color-brand-navy);
+  --chart-2: var(--color-brand-blue);
+  --chart-3: var(--color-brand-red);
+  --chart-4: var(--color-brand-darkred);
+  --chart-5: var(--color-brand-cream);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  --titlebar: var(--color-brand-navy);
+  --titlebar-foreground: var(--color-brand-cream);
+  --taskbar: var(--color-brand-navy);
+  --taskbar-foreground: var(--color-brand-cream);
+  --desktop: var(--color-brand-cream);
+  --desktop-grid: color-mix(in oklch, var(--color-brand-navy) 16%, transparent);
+  --window-shadow: var(--color-brand-navy);
+}
+
+.dark {
+  --background: var(--color-brand-navy);
+  --foreground: var(--color-brand-cream);
+  --card: color-mix(in oklch, var(--color-brand-navy) 88%, black);
+  --card-foreground: var(--color-brand-cream);
+  --popover: color-mix(in oklch, var(--color-brand-navy) 88%, black);
+  --popover-foreground: var(--color-brand-cream);
+  --primary: var(--color-brand-red);
+  --primary-foreground: var(--color-brand-cream);
+  --secondary: var(--color-brand-blue);
+  --secondary-foreground: var(--color-brand-navy);
+  --muted: color-mix(
+    in oklch,
+    var(--color-brand-navy) 82%,
+    var(--color-brand-blue)
+  );
+  --muted-foreground: color-mix(
+    in oklch,
+    var(--color-brand-cream) 68%,
+    var(--color-brand-navy)
+  );
+  --accent: color-mix(
+    in oklch,
+    var(--color-brand-blue) 32%,
+    var(--color-brand-navy)
+  );
+  --accent-foreground: var(--color-brand-cream);
+  --destructive: var(--color-brand-red);
+  --border: color-mix(in oklch, var(--color-brand-cream) 16%, transparent);
+  --input: color-mix(in oklch, var(--color-brand-cream) 16%, transparent);
+  --ring: var(--color-brand-blue);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  --titlebar: color-mix(in oklch, var(--color-brand-navy) 70%, black);
+  --titlebar-foreground: var(--color-brand-cream);
+  --taskbar: color-mix(in oklch, var(--color-brand-navy) 70%, black);
+  --taskbar-foreground: var(--color-brand-cream);
+  --desktop: var(--color-brand-navy);
+  --desktop-grid: color-mix(in oklch, var(--color-brand-blue) 28%, transparent);
+  --window-shadow: color-mix(in oklch, var(--color-brand-navy) 55%, black);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100%;
+    overscroll-behavior: none;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--color-brand-blue);
+    color: var(--color-brand-navy);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility desktop-grid {
+  background-color: var(--desktop);
+  background-image: radial-gradient(
+    var(--desktop-grid) 1.2px,
+    transparent 1.2px
+  );
+  background-size: 24px 24px;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }

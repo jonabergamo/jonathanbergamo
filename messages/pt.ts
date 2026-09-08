@@ -1,0 +1,101 @@
+import type { Messages } from "./en";
+
+export const pt: Messages = {
+  meta: {
+    title: "Jonathan Bergamo",
+    description:
+      "Engenheiro de software full-stack construindo sistemas web, mobile e distribuídos. Aberto a novas oportunidades.",
+  },
+  os: {
+    start: "Iniciar",
+    close: "Fechar",
+    minimize: "Minimizar",
+    maximize: "Maximizar",
+    restore: "Restaurar",
+    resetLayout: "Redefinir layout",
+    openWindow: "Abrir {name}",
+    running: "Janelas abertas",
+    home: "Início",
+    theme: "Alternar modo escuro",
+    language: "Idioma",
+    downloadCv: "Baixar currículo",
+    desktopHint: "Clique duas vezes em um ícone para abrir",
+    nothingOpen:
+      "Nada aberto ainda. Escolha uma seção na área de trabalho ou no menu Iniciar.",
+    windowMenu: "Seções",
+    system: "Sistema",
+    tip: "Dica: arraste a barra de título para mover, as bordas para redimensionar, Esc fecha a janela em foco.",
+  },
+  windows: {
+    about: "Sobre mim",
+    experience: "Experiência",
+    projects: "Projetos",
+    skills: "Habilidades",
+    contact: "Contato",
+    terminal: "Terminal",
+  },
+  about: {
+    greeting: "Oi, eu sou o Jonathan.",
+    role: "Engenheiro de software full-stack",
+    location: "São Paulo, Brasil · trabalhando remoto para Londres",
+    status: "Aberto a novas oportunidades",
+    statusHint:
+      "Vagas remotas, full-stack ou com foco em frontend. Inglês ou português.",
+    cta: "Fale comigo",
+    seeProjects: "Ver projetos",
+    avatarHint: "Mova o mouse para eu olhar. Clique para eu acenar.",
+    yearsLabel: "anos entregando",
+    incidentsLabel: "incidentes de produção resolvidos",
+    regionsLabel: "regiões atendidas",
+  },
+  experience: {
+    present: "Atual",
+    highlights: "Destaques",
+    stack: "Stack",
+  },
+  projects: {
+    all: "Todos",
+    featured: "Destaque",
+    filterLabel: "Filtrar por tag",
+    noLink: "Sem link público",
+    open: "Abrir",
+    details: "Detalhes",
+    status: {
+      live: "Em produção",
+      archived: "Arquivado",
+      wip: "Em andamento",
+    },
+    empty: "Nenhum projeto com essa tag.",
+    links: "Links",
+  },
+  skills: {
+    intro:
+      "Agrupadas por onde uso no dia a dia. Os chips em destaque são os que mais uso.",
+  },
+  contact: {
+    heading: "Vamos conversar",
+    body: "Estou aberto a novas oportunidades. E-mail é o jeito mais rápido de me encontrar. Costumo responder em um dia.",
+    email: "E-mail",
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    cv: "Currículo (PDF)",
+    copy: "Copiar e-mail",
+    copied: "Copiado",
+    languages: "Idiomas",
+    portuguese: "Português, nativo",
+    english: "Inglês, fluente (C1)",
+  },
+  terminal: {
+    welcome: "jonathan-os 1.0 · digite `help` para ver os comandos",
+    help: "Comandos: help, whoami, ls, open <seção>, lang <en|pt>, theme <light|dark>, clear",
+    unknown: "Comando desconhecido: {cmd}. Tente `help`.",
+    opened: "Abriu {name}",
+    notFound: "Nenhuma seção chamada {name}",
+    langSet: "Idioma definido para {lang}",
+    themeSet: "Tema definido para {theme}",
+    prompt: "guest@jonathan-os",
+  },
+  mobile: {
+    homeHint: "Toque em uma seção para abrir",
+  },
+};
