@@ -15,10 +15,10 @@ export const INSTAGRAM_URL = "https://www.instagram.com/jonab.img/";
  */
 export const photos: Photo[] = [
   {
-    code: "DXPkqOiAUjN",
+    code: "DUqs1SpAZsV",
     width: 1080,
-    height: 719,
-    date: "2026-04-17",
+    height: 1440,
+    date: "",
   },
   {
     code: "DXDW4WVjFJ0",
@@ -78,12 +78,6 @@ export const photos: Photo[] = [
     code: "DUs0kPqgZfo",
     width: 1080,
     height: 1351,
-    date: "",
-  },
-  {
-    code: "DUqs1SpAZsV",
-    width: 1080,
-    height: 1440,
     date: "",
   },
 ];
