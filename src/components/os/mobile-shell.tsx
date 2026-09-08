@@ -63,31 +63,6 @@ export function MobileShell() {
       {/* Home screen */}
       <div className="pointer-events-none absolute inset-x-0 top-0 bottom-16 flex flex-col justify-end px-5 pb-4">
         <MobileWidgets />
-        <p className="text-muted-foreground pointer-events-auto mt-4 mb-2 text-xs">
-          {t("mobile.homeHint")}
-        </p>
-        <div className="pointer-events-auto grid grid-cols-4 gap-2">
-          {WINDOW_LIST.map((w) => {
-            const Icon = w.icon;
-            return (
-              <button
-                key={w.id}
-                type="button"
-                data-testid={`icon-${w.id}`}
-                onClick={() => launch(w.id)}
-                className="border-brand-ink bg-card text-card-foreground shadow-hard flex flex-col items-center gap-1 rounded-lg border-2 px-1 py-2.5 active:translate-x-px active:translate-y-px active:shadow-none"
-              >
-                <Icon
-                  className="text-brand-ink dark:text-brand-mid size-6"
-                  strokeWidth={1.8}
-                />
-                <span className="text-[11px] leading-tight font-medium">
-                  {t(w.titleKey)}
-                </span>
-              </button>
-            );
-          })}
-        </div>
       </div>
 
       {/* Current app sheet */}

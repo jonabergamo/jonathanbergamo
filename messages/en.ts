@@ -159,9 +159,6 @@ export const en = {
       fallback: "See what I'm up to on GitHub",
     },
   },
-  mobile: {
-    homeHint: "Tap a section to open it",
-  },
 } as const;
 
 type Widen<T> = T extends string ? string : { [K in keyof T]: Widen<T[K]> };

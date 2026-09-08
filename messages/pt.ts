@@ -165,7 +165,4 @@ export const pt: Messages = {
       fallback: "Veja o que estou fazendo no GitHub",
     },
   },
-  mobile: {
-    homeHint: "Toque em uma seção para abrir",
-  },
 };

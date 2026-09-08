@@ -27,7 +27,7 @@ export function Wallpaper({ variant }: { variant: "desktop" | "mobile" }) {
       <div
         className={
           mobile
-            ? "absolute inset-x-0 top-[3dvh] bottom-[50dvh]"
+            ? "absolute inset-x-0 top-[6dvh] bottom-[32dvh]"
             : "absolute right-[4vw] bottom-0 h-[min(88vh,930px)] w-[min(64vw,920px)]"
         }
       >

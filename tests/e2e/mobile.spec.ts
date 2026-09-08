@@ -10,7 +10,8 @@ test("phone shows the home screen, opens sections as sheets, no resize handles",
   await expect(page.getByTestId("bottom-nav")).toBeVisible();
   await expect(page.getByTestId("taskbar")).toHaveCount(0);
 
-  await page.getByTestId("icon-projects").click();
+  await page.getByTestId("nav-start").click();
+  await page.getByTestId("mstart-projects").click();
   const sheet = page.getByTestId("sheet-projects");
   await expect(sheet).toBeVisible();
   await expect(page.locator("[data-resize-handle]")).toHaveCount(0);

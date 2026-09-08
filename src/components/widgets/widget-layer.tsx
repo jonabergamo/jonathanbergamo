@@ -60,18 +60,12 @@ export function WidgetLayer() {
   );
 }
 
-/** Compact, non-draggable strip for the phone home screen. */
+/** Compact, non-draggable cards for the phone home screen. */
 export function MobileWidgets() {
   return (
-    <div className="pointer-events-none grid grid-cols-2 gap-2">
-      <ClockWidget inline />
-      <WeatherWidget inline />
-      <div className="col-span-2">
-        <ExperienceWidget inline />
-      </div>
-      <div className="col-span-2">
-        <MusicWidget inline />
-      </div>
+    <div className="pointer-events-none space-y-2">
+      <ExperienceWidget inline />
+      <MusicWidget inline />
     </div>
   );
 }
