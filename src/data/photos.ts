@@ -15,12 +15,6 @@ export const INSTAGRAM_URL = "https://www.instagram.com/jonab.img/";
  */
 export const photos: Photo[] = [
   {
-    code: "DYFvNP_laUD",
-    width: 1080,
-    height: 1439,
-    date: "2026-05-08",
-  },
-  {
     code: "DXPkqOiAUjN",
     width: 1080,
     height: 719,
