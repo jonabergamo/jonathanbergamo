@@ -29,7 +29,7 @@ export function Taskbar() {
   const resetWidgets = useWidgetStore((s) => s.reset);
   const resetLayout = () => {
     resetWindows();
-    resetWidgets(window.innerWidth);
+    resetWidgets(window.innerWidth, window.innerHeight);
   };
 
   return (

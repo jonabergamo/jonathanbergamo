@@ -13,17 +13,35 @@ export type WidgetId = (typeof WIDGET_IDS)[number];
 
 type Pos = { x: number; y: number };
 
-/** Default column between the About window and the avatar. */
-export function defaultWidgetPositions(width: number): Record<WidgetId, Pos> {
+/**
+ * Default layout, taken from Jonathan's own arrangement on a 1408x1227 window:
+ * a column between the About window and the avatar, with the music player to
+ * its right at the top. Shorter screens get a tighter column that still ends
+ * above the taskbar.
+ */
+export function defaultWidgetPositions(
+  width: number,
+  height = 1227,
+): Record<WidgetId, Pos> {
   const x = Math.max(680, Math.min(width - 560, width * 0.47));
-  return {
-    experience: { x, y: 24 },
-    clock: { x, y: 292 },
-    weather: { x, y: 428 },
-    status: { x, y: 612 },
-    github: { x, y: 744 },
-    music: { x: Math.max(x + 280, width - 352), y: 196 },
-  };
+  const tall = height >= 1000;
+  return tall
+    ? {
+        experience: { x, y: 34 },
+        clock: { x, y: 290 },
+        weather: { x, y: 426 },
+        status: { x, y: 623 },
+        github: { x, y: 780 },
+        music: { x: x + 248, y: 35 },
+      }
+    : {
+        experience: { x, y: 24 },
+        clock: { x, y: 292 },
+        weather: { x, y: 428 },
+        status: { x, y: 612 },
+        github: { x, y: 744 },
+        music: { x: x + 248, y: 24 },
+      };
 }
 
 type WidgetStore = {
@@ -31,7 +49,7 @@ type WidgetStore = {
   hidden: WidgetId[];
   move: (id: WidgetId, pos: Pos) => void;
   toggle: (id: WidgetId) => void;
-  reset: (width: number) => void;
+  reset: (width: number, height?: number) => void;
 };
 
 export const useWidgetStore = create<WidgetStore>()(
@@ -58,9 +76,10 @@ export const useWidgetStore = create<WidgetStore>()(
       // Older saves may lack widgets added later; fill them from the defaults.
       merge: (persisted, current) => {
         const p = (persisted ?? {}) as Partial<WidgetStore>;
-        const defaults = defaultWidgetPositions(
-          typeof window === "undefined" ? 1440 : window.innerWidth,
-        );
+        const defaults =
+          typeof window === "undefined"
+            ? defaultWidgetPositions(1440)
+            : defaultWidgetPositions(window.innerWidth, window.innerHeight);
         const positions = { ...defaults };
         for (const id of WIDGET_IDS) {
           const pos = p.positions?.[id];

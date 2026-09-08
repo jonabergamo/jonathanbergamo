@@ -30,9 +30,18 @@ export function WidgetLayer() {
   const hidden = useWidgetStore((s) => s.hidden);
   const [ready, setReady] = React.useState(false);
   React.useEffect(() => {
-    const unsub = useWidgetStore.persist.onFinishHydration(() =>
-      setReady(true),
-    );
+    const unsub = useWidgetStore.persist.onFinishHydration(() => {
+      // First visit: lay out for this window rather than the server default.
+      let stored: string | null = null;
+      try {
+        stored = localStorage.getItem("jb-widgets");
+      } catch {
+        // storage blocked
+      }
+      if (!stored)
+        useWidgetStore.getState().reset(window.innerWidth, window.innerHeight);
+      setReady(true);
+    });
     void useWidgetStore.persist.rehydrate();
     return unsub;
   }, []);

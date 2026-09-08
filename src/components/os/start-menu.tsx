@@ -19,7 +19,7 @@ export function StartMenu() {
   const resetWidgets = useWidgetStore((s) => s.reset);
   const resetLayout = () => {
     resetWindows();
-    resetWidgets(window.innerWidth);
+    resetWidgets(window.innerWidth, window.innerHeight);
   };
   const windows = useWindowStore((s) => s.windows);
   const ref = React.useRef<HTMLDivElement>(null);
