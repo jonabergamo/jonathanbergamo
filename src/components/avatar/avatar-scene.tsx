@@ -11,6 +11,7 @@ import {
 } from "@react-three/drei";
 import { Avatar } from "./avatar";
 import type { AvatarVariant } from "./avatar-lazy";
+import { useMusicStore } from "@/store/music-store";
 
 export default function AvatarScene({
   variant,
@@ -21,9 +22,8 @@ export default function AvatarScene({
 }) {
   const pointer = React.useRef({ x: 0, y: 0 });
   const wave = React.useRef(0);
-  const dance = React.useRef(0);
-  const taps = React.useRef<number[]>([]);
   const [visible, setVisible] = React.useState(true);
+  const dancing = useMusicStore((s) => s.playing);
 
   // Follow the cursor anywhere on the page, not just over the canvas.
   React.useEffect(() => {
@@ -59,15 +59,7 @@ export default function AvatarScene({
       performance={{ min: 0.5 }}
       onCreated={({ camera: cam }) => cam.lookAt(0, eye, 0)}
       onPointerDown={() => {
-        // Six taps within a few seconds: he dances. Otherwise, a wave.
-        const now = performance.now();
-        taps.current = [...taps.current.filter((t) => now - t < 4000), now];
-        if (taps.current.length >= 6) {
-          taps.current = [];
-          dance.current = 1;
-        } else {
-          wave.current = 1;
-        }
+        wave.current = 1;
       }}
       style={{ touchAction: "pan-y" }}
     >
@@ -125,7 +117,7 @@ export default function AvatarScene({
         <Avatar
           pointer={pointer}
           waveRef={wave}
-          danceRef={dance}
+          dancing={dancing}
           animate={animate}
         />
       </React.Suspense>

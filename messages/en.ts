@@ -129,6 +129,12 @@ export const en = {
         7: "Currently: out with a camera. Back in a bit.",
       },
     },
+    music: {
+      title: "Now playing",
+      hint: "Press play and watch the desktop.",
+      playing: "Playing. He dances.",
+      toggle: "Show or hide the player",
+    },
     github: {
       title: "Last seen on GitHub",
       pushed: "Pushed {count} commit(s) to",

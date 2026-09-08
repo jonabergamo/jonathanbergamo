@@ -1,7 +1,13 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-export const WIDGET_IDS = ["clock", "weather", "status", "github"] as const;
+export const WIDGET_IDS = [
+  "clock",
+  "weather",
+  "status",
+  "github",
+  "music",
+] as const;
 export type WidgetId = (typeof WIDGET_IDS)[number];
 
 type Pos = { x: number; y: number };
@@ -14,6 +20,7 @@ export function defaultWidgetPositions(width: number): Record<WidgetId, Pos> {
     weather: { x, y: 172 },
     status: { x, y: 356 },
     github: { x, y: 484 },
+    music: { x: Math.max(x + 280, width - 352), y: 196 },
   };
 }
 
@@ -43,9 +50,28 @@ export const useWidgetStore = create<WidgetStore>()(
     }),
     {
       name: "jb-widgets",
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
       skipHydration: true,
+      // Older saves may lack widgets added later; fill them from the defaults.
+      merge: (persisted, current) => {
+        const p = (persisted ?? {}) as Partial<WidgetStore>;
+        const defaults = defaultWidgetPositions(
+          typeof window === "undefined" ? 1440 : window.innerWidth,
+        );
+        const positions = { ...defaults };
+        for (const id of WIDGET_IDS) {
+          const pos = p.positions?.[id];
+          if (pos && typeof pos.x === "number" && typeof pos.y === "number")
+            positions[id] = pos;
+        }
+        const hidden = Array.isArray(p.hidden)
+          ? p.hidden.filter((id): id is WidgetId =>
+              (WIDGET_IDS as readonly string[]).includes(id),
+            )
+          : [];
+        return { ...current, positions, hidden };
+      },
     },
   ),
 );

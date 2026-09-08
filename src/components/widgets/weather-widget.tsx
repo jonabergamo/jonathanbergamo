@@ -116,17 +116,30 @@ export function WeatherWidget({ inline }: { inline?: boolean }) {
         </p>
       ) : (
         <>
-          <div className="flex items-center gap-3">
+          <div className={cn("flex items-center", inline ? "gap-2" : "gap-3")}>
             {React.createElement(icon(w.code), {
-              className: "size-9 shrink-0 text-brand-ink dark:text-brand-mid",
+              className: inline
+                ? "size-6 shrink-0 text-brand-ink dark:text-brand-mid"
+                : "size-9 shrink-0 text-brand-ink dark:text-brand-mid",
               strokeWidth: 1.6,
               "aria-hidden": true,
             })}
             <div>
-              <p className="font-mono text-2xl leading-none font-semibold tabular-nums">
+              <p
+                className={
+                  inline
+                    ? "font-mono text-base leading-none font-semibold tabular-nums"
+                    : "font-mono text-2xl leading-none font-semibold tabular-nums"
+                }
+              >
                 {w.temp}°C
               </p>
-              <p className="text-muted-foreground mt-1 text-[11px]">
+              <p
+                className={cn(
+                  "text-muted-foreground mt-1 text-[11px]",
+                  inline && "hidden",
+                )}
+              >
                 {t("widgets.weather.feels", { temp: w.feels })} · {w.humidity}%
               </p>
             </div>
@@ -144,7 +157,13 @@ export function WeatherWidget({ inline }: { inline?: boolean }) {
               <span>{t("widgets.weather.hotEnd")}</span>
             </div>
           </div>
-          <p className={cn("mt-2 text-xs font-medium")}>
+          <p
+            className={cn(
+              inline
+                ? "mt-1 text-[11px] leading-snug"
+                : "mt-2 text-xs font-medium",
+            )}
+          >
             {t(`widgets.weather.${verdictKey(w.feels)}`)}
           </p>
         </>

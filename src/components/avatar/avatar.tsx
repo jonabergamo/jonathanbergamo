@@ -15,8 +15,8 @@ type Props = {
   pointer: React.RefObject<{ x: number; y: number }>;
   /** Set to 1 by the parent to trigger a wave. */
   waveRef: React.RefObject<number>;
-  /** Set to 1 by the parent to trigger the dance easter egg. */
-  danceRef: React.RefObject<number>;
+  /** While true (music is playing) he dances in a loop. */
+  dancing: boolean;
   animate: boolean;
 };
 
@@ -76,7 +76,7 @@ function adaptClip(clip: THREE.AnimationClip, name: string) {
   return c;
 }
 
-export function Avatar({ pointer, waveRef, danceRef, animate }: Props) {
+export function Avatar({ pointer, waveRef, dancing, animate }: Props) {
   const group = React.useRef<THREE.Group>(null);
   const { scene } = useGLTF(MODEL_URL);
   const fbx = useFBX(WAVE_URL);
@@ -101,9 +101,9 @@ export function Avatar({ pointer, waveRef, danceRef, animate }: Props) {
     headForward: new THREE.Quaternion(),
     neckForward: new THREE.Quaternion(),
   });
-  const phase = React.useRef<"idle" | "waving" | "restoring" | "loading">(
-    "idle",
-  );
+  const phase = React.useRef<
+    "idle" | "waving" | "dancing" | "restoring" | "loading"
+  >("idle");
   const danceAction = React.useRef<THREE.AnimationAction | null>(null);
   const restoreT = React.useRef(0);
   const blink = React.useRef({ next: 2.5, t: 0 });
@@ -172,17 +172,17 @@ export function Avatar({ pointer, waveRef, danceRef, animate }: Props) {
     const b = bones.current;
     const t = state.clock.elapsedTime;
 
-    if ((danceRef.current ?? 0) > 0 && phase.current === "idle") {
-      danceRef.current = 0;
+    // Music on: start (or keep) the dance loop. Music off: ease back to rest.
+    if (dancing && phase.current === "idle") {
       waveRef.current = 0;
       phase.current = "loading";
       const start = (clip: THREE.AnimationClip) => {
         if (!group.current) return;
         const a = mixer.clipAction(clip, group.current);
-        a.setLoop(THREE.LoopOnce, 1);
+        a.setLoop(THREE.LoopRepeat, Infinity);
         danceAction.current = a;
-        phase.current = "waving";
-        a.reset().fadeIn(0.2).play();
+        phase.current = "dancing";
+        a.reset().fadeIn(0.3).play();
       };
       if (danceAction.current) start(danceAction.current.getClip());
       else
@@ -192,6 +192,14 @@ export function Avatar({ pointer, waveRef, danceRef, animate }: Props) {
           .catch(() => {
             phase.current = "idle";
           });
+    } else if (!dancing && phase.current === "dancing" && danceAction.current) {
+      const b = bones.current;
+      const last = new Map<THREE.Object3D, THREE.Quaternion>();
+      for (const bone of b.rest.keys()) last.set(bone, bone.quaternion.clone());
+      danceAction.current.stop();
+      for (const [bone, q] of last) bone.quaternion.copy(q);
+      phase.current = "restoring";
+      restoreT.current = 0;
     } else if (
       (waveRef.current ?? 0) > 0 &&
       phase.current === "idle" &&
@@ -209,7 +217,7 @@ export function Avatar({ pointer, waveRef, danceRef, animate }: Props) {
       if (k >= 1) phase.current = "idle";
     }
 
-    if (phase.current !== "waving") {
+    if (phase.current !== "waving" && phase.current !== "dancing") {
       // Breathing on the chest, gentle sway on the whole body.
       if (b.spine) b.spine.rotation.x = Math.sin(t * 1.6) * 0.02;
 

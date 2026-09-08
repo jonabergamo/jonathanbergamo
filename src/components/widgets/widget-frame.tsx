@@ -63,6 +63,7 @@ export function WidgetFrame({ id, title, children, className, inline }: Props) {
         className={cn(
           "border-brand-ink/15 text-muted-foreground flex h-7 items-center gap-1 border-b px-2 text-[11px] font-medium select-none",
           !inline && "cursor-grab active:cursor-grabbing",
+          inline && "hidden",
         )}
         style={{ touchAction: inline ? undefined : "none" }}
         onPointerDown={drag.onPointerDown}
@@ -83,7 +84,7 @@ export function WidgetFrame({ id, title, children, className, inline }: Props) {
           </button>
         )}
       </div>
-      <div className={inline ? "p-2.5" : "p-3"}>{children}</div>
+      <div className={inline ? "p-2" : "p-3"}>{children}</div>
     </div>
   );
 }

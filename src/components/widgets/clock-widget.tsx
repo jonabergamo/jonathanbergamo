@@ -18,8 +18,8 @@ function useSeconds() {
 }
 
 const ZONES = [
-  { key: "sp", zone: "America/Sao_Paulo" },
-  { key: "ldn", zone: "Europe/London" },
+  { key: "sp", short: "SP", zone: "America/Sao_Paulo" },
+  { key: "ldn", short: "LDN", zone: "Europe/London" },
 ] as const;
 
 export function ClockWidget({ inline }: { inline?: boolean }) {
@@ -27,6 +27,33 @@ export function ClockWidget({ inline }: { inline?: boolean }) {
   const sec = useSeconds();
   const lang = HTML_LANG[locale];
   const now = sec === null ? null : new Date(sec * 1000);
+  if (inline) {
+    return (
+      <WidgetFrame id="clock" title={t("widgets.clock.title")} inline>
+        <div className="flex items-baseline justify-between gap-2">
+          {ZONES.map((z) => (
+            <p
+              key={z.key}
+              className="font-mono text-base leading-none font-semibold tabular-nums"
+            >
+              <span className="text-muted-foreground mr-1 font-sans text-[10px]">
+                {z.short}
+              </span>
+              {now
+                ? now.toLocaleTimeString(lang, {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                    timeZone: z.zone,
+                  })
+                : "--:--"}
+            </p>
+          ))}
+        </div>
+      </WidgetFrame>
+    );
+  }
+
   return (
     <WidgetFrame id="clock" title={t("widgets.clock.title")} inline={inline}>
       <div className="flex items-end justify-between gap-3">

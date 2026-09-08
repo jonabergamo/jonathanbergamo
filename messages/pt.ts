@@ -135,6 +135,12 @@ export const pt: Messages = {
         7: "Agora: na rua com a câmera. Volto já.",
       },
     },
+    music: {
+      title: "Tocando agora",
+      hint: "Dê play e olhe para a área de trabalho.",
+      playing: "Tocando. Ele dança.",
+      toggle: "Mostrar ou esconder o player",
+    },
     github: {
       title: "Visto por último no GitHub",
       pushed: "Enviou {count} commit(s) para",
