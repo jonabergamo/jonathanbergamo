@@ -3,7 +3,12 @@
 import * as React from "react";
 import { Canvas } from "@react-three/fiber";
 import { PCFShadowMap } from "three";
-import { AdaptiveDpr, ContactShadows } from "@react-three/drei";
+import {
+  AdaptiveDpr,
+  ContactShadows,
+  Environment,
+  Lightformer,
+} from "@react-three/drei";
 import { Avatar } from "./avatar";
 import type { AvatarVariant } from "./avatar-lazy";
 
@@ -52,14 +57,56 @@ export default function AvatarScene({
       }}
       style={{ touchAction: "pan-y" }}
     >
-      <hemisphereLight args={["#ffffff", "#8899aa", 0.9]} />
+      {/* Studio lighting: a procedural environment for soft ambient light and
+          reflections (no HDR download), a warm key, a cool fill and a rim. */}
+      <Environment resolution={128} frames={1}>
+        <Lightformer
+          intensity={2.2}
+          position={[0, 4, 2]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={[8, 8, 1]}
+          color="#fff6e8"
+        />
+        <Lightformer
+          intensity={1.4}
+          position={[-4, 1.5, 2]}
+          rotation={[0, Math.PI / 3, 0]}
+          scale={[3, 4, 1]}
+          color="#dfe9f5"
+        />
+        <Lightformer
+          intensity={1}
+          position={[4, 1, -1]}
+          rotation={[0, -Math.PI / 3, 0]}
+          scale={[3, 4, 1]}
+          color="#ffffff"
+        />
+        <Lightformer
+          intensity={0.6}
+          position={[0, -3, 0]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          scale={[10, 10, 1]}
+          color="#c9d2dc"
+        />
+      </Environment>
       <directionalLight
-        intensity={2.2}
-        position={[2, 3.5, 3]}
+        intensity={1.6}
+        color="#fff1e0"
+        position={[2.2, 3, 2.5]}
         castShadow
         shadow-mapSize={[1024, 1024]}
+        shadow-bias={-0.0005}
       />
-      <directionalLight intensity={0.8} position={[-3, 2, -2]} />
+      <directionalLight
+        intensity={0.45}
+        color="#cfe0f2"
+        position={[-3, 1.5, 2]}
+      />
+      <directionalLight
+        intensity={0.9}
+        color="#ffffff"
+        position={[-1.5, 2.5, -3]}
+      />
       <React.Suspense fallback={null}>
         <Avatar pointer={pointer} waveRef={wave} animate={animate} />
       </React.Suspense>
