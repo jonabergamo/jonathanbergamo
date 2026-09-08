@@ -24,6 +24,7 @@ export default function AvatarScene({
   const wave = React.useRef(0);
   const [visible, setVisible] = React.useState(true);
   const dancing = useMusicStore((s) => s.playing);
+  const bpm = useMusicStore((s) => s.bpm);
 
   // Follow the cursor anywhere on the page, not just over the canvas.
   React.useEffect(() => {
@@ -121,6 +122,7 @@ export default function AvatarScene({
           dancing={dancing}
           animate={animate}
           offsetX={offsetX}
+          bpm={bpm}
         />
       </React.Suspense>
       <ContactShadows

@@ -2,7 +2,9 @@
  * Writes src/data/playlist.json ({ id, title, author } per track) for the
  * playlist configured in src/data/music.ts. The track ids and order come from
  * the YouTube player itself (loaded in a headless browser), titles from oEmbed,
- * so the list matches what the widget will play.  Run:  pnpm music:sync
+ * so the list matches what the widget will play. Tempo comes from Deezer; when
+ * it is unknown you can type a bpm into playlist.json and later runs keep it.
+ * Run:  pnpm music:sync
  */
 import fs from "node:fs";
 import { chromium } from "@playwright/test";
@@ -38,21 +40,68 @@ await browser.close();
 if (!ids.length)
   throw new Error("Player returned no tracks; is the playlist public?");
 
+// Keep hand-filled tempos from a previous run when the lookup finds nothing.
+const previous = new Map();
+try {
+  for (const t of JSON.parse(fs.readFileSync("src/data/playlist.json", "utf8"))
+    .tracks)
+    previous.set(t.id, t);
+} catch {
+  // first run
+}
+
 const tracks = [];
 for (const vid of ids) {
   const r = await fetch(
     `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${vid}&format=json`,
   );
   if (!r.ok) {
-    tracks.push({ id: vid, title: "", author: "" });
+    tracks.push({ id: vid, title: "", author: "", bpm: null });
     continue;
   }
   const j = await r.json();
-  tracks.push({
-    id: vid,
-    title: j.title ?? "",
-    author: (j.author_name ?? "").replace(/\s*-\s*Topic$/i, ""),
-  });
+  const title = j.title ?? "";
+  const author = (j.author_name ?? "").replace(/\s*-\s*Topic$/i, "");
+  const bpm =
+    (await lookupBpm(title, author)) ?? previous.get(vid)?.bpm ?? null;
+  tracks.push({ id: vid, title, author, bpm });
+}
+
+/** Tempo from Deezer's public API (no key). Returns null when unknown. */
+async function lookupBpm(title, author) {
+  const clean = title
+    .replace(
+      /\s*[([].*?(official|video|audio|lyric|visualizer|remaster).*?[)\]]\s*/gi,
+      "",
+    )
+    .replace(/^.*?\s-\s/, (m) =>
+      author && m.toLowerCase().includes(author.toLowerCase()) ? "" : m,
+    )
+    .trim();
+  try {
+    const q = encodeURIComponent(`${clean} ${author}`.trim());
+    const res = await (
+      await fetch(`https://api.deezer.com/search?q=${q}&limit=5`)
+    ).json();
+    const hits = res.data ?? [];
+    const preferred =
+      hits.find(
+        (h) =>
+          author &&
+          h.artist?.name
+            ?.toLowerCase()
+            .includes(author.toLowerCase().split(" ")[0]),
+      ) ?? hits[0];
+    for (const h of [preferred, ...hits].filter(Boolean)) {
+      const t = await (
+        await fetch(`https://api.deezer.com/track/${h.id}`)
+      ).json();
+      if (t.bpm > 0) return Math.round(t.bpm);
+    }
+  } catch {
+    // offline or rate limited: leave it unknown
+  }
+  return null;
 }
 
 fs.writeFileSync(

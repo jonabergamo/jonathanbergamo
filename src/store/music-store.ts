@@ -6,8 +6,11 @@ type MusicStore = {
   /** True while the player reports playback. The avatar dances to it. */
   playing: boolean;
   volume: number;
+  /** Tempo of the current track, when known. Drives the dance speed. */
+  bpm: number | null;
   setPlaying: (v: boolean) => void;
   setVolume: (v: number) => void;
+  setBpm: (v: number | null) => void;
 };
 
 export const useMusicStore = create<MusicStore>()(
@@ -15,7 +18,9 @@ export const useMusicStore = create<MusicStore>()(
     (set) => ({
       playing: false,
       volume: music.defaultVolume,
+      bpm: null,
       setPlaying: (playing) => set({ playing }),
+      setBpm: (bpm) => set({ bpm }),
       setVolume: (volume) =>
         set({ volume: Math.max(0, Math.min(100, Math.round(volume))) }),
     }),

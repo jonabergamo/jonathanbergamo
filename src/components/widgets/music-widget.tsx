@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { music } from "@/data/music";
 import { WidgetFrame } from "./widget-frame";
 import { useYouTubePlayer } from "./use-youtube-player";
+import { useMusicStore } from "@/store/music-store";
 import playlist from "@/data/playlist.json";
 
 function fmt(s: number) {
@@ -50,6 +51,10 @@ export function MusicWidget({ inline }: { inline?: boolean }) {
   );
   const order = ids.length ? ids : playlist.tracks.map((t) => t.id);
   const listRef = React.useRef<HTMLOListElement>(null);
+  const setBpm = useMusicStore((s) => s.setBpm);
+  React.useEffect(() => {
+    setBpm((track?.videoId && meta.get(track.videoId)?.bpm) || null);
+  }, [track?.videoId, meta, setBpm]);
   React.useEffect(() => {
     listRef.current
       ?.querySelector<HTMLElement>("[aria-current='true']")

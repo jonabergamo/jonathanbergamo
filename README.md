@@ -35,7 +35,7 @@ pnpm test:e2e     # Playwright (builds and serves out/ on :3100)
 - `src/components/avatar/` — the avatar: GLB model in `public/models`, wave clip in `public/animations`, scene, SVG fallback, capability probe
 - `src/components/widgets/` — floating desktop widgets (clocks, weather, status, GitHub)
 - `src/data/photos.ts` + `public/photos/` — photography grid pulled from Instagram
-- `src/data/music.ts` + `src/data/playlist.json` — the music widget's YouTube playlist; run `pnpm music:sync` after changing the id to refresh track titles
+- `src/data/music.ts` + `src/data/playlist.json` — the music widget's YouTube playlist; run `pnpm music:sync` after changing the id to refresh titles and tempos (BPM from Deezer; fill in missing ones by hand and they survive later syncs). The avatar's dance speed follows the current track's BPM
 - `src/i18n/` — locale store, provider and typed `t()`
 
 ## Design rules

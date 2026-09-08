@@ -9,6 +9,25 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 export const MODEL_URL = "/models/jonathan.glb";
 export const WAVE_URL = "/animations/Waving.fbx";
 export const DANCE_URL = "/animations/HipHop.fbx";
+/** Native tempo of the HipHop clip (hips bounce on the eighth notes). */
+export const CLIP_BPM = 100;
+
+/**
+ * Playback speed that lands the clip on the song's beat, folding to half or
+ * double time so it never looks frantic or sluggish, then clamped.
+ */
+export function danceSpeed(bpm: number | null | undefined) {
+  if (!bpm || bpm <= 0) return 1;
+  const candidates = [
+    bpm / CLIP_BPM,
+    bpm / (2 * CLIP_BPM),
+    (2 * bpm) / CLIP_BPM,
+  ];
+  const best = candidates.reduce((a, b) =>
+    Math.abs(Math.log(b)) < Math.abs(Math.log(a)) ? b : a,
+  );
+  return Math.min(1.6, Math.max(0.6, best));
+}
 
 type Props = {
   /** Normalised pointer position in [-1, 1], updated by the parent. */
@@ -19,6 +38,8 @@ type Props = {
   dancing: boolean;
   /** Horizontal placement inside the canvas, world units. */
   offsetX?: number;
+  /** Tempo of the playing track; the dance clip is authored at CLIP_BPM. */
+  bpm?: number | null;
   animate: boolean;
 };
 
@@ -84,6 +105,7 @@ export function Avatar({
   dancing,
   animate,
   offsetX = 0,
+  bpm = null,
 }: Props) {
   const group = React.useRef<THREE.Group>(null);
   const { scene } = useGLTF(MODEL_URL);
@@ -175,6 +197,13 @@ export function Avatar({
     return () => mixer.removeEventListener("finished", onFinished);
   }, [actions, mixer]);
 
+  // Follow tempo changes between tracks while dancing.
+  React.useEffect(() => {
+    if (danceAction.current && phase.current === "dancing") {
+      danceAction.current.timeScale = danceSpeed(bpm);
+    }
+  }, [bpm]);
+
   useFrame((state, delta) => {
     if (!animate) return;
     const b = bones.current;
@@ -188,6 +217,7 @@ export function Avatar({
         if (!group.current) return;
         const a = mixer.clipAction(clip, group.current);
         a.setLoop(THREE.LoopRepeat, Infinity);
+        a.timeScale = danceSpeed(bpm);
         danceAction.current = a;
         phase.current = "dancing";
         a.reset().fadeIn(0.3).play();
