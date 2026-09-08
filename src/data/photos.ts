@@ -18,7 +18,7 @@ export const photos: Photo[] = [
     code: "DUqs1SpAZsV",
     width: 1080,
     height: 1440,
-    date: "",
+    date: "2026-02-12",
   },
   { code: "DXPkqOiAUjN", width: 1080, height: 719, date: "2026-04-17" },
   {
@@ -79,6 +79,6 @@ export const photos: Photo[] = [
     code: "DUs0kPqgZfo",
     width: 1080,
     height: 1351,
-    date: "",
+    date: "2026-02-13",
   },
 ];
