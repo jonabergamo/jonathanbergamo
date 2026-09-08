@@ -17,6 +17,8 @@ type Props = {
   waveRef: React.RefObject<number>;
   /** While true (music is playing) he dances in a loop. */
   dancing: boolean;
+  /** Horizontal placement inside the canvas, world units. */
+  offsetX?: number;
   animate: boolean;
 };
 
@@ -76,7 +78,13 @@ function adaptClip(clip: THREE.AnimationClip, name: string) {
   return c;
 }
 
-export function Avatar({ pointer, waveRef, dancing, animate }: Props) {
+export function Avatar({
+  pointer,
+  waveRef,
+  dancing,
+  animate,
+  offsetX = 0,
+}: Props) {
   const group = React.useRef<THREE.Group>(null);
   const { scene } = useGLTF(MODEL_URL);
   const fbx = useFBX(WAVE_URL);
@@ -257,7 +265,7 @@ export function Avatar({ pointer, waveRef, dancing, animate }: Props) {
   });
 
   return (
-    <group ref={group} position={[0, -1.52, 0]} dispose={null}>
+    <group ref={group} position={[offsetX, -1.52, 0]} dispose={null}>
       <primitive object={scene} />
     </group>
   );

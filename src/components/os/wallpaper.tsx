@@ -27,8 +27,8 @@ export function Wallpaper({ variant }: { variant: "desktop" | "mobile" }) {
       <div
         className={
           mobile
-            ? "absolute inset-x-0 top-[10dvh] bottom-[46dvh]"
-            : "absolute right-[4vw] bottom-0 h-[min(72vh,760px)] w-[min(44vw,620px)]"
+            ? "absolute inset-x-0 top-[4dvh] bottom-[46dvh]"
+            : "absolute right-[4vw] bottom-0 h-[min(88vh,930px)] w-[min(64vw,920px)]"
         }
       >
         <AvatarLazy variant={mobile ? "mobile" : "wallpaper"} />

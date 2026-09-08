@@ -43,10 +43,11 @@ export default function AvatarScene({
   const mobile = variant === "mobile";
   // Camera is level (it looks at a point at its own height) so the avatar
   // stands perfectly vertical, no top-down perspective.
-  const eye = mobile ? 0.14 : 0.05;
+  const eye = mobile ? 0.2 : 0.18;
+  const offsetX = mobile ? 0 : 0.05;
   const camera = mobile
-    ? { position: [0, eye, 1.75] as [number, number, number], fov: 30 }
-    : { position: [0, eye, 2.6] as [number, number, number], fov: 26 };
+    ? { position: [0, eye, 2.0] as [number, number, number], fov: 30 }
+    : { position: [0, eye, 3.18] as [number, number, number], fov: 26 };
 
   return (
     <Canvas
@@ -119,10 +120,11 @@ export default function AvatarScene({
           waveRef={wave}
           dancing={dancing}
           animate={animate}
+          offsetX={offsetX}
         />
       </React.Suspense>
       <ContactShadows
-        position={[0, -1.52, 0]}
+        position={[offsetX, -1.52, 0]}
         opacity={0.35}
         scale={3}
         blur={2.2}
