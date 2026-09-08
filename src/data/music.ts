@@ -5,6 +5,6 @@
  */
 export const music = {
   title: "This is Jonathan Bergamo",
-  youtubePlaylistId: "PLhf_RSaUvUVt5XeZEBdB_lirshAWDM5vd",
+  youtubePlaylistId: "PLErtElb3drXI",
   defaultVolume: 70,
 } as const;

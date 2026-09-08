@@ -102,7 +102,7 @@ export function useYouTubePlayer(
           )
           .trim() ||
         (data.title ?? ""),
-      author: data.author ?? "",
+      author: (data.author ?? "").replace(/\s*-\s*Topic$/i, ""),
       videoId: data.video_id ?? "",
       index: Math.max(0, p.getPlaylistIndex()),
       count: list.length,
