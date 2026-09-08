@@ -228,16 +228,21 @@
   html {
     @apply font-sans;
     height: 100%;
+    overflow: hidden;
     /* Safe areas and overscroll show this, so match the bars, not the page. */
     background: var(--taskbar);
   }
   body {
     @apply text-foreground;
-    /* The shell is fixed to the viewport; anything visible around it (Safari
-       toolbar gaps, safe areas, overscroll) should look like the bars. */
+    /* The whole site is an app shell. Pinning the body stops iOS Safari from
+       scrolling the document to collapse its toolbar, which used to open a
+       gap under the bottom navigation until the page was reloaded. */
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
     background: var(--taskbar);
-    min-height: 100%;
     overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%;
   }
   h1,
   h2,
