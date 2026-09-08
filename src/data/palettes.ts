@@ -38,7 +38,7 @@ export const PALETTES: Palette[] = [
   },
 ];
 
-export const DEFAULT_PALETTE: PaletteId = "natoora";
+export const DEFAULT_PALETTE: PaletteId = "slate";
 export const THEMES = PALETTES.flatMap((p) => [
   `${p.id}-light`,
   `${p.id}-dark`,

@@ -7,7 +7,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
       attribute="data-theme"
-      defaultTheme="natoora-light"
+      defaultTheme="slate-light"
       themes={THEMES}
       enableSystem={false}
       disableTransitionOnChange

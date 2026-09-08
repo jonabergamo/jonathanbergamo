@@ -11,7 +11,6 @@
  * written by next-themes before hydration so there is no flash. The list of
  * palettes with names and swatches lives in src/data/palettes.ts.
  */
-:root,
 [data-theme^="natoora-"] {
   --p-ink: #003049;
   --p-mid: #669bbc;
@@ -28,6 +27,7 @@
   --p-deep: #6e2418;
   --p-accent-fg: #f2efe6;
 }
+:root,
 [data-theme^="slate-"] {
   --p-ink: #1b2430;
   --p-mid: #7c9bb5;

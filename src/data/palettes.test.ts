@@ -16,11 +16,11 @@ describe("palettes", () => {
       mode: "dark",
     });
     expect(parseTheme(undefined)).toEqual({
-      palette: "natoora",
+      palette: "slate",
       mode: "light",
     });
     expect(parseTheme("nope-dark")).toEqual({
-      palette: "natoora",
+      palette: "slate",
       mode: "dark",
     });
   });
