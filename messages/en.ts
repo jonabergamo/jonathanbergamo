@@ -140,6 +140,8 @@ export const en = {
       volume: "Volume",
       mute: "Mute or unmute",
       toggle: "Show or hide the player",
+      tracks: "Songs",
+      track: "Track {n}",
     },
     github: {
       title: "Last seen on GitHub",

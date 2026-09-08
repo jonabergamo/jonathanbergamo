@@ -7,6 +7,7 @@ import { useMusicStore } from "@/store/music-store";
 /* Minimal typing of the parts of the YouTube IFrame Player API we use. */
 type YTPlayer = {
   playVideo: () => void;
+  playVideoAt: (i: number) => void;
   pauseVideo: () => void;
   nextVideo: () => void;
   previousVideo: () => void;
@@ -83,6 +84,7 @@ export function useYouTubePlayer(
   const [ready, setReady] = React.useState(false);
   const [track, setTrack] = React.useState<Track | null>(null);
   const [progress, setProgress] = React.useState({ current: 0, duration: 0 });
+  const [ids, setIds] = React.useState<string[]>([]);
   const playing = useMusicStore((s) => s.playing);
   const setPlaying = useMusicStore((s) => s.setPlaying);
   const volume = useMusicStore((s) => s.volume);
@@ -93,6 +95,11 @@ export function useYouTubePlayer(
     if (!p) return;
     const data = p.getVideoData();
     const list = p.getPlaylist() ?? [];
+    setIds((prev) =>
+      prev.length === list.length && prev.every((v, i) => v === list[i])
+        ? prev
+        : list,
+    );
     setTrack({
       title:
         (data.title ?? "")
@@ -176,6 +183,7 @@ export function useYouTubePlayer(
           ? player.current?.pauseVideo()
           : player.current?.playVideo(),
       next: () => player.current?.nextVideo(),
+      playAt: (i: number) => player.current?.playVideoAt(i),
       prev: () => player.current?.previousVideo(),
       seek: (fraction: number) => {
         const p = player.current;
@@ -192,5 +200,5 @@ export function useYouTubePlayer(
     [setVolumeStore],
   );
 
-  return { ready, playing, track, progress, volume, ...api };
+  return { ready, playing, track, progress, volume, ids, ...api };
 }

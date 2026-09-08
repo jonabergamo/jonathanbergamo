@@ -146,6 +146,8 @@ export const pt: Messages = {
       volume: "Volume",
       mute: "Silenciar ou ativar o som",
       toggle: "Mostrar ou esconder o player",
+      tracks: "Músicas",
+      track: "Faixa {n}",
     },
     github: {
       title: "Visto por último no GitHub",

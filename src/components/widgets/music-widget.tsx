@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { music } from "@/data/music";
 import { WidgetFrame } from "./widget-frame";
 import { useYouTubePlayer } from "./use-youtube-player";
+import playlist from "@/data/playlist.json";
 
 function fmt(s: number) {
   if (!Number.isFinite(s) || s <= 0) return "0:00";
@@ -40,7 +41,20 @@ export function MusicWidget({ inline }: { inline?: boolean }) {
     prev,
     seek,
     setVolume,
+    ids,
+    playAt,
   } = useYouTubePlayer(host);
+  const meta = React.useMemo(
+    () => new Map(playlist.tracks.map((t) => [t.id, t])),
+    [],
+  );
+  const order = ids.length ? ids : playlist.tracks.map((t) => t.id);
+  const listRef = React.useRef<HTMLOListElement>(null);
+  React.useEffect(() => {
+    listRef.current
+      ?.querySelector<HTMLElement>("[aria-current='true']")
+      ?.scrollIntoView({ block: "nearest" });
+  }, [track?.videoId]);
   const [expanded, setExpanded] = React.useState(!inline);
   const VolumeIcon = volume === 0 ? VolumeX : volume < 50 ? Volume1 : Volume2;
   const cover = track?.videoId
@@ -204,6 +218,60 @@ export function MusicWidget({ inline }: { inline?: boolean }) {
             />
           </div>
         </div>
+        {/* Song selector */}
+        <ol
+          ref={listRef}
+          aria-label={t("widgets.music.tracks")}
+          className={cn(
+            "no-scrollbar border-brand-ink/15 -mx-1 overflow-y-auto rounded-md border",
+            inline ? "max-h-28" : "max-h-40",
+          )}
+        >
+          {order.map((id, i) => {
+            const m = meta.get(id);
+            const current = track?.videoId === id;
+            return (
+              <li key={id}>
+                <button
+                  type="button"
+                  aria-current={current ? "true" : undefined}
+                  data-testid={`music-track-${i}`}
+                  disabled={!ready}
+                  onClick={() => playAt(i)}
+                  className={cn(
+                    "hover:bg-muted flex w-full items-center gap-2 px-2 py-1.5 text-left text-xs disabled:opacity-50",
+                    current &&
+                      "bg-brand-ink text-brand-paper hover:bg-brand-ink",
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "w-4 shrink-0 font-mono text-[10px] tabular-nums",
+                      current ? "text-brand-paper/80" : "text-muted-foreground",
+                    )}
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="min-w-0 flex-1 truncate">
+                    {m?.title ?? t("widgets.music.track", { n: i + 1 })}
+                  </span>
+                  {m?.author && (
+                    <span
+                      className={cn(
+                        "hidden max-w-[40%] truncate text-[10px] sm:inline",
+                        current
+                          ? "text-brand-paper/80"
+                          : "text-muted-foreground",
+                      )}
+                    >
+                      {m.author}
+                    </span>
+                  )}
+                </button>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </WidgetFrame>
   );

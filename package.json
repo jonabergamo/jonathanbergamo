@@ -15,7 +15,8 @@
     "test:watch": "vitest --project unit",
     "test:e2e": "playwright test",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "music:sync": "node scripts/fetch-playlist.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
