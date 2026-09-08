@@ -61,7 +61,7 @@ export function MobileShell() {
       <Wallpaper variant="mobile" />
 
       {/* Home screen */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-16 flex flex-col justify-end px-5 pb-4">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-(--nav-h) flex flex-col justify-end px-5 pb-4">
         <MobileWidgets />
       </div>
 
@@ -77,7 +77,7 @@ export function MobileShell() {
             animate={reduced ? { opacity: 1 } : { y: 0 }}
             exit={reduced ? { opacity: 0 } : { y: "100%" }}
             transition={{ type: "spring", stiffness: 380, damping: 36 }}
-            className="bg-card text-card-foreground absolute inset-x-0 top-0 bottom-16 z-20 flex flex-col"
+            className="bg-card text-card-foreground absolute inset-x-0 top-0 bottom-(--nav-h) z-20 flex flex-col"
           >
             <div className="bg-titlebar text-titlebar-foreground flex h-12 shrink-0 items-center gap-2 pr-2 pl-4">
               {React.createElement(WINDOW_REGISTRY[current].icon, {
@@ -129,7 +129,7 @@ export function MobileShell() {
               animate={reduced ? { opacity: 1 } : { y: 0 }}
               exit={reduced ? { opacity: 0 } : { y: "100%" }}
               transition={{ type: "spring", stiffness: 380, damping: 36 }}
-              className="border-brand-ink bg-card text-card-foreground absolute inset-x-0 bottom-16 z-40 rounded-t-xl border-2 border-b-0 p-3"
+              className="border-brand-ink bg-card text-card-foreground absolute inset-x-0 bottom-(--nav-h) z-40 rounded-t-xl border-2 border-b-0 p-3"
             >
               <p className="font-display px-2 pb-2 text-base font-bold">
                 {profile.shortName}
@@ -186,7 +186,7 @@ export function MobileShell() {
       <nav
         aria-label={t("os.system")}
         data-testid="bottom-nav"
-        className="pb-safe border-brand-ink/40 bg-taskbar text-taskbar-foreground absolute inset-x-0 bottom-0 z-50 flex h-16 items-stretch border-t-2"
+        className="pb-safe border-brand-ink/40 bg-taskbar text-taskbar-foreground absolute inset-x-0 bottom-0 z-50 flex min-h-(--nav-h) items-stretch border-t-2"
       >
         <NavButton
           label={t("os.home")}

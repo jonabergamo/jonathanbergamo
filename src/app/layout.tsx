@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { ThemeColorMeta } from "@/components/theme-color-meta";
 import { en } from "../../messages/en";
 import { SITE_URL } from "@/lib/site";
 
@@ -47,10 +48,6 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f1f4f7" },
-    { media: "(prefers-color-scheme: dark)", color: "#1b2430" },
-  ],
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -66,7 +63,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-background min-h-full overflow-hidden">
-        <Providers>{children}</Providers>
+        <Providers>
+          <ThemeColorMeta />
+          {children}
+        </Providers>
       </body>
     </html>
   );

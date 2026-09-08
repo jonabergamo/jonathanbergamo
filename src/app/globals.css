@@ -228,6 +228,8 @@
   html {
     @apply font-sans;
     height: 100%;
+    /* Safe areas and overscroll show this, so match the bars, not the page. */
+    background: var(--taskbar);
   }
   body {
     @apply bg-background text-foreground;
@@ -271,6 +273,11 @@
 
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Phone bottom bar: 4rem of controls plus the home-indicator safe area. */
+:root {
+  --nav-h: calc(4rem + env(safe-area-inset-bottom, 0px));
 }
 
 /* Custom range inputs for the music widget: a filled track in the palette. */
