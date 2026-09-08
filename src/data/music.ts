@@ -5,6 +5,6 @@
  * Premium listeners get full tracks.
  */
 export const music = {
-  artist: "Twenty One Pilots",
-  spotifyUri: "spotify:artist:3YQKmKGau1PzlVlkL1iodx",
+  title: "This is Jonathan Bergamo",
+  spotifyUri: "spotify:playlist:4ZP3cQQI1m4v69i9ZYyQMt",
 } as const;

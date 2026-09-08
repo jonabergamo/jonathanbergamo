@@ -33,7 +33,7 @@ export function MusicWidget({ inline }: { inline?: boolean }) {
           <Music2 className={cn("size-4", playing && "animate-pulse")} />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold">{music.artist}</p>
+          <p className="truncate text-sm font-semibold">{music.title}</p>
           <p className="text-muted-foreground truncate text-[11px]">
             {playing ? t("widgets.music.playing") : t("widgets.music.hint")}
           </p>
