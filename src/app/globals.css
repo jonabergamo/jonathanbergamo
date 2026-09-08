@@ -232,7 +232,10 @@
     background: var(--taskbar);
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    /* The shell is fixed to the viewport; anything visible around it (Safari
+       toolbar gaps, safe areas, overscroll) should look like the bars. */
+    background: var(--taskbar);
     min-height: 100%;
     overscroll-behavior: none;
   }

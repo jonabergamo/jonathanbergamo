@@ -54,10 +54,7 @@ export function MobileShell() {
   const visibleTabs = running.slice(0, 4);
 
   return (
-    <div
-      className="relative h-dvh w-full overflow-hidden"
-      data-testid="mobile-shell"
-    >
+    <div className="fixed inset-0 overflow-hidden" data-testid="mobile-shell">
       <Wallpaper variant="mobile" />
 
       {/* Home screen */}

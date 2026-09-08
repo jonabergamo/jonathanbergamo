@@ -26,7 +26,7 @@ export function Desktop() {
   return (
     <main
       className={cn(
-        "relative h-dvh w-full overflow-hidden transition-opacity duration-300",
+        "fixed inset-0 overflow-hidden transition-opacity duration-300",
         ready ? "opacity-100" : "opacity-0",
       )}
     >
