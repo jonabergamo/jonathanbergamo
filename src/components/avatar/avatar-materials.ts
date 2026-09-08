@@ -5,13 +5,36 @@ import * as THREE from "three";
  * The one documented exception is SKIN, a warm light tone; a cream skin looked
  * jaundiced under toon shading and a navy one is not a person.
  */
-export const BRAND = {
-  darkred: "#780000",
-  red: "#c1121f",
-  cream: "#fdf0d5",
-  navy: "#003049",
-  blue: "#669bbc",
-} as const;
+export type Brand = {
+  deep: string;
+  accent: string;
+  paper: string;
+  ink: string;
+  mid: string;
+};
+
+/** Default palette; replaced at runtime by readBrand() so the avatar follows the active theme. */
+export const BRAND: Brand = {
+  deep: "#780000",
+  accent: "#c1121f",
+  paper: "#fdf0d5",
+  ink: "#003049",
+  mid: "#669bbc",
+};
+
+export function readBrand(): Brand {
+  if (typeof window === "undefined") return BRAND;
+  const cs = getComputedStyle(document.documentElement);
+  const get = (v: string, fallback: string) =>
+    cs.getPropertyValue(v).trim() || fallback;
+  return {
+    deep: get("--p-deep", BRAND.deep),
+    accent: get("--p-accent", BRAND.accent),
+    paper: get("--p-paper", BRAND.paper),
+    ink: get("--p-ink", BRAND.ink),
+    mid: get("--p-mid", BRAND.mid),
+  };
+}
 
 export const SKIN = "#f2c9a6"; // exception, see above
 
@@ -19,21 +42,24 @@ function mix(a: string, b: string, t: number) {
   return new THREE.Color(a).lerp(new THREE.Color(b), t);
 }
 
-export const COLORS = {
-  skin: new THREE.Color(SKIN),
-  hair: mix(BRAND.navy, BRAND.darkred, 0.42).multiplyScalar(0.42), // dark brown, palette-derived
-  stubble: mix(BRAND.navy, BRAND.darkred, 0.42).multiplyScalar(0.5),
-  jacket: new THREE.Color(BRAND.navy).multiplyScalar(0.45),
-  jacketTrim: new THREE.Color(BRAND.navy).multiplyScalar(0.7),
-  sweaterLight: new THREE.Color(BRAND.cream),
-  sweaterDark: new THREE.Color(BRAND.navy),
-  frames: new THREE.Color(BRAND.navy).multiplyScalar(0.6),
-  lens: new THREE.Color(BRAND.blue),
-  eye: new THREE.Color(BRAND.navy).multiplyScalar(0.5),
-  mouth: mix(BRAND.darkred, SKIN, 0.35),
-  blush: new THREE.Color(BRAND.red),
-  earring: new THREE.Color(BRAND.cream),
-};
+export function paletteColors(b: Brand) {
+  return {
+    skin: new THREE.Color(SKIN),
+    // Hair and stubble stay a dark brown whatever the palette: it is a portrait.
+    hair: new THREE.Color("#2b1d1a"),
+    stubble: new THREE.Color("#2b1d1a"),
+    jacket: new THREE.Color(b.ink).multiplyScalar(0.45),
+    jacketTrim: new THREE.Color(b.ink).multiplyScalar(0.7),
+    sweaterLight: new THREE.Color(b.paper),
+    sweaterDark: new THREE.Color(b.ink),
+    frames: new THREE.Color(b.ink).multiplyScalar(0.6),
+    lens: new THREE.Color(b.mid),
+    eye: new THREE.Color(b.ink).multiplyScalar(0.5),
+    mouth: mix(b.deep, SKIN, 0.35),
+    blush: new THREE.Color(b.accent),
+    earring: new THREE.Color(b.paper),
+  };
+}
 
 let gradient: THREE.DataTexture | null = null;
 /** Three-step gradient for MeshToonMaterial: flat, readable, low-poly look. */
@@ -60,8 +86,8 @@ export function toon(
   });
 }
 
-/** Horizontal cream/navy stripes for the sweater. */
-export function stripeTexture(bands = 15) {
+/** Horizontal paper/ink stripes for the sweater. */
+export function stripeTexture(b: Brand, bands = 15) {
   const size = 128;
   const canvas = document.createElement("canvas");
   canvas.width = 8;
@@ -69,7 +95,7 @@ export function stripeTexture(bands = 15) {
   const ctx = canvas.getContext("2d")!;
   const h = size / bands;
   for (let i = 0; i < bands; i++) {
-    ctx.fillStyle = i % 2 === 0 ? BRAND.cream : BRAND.navy;
+    ctx.fillStyle = i % 2 === 0 ? b.paper : b.ink;
     ctx.fillRect(0, i * h, 8, h);
   }
   const tex = new THREE.CanvasTexture(canvas);

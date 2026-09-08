@@ -23,8 +23,8 @@ export default function SkillsWindow() {
                 className={cn(
                   "rounded-md border px-2 py-1 text-[13px] leading-none",
                   s.core
-                    ? "border-brand-navy bg-brand-navy text-brand-cream dark:border-brand-cream dark:bg-brand-cream dark:text-brand-navy font-semibold"
-                    : "border-brand-navy/25 text-foreground/90",
+                    ? "border-brand-ink bg-brand-ink text-brand-paper dark:border-brand-paper dark:bg-brand-paper dark:text-brand-ink font-semibold"
+                    : "border-brand-ink/25 text-foreground/90",
                 )}
               >
                 {s.name}

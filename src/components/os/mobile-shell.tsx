@@ -10,9 +10,11 @@ import { useWindowStore, selectRunning } from "@/store/window-store";
 import type { WindowId } from "@/store/window-defaults";
 import { WINDOW_LIST, WINDOW_REGISTRY } from "./window-registry";
 import { Wallpaper } from "./wallpaper";
+import { MobileWidgets } from "@/components/widgets/widget-layer";
 import { WindowSkeleton } from "./window-skeleton";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { PalettePicker } from "@/components/palette-picker";
 import { profile } from "@/data/profile";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { Download, RotateCcw } from "lucide-react";
@@ -60,10 +62,11 @@ export function MobileShell() {
 
       {/* Home screen */}
       <div className="absolute inset-x-0 top-0 bottom-16 flex flex-col justify-end px-5 pb-4">
-        <p className="text-muted-foreground mb-2 text-xs">
+        <MobileWidgets />
+        <p className="text-muted-foreground mt-4 mb-2 text-xs">
           {t("mobile.homeHint")}
         </p>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-4 gap-2">
           {WINDOW_LIST.map((w) => {
             const Icon = w.icon;
             return (
@@ -72,13 +75,15 @@ export function MobileShell() {
                 type="button"
                 data-testid={`icon-${w.id}`}
                 onClick={() => launch(w.id)}
-                className="border-brand-navy bg-card text-card-foreground shadow-hard flex flex-col items-center gap-1.5 rounded-lg border-2 p-3 active:translate-x-px active:translate-y-px active:shadow-none"
+                className="border-brand-ink bg-card text-card-foreground shadow-hard flex flex-col items-center gap-1 rounded-lg border-2 px-1 py-2.5 active:translate-x-px active:translate-y-px active:shadow-none"
               >
                 <Icon
-                  className="text-brand-navy dark:text-brand-blue size-6"
+                  className="text-brand-ink dark:text-brand-mid size-6"
                   strokeWidth={1.8}
                 />
-                <span className="text-xs font-medium">{t(w.titleKey)}</span>
+                <span className="text-[11px] leading-tight font-medium">
+                  {t(w.titleKey)}
+                </span>
               </button>
             );
           })}
@@ -115,7 +120,7 @@ export function MobileShell() {
                 aria-label={t("os.close")}
                 data-testid="sheet-close"
                 onClick={() => close(current)}
-                className="hover:bg-brand-red inline-flex size-9 items-center justify-center rounded-md"
+                className="hover:bg-brand-accent inline-flex size-9 items-center justify-center rounded-md"
               >
                 <X className="size-5" />
               </button>
@@ -136,7 +141,7 @@ export function MobileShell() {
             <motion.button
               type="button"
               aria-label={t("os.close")}
-              className="bg-brand-navy/40 absolute inset-0 z-30"
+              className="bg-brand-ink/40 absolute inset-0 z-30"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -149,7 +154,7 @@ export function MobileShell() {
               animate={reduced ? { opacity: 1 } : { y: 0 }}
               exit={reduced ? { opacity: 0 } : { y: "100%" }}
               transition={{ type: "spring", stiffness: 380, damping: 36 }}
-              className="border-brand-navy bg-card text-card-foreground absolute inset-x-0 bottom-16 z-40 rounded-t-xl border-2 border-b-0 p-3"
+              className="border-brand-ink bg-card text-card-foreground absolute inset-x-0 bottom-16 z-40 rounded-t-xl border-2 border-b-0 p-3"
             >
               <p className="font-display px-2 pb-2 text-base font-bold">
                 {profile.shortName}
@@ -166,7 +171,7 @@ export function MobileShell() {
                       onClick={() => launch(w.id)}
                       className="hover:bg-accent flex items-center gap-2 rounded-md px-2 py-2 text-left text-sm"
                     >
-                      <Icon className="text-brand-navy dark:text-brand-blue size-4" />
+                      <Icon className="text-brand-ink dark:text-brand-mid size-4" />
                       {t(w.titleKey)}
                     </button>
                   );
@@ -175,9 +180,10 @@ export function MobileShell() {
               <div className="bg-border my-2 h-px" />
               <div className="flex flex-wrap items-center gap-2 px-1">
                 <LanguageToggle tone="surface" />
-                <span className="bg-brand-navy rounded-md">
+                <span className="bg-brand-ink rounded-md">
                   <ThemeToggle />
                 </span>
+                <PalettePicker tone="surface" />
                 <a
                   href={profile.cv[locale]}
                   download
@@ -205,7 +211,7 @@ export function MobileShell() {
       <nav
         aria-label={t("os.system")}
         data-testid="bottom-nav"
-        className="pb-safe border-brand-navy/40 bg-taskbar text-taskbar-foreground absolute inset-x-0 bottom-0 z-50 flex h-16 items-stretch border-t-2"
+        className="pb-safe border-brand-ink/40 bg-taskbar text-taskbar-foreground absolute inset-x-0 bottom-0 z-50 flex h-16 items-stretch border-t-2"
       >
         <NavButton
           label={t("os.home")}
@@ -273,7 +279,7 @@ function NavButton({
       onClick={onClick}
       className={cn(
         "flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium",
-        active ? "text-brand-cream" : "text-taskbar-foreground/60",
+        active ? "text-brand-paper" : "text-taskbar-foreground/60",
       )}
     >
       {children}
@@ -282,7 +288,7 @@ function NavButton({
         aria-hidden
         className={cn(
           "mt-0.5 h-0.5 w-6 rounded-full",
-          active ? "bg-brand-red" : "bg-transparent",
+          active ? "bg-brand-accent" : "bg-transparent",
         )}
       />
     </button>

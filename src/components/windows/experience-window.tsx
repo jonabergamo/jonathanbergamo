@@ -20,13 +20,13 @@ export default function ExperienceWindow() {
     <ol className="relative space-y-10 p-6 sm:p-8">
       <span
         aria-hidden
-        className="bg-brand-navy/15 absolute top-8 bottom-8 left-[2.15rem] w-0.5 sm:left-[2.65rem]"
+        className="bg-brand-ink/15 absolute top-8 bottom-8 left-[2.15rem] w-0.5 sm:left-[2.65rem]"
       />
       {experience.map((job, i) => (
         <li key={job.id} className="relative pl-9">
           <span
             aria-hidden
-            className={`border-brand-navy absolute top-1.5 left-0 grid size-5 place-items-center rounded-full border-2 ${i === 0 ? "bg-brand-red" : "bg-brand-cream"}`}
+            className={`border-brand-ink absolute top-1.5 left-0 grid size-5 place-items-center rounded-full border-2 ${i === 0 ? "bg-brand-accent" : "bg-brand-paper"}`}
           />
           <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h3 className="font-display text-xl leading-tight font-bold">
@@ -58,7 +58,7 @@ export default function ExperienceWindow() {
               <li key={idx} className="flex gap-2.5">
                 <span
                   aria-hidden
-                  className="bg-brand-blue mt-2 size-1.5 shrink-0 rounded-sm"
+                  className="bg-brand-mid mt-2 size-1.5 shrink-0 rounded-sm"
                 />
                 <span>{b}</span>
               </li>
@@ -71,7 +71,7 @@ export default function ExperienceWindow() {
             {job.stack.map((s) => (
               <li
                 key={s}
-                className="border-brand-navy/25 text-muted-foreground rounded-sm border px-1.5 py-0.5 font-mono text-[11px]"
+                className="border-brand-ink/25 text-muted-foreground rounded-sm border px-1.5 py-0.5 font-mono text-[11px]"
               >
                 {s}
               </li>

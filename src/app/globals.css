@@ -2,19 +2,64 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is([data-theme$="-dark"] *));
 
 /*
- * Brand palette. The whole site is built from these five colours plus
- * tints of them. Any other literal colour is a bug (see the avatar
- * materials for the one documented exception: skin tone).
+ * Palettes. Five roles, five colours each: ink (text/chrome), mid (secondary),
+ * paper (background), accent (CTA) and deep (accent's darker sibling). The
+ * active palette is chosen by data-theme="<palette>-<light|dark>" on <html>,
+ * written by next-themes before hydration so there is no flash. The list of
+ * palettes with names and swatches lives in src/data/palettes.ts.
  */
-@theme {
-  --color-brand-darkred: #780000;
-  --color-brand-red: #c1121f;
-  --color-brand-cream: #fdf0d5;
-  --color-brand-navy: #003049;
-  --color-brand-blue: #669bbc;
+:root,
+[data-theme^="natoora-"] {
+  --p-ink: #003049;
+  --p-mid: #669bbc;
+  --p-paper: #fdf0d5;
+  --p-accent: #c1121f;
+  --p-deep: #780000;
+  --p-accent-fg: #fdf0d5;
+}
+[data-theme^="sunset-"] {
+  --p-ink: #264653;
+  --p-mid: #2a9d8f;
+  --p-paper: #e9c46a;
+  --p-accent: #e76f51;
+  --p-deep: #f4a261;
+  --p-accent-fg: #264653;
+}
+[data-theme^="amber-"] {
+  --p-ink: #14213d;
+  --p-mid: #e5e5e5;
+  --p-paper: #ffffff;
+  --p-accent: #fca311;
+  --p-deep: #000000;
+  --p-accent-fg: #14213d;
+}
+[data-theme^="harbor-"] {
+  --p-ink: #0b2545;
+  --p-mid: #8da9c4;
+  --p-paper: #eef4ed;
+  --p-accent: #134074;
+  --p-deep: #13315c;
+  --p-accent-fg: #eef4ed;
+}
+[data-theme^="graphite-"] {
+  --p-ink: #14110f;
+  --p-mid: #7e7f83;
+  --p-paper: #f3f3f4;
+  --p-accent: #d9c5b2;
+  --p-deep: #34312d;
+  --p-accent-fg: #14110f;
+}
+
+@theme inline {
+  --color-brand-ink: var(--p-ink);
+  --color-brand-mid: var(--p-mid);
+  --color-brand-paper: var(--p-paper);
+  --color-brand-accent: var(--p-accent);
+  --color-brand-deep: var(--p-deep);
+  --color-brand-accent-fg: var(--p-accent-fg);
 }
 
 @theme inline {
@@ -74,41 +119,41 @@
 :root {
   --radius: 0.5rem;
 
-  --background: var(--color-brand-cream);
-  --foreground: var(--color-brand-navy);
-  --card: color-mix(in oklch, var(--color-brand-cream) 96%, white);
-  --card-foreground: var(--color-brand-navy);
-  --popover: color-mix(in oklch, var(--color-brand-cream) 96%, white);
-  --popover-foreground: var(--color-brand-navy);
-  --primary: var(--color-brand-red);
-  --primary-foreground: var(--color-brand-cream);
-  --secondary: var(--color-brand-blue);
-  --secondary-foreground: var(--color-brand-navy);
+  --background: var(--color-brand-paper);
+  --foreground: var(--color-brand-ink);
+  --card: color-mix(in oklch, var(--color-brand-paper) 96%, white);
+  --card-foreground: var(--color-brand-ink);
+  --popover: color-mix(in oklch, var(--color-brand-paper) 96%, white);
+  --popover-foreground: var(--color-brand-ink);
+  --primary: var(--color-brand-accent);
+  --primary-foreground: var(--color-brand-accent-fg);
+  --secondary: var(--color-brand-mid);
+  --secondary-foreground: var(--color-brand-ink);
   --muted: color-mix(
     in oklch,
-    var(--color-brand-cream) 88%,
-    var(--color-brand-navy)
+    var(--color-brand-paper) 88%,
+    var(--color-brand-ink)
   );
   --muted-foreground: color-mix(
     in oklch,
-    var(--color-brand-navy) 72%,
-    var(--color-brand-cream)
+    var(--color-brand-ink) 72%,
+    var(--color-brand-paper)
   );
   --accent: color-mix(
     in oklch,
-    var(--color-brand-blue) 28%,
-    var(--color-brand-cream)
+    var(--color-brand-mid) 28%,
+    var(--color-brand-paper)
   );
-  --accent-foreground: var(--color-brand-navy);
-  --destructive: var(--color-brand-darkred);
-  --border: color-mix(in oklch, var(--color-brand-navy) 18%, transparent);
-  --input: color-mix(in oklch, var(--color-brand-navy) 18%, transparent);
-  --ring: var(--color-brand-blue);
-  --chart-1: var(--color-brand-navy);
-  --chart-2: var(--color-brand-blue);
-  --chart-3: var(--color-brand-red);
-  --chart-4: var(--color-brand-darkred);
-  --chart-5: var(--color-brand-cream);
+  --accent-foreground: var(--color-brand-ink);
+  --destructive: var(--color-brand-deep);
+  --border: color-mix(in oklch, var(--color-brand-ink) 18%, transparent);
+  --input: color-mix(in oklch, var(--color-brand-ink) 18%, transparent);
+  --ring: var(--color-brand-mid);
+  --chart-1: var(--color-brand-ink);
+  --chart-2: var(--color-brand-mid);
+  --chart-3: var(--color-brand-accent);
+  --chart-4: var(--color-brand-deep);
+  --chart-5: var(--color-brand-paper);
   --sidebar: var(--card);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
@@ -118,46 +163,46 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 
-  --titlebar: var(--color-brand-navy);
-  --titlebar-foreground: var(--color-brand-cream);
-  --taskbar: var(--color-brand-navy);
-  --taskbar-foreground: var(--color-brand-cream);
-  --desktop: var(--color-brand-cream);
-  --desktop-grid: color-mix(in oklch, var(--color-brand-navy) 16%, transparent);
-  --window-shadow: var(--color-brand-navy);
+  --titlebar: var(--color-brand-ink);
+  --titlebar-foreground: var(--color-brand-paper);
+  --taskbar: var(--color-brand-ink);
+  --taskbar-foreground: var(--color-brand-paper);
+  --desktop: var(--color-brand-paper);
+  --desktop-grid: color-mix(in oklch, var(--color-brand-ink) 16%, transparent);
+  --window-shadow: var(--color-brand-ink);
 }
 
-.dark {
-  --background: var(--color-brand-navy);
-  --foreground: var(--color-brand-cream);
-  --card: color-mix(in oklch, var(--color-brand-navy) 88%, black);
-  --card-foreground: var(--color-brand-cream);
-  --popover: color-mix(in oklch, var(--color-brand-navy) 88%, black);
-  --popover-foreground: var(--color-brand-cream);
-  --primary: var(--color-brand-red);
-  --primary-foreground: var(--color-brand-cream);
-  --secondary: var(--color-brand-blue);
-  --secondary-foreground: var(--color-brand-navy);
+[data-theme$="-dark"] {
+  --background: var(--color-brand-ink);
+  --foreground: var(--color-brand-paper);
+  --card: color-mix(in oklch, var(--color-brand-ink) 88%, black);
+  --card-foreground: var(--color-brand-paper);
+  --popover: color-mix(in oklch, var(--color-brand-ink) 88%, black);
+  --popover-foreground: var(--color-brand-paper);
+  --primary: var(--color-brand-accent);
+  --primary-foreground: var(--color-brand-accent-fg);
+  --secondary: var(--color-brand-mid);
+  --secondary-foreground: var(--color-brand-ink);
   --muted: color-mix(
     in oklch,
-    var(--color-brand-navy) 82%,
-    var(--color-brand-blue)
+    var(--color-brand-ink) 82%,
+    var(--color-brand-mid)
   );
   --muted-foreground: color-mix(
     in oklch,
-    var(--color-brand-cream) 68%,
-    var(--color-brand-navy)
+    var(--color-brand-paper) 68%,
+    var(--color-brand-ink)
   );
   --accent: color-mix(
     in oklch,
-    var(--color-brand-blue) 32%,
-    var(--color-brand-navy)
+    var(--color-brand-mid) 32%,
+    var(--color-brand-ink)
   );
-  --accent-foreground: var(--color-brand-cream);
-  --destructive: var(--color-brand-red);
-  --border: color-mix(in oklch, var(--color-brand-cream) 16%, transparent);
-  --input: color-mix(in oklch, var(--color-brand-cream) 16%, transparent);
-  --ring: var(--color-brand-blue);
+  --accent-foreground: var(--color-brand-paper);
+  --destructive: var(--color-brand-accent);
+  --border: color-mix(in oklch, var(--color-brand-paper) 16%, transparent);
+  --input: color-mix(in oklch, var(--color-brand-paper) 16%, transparent);
+  --ring: var(--color-brand-mid);
   --sidebar: var(--card);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
@@ -167,13 +212,13 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 
-  --titlebar: color-mix(in oklch, var(--color-brand-navy) 70%, black);
-  --titlebar-foreground: var(--color-brand-cream);
-  --taskbar: color-mix(in oklch, var(--color-brand-navy) 70%, black);
-  --taskbar-foreground: var(--color-brand-cream);
-  --desktop: var(--color-brand-navy);
-  --desktop-grid: color-mix(in oklch, var(--color-brand-blue) 28%, transparent);
-  --window-shadow: color-mix(in oklch, var(--color-brand-navy) 55%, black);
+  --titlebar: color-mix(in oklch, var(--color-brand-ink) 70%, black);
+  --titlebar-foreground: var(--color-brand-paper);
+  --taskbar: color-mix(in oklch, var(--color-brand-ink) 70%, black);
+  --taskbar-foreground: var(--color-brand-paper);
+  --desktop: var(--color-brand-ink);
+  --desktop-grid: color-mix(in oklch, var(--color-brand-mid) 28%, transparent);
+  --window-shadow: color-mix(in oklch, var(--color-brand-ink) 55%, black);
 }
 
 @layer base {
@@ -197,8 +242,14 @@
     letter-spacing: -0.01em;
   }
   ::selection {
-    background: var(--color-brand-blue);
-    color: var(--color-brand-navy);
+    background: var(--color-brand-mid);
+    color: var(--color-brand-ink);
+  }
+  html {
+    color-scheme: light;
+  }
+  html[data-theme$="-dark"] {
+    color-scheme: dark;
   }
 }
 

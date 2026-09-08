@@ -10,12 +10,22 @@ beforeEach(() => {
 });
 
 describe("defaults", () => {
-  it("opens only About on a fresh visit, focused", () => {
+  it("opens About and Skills on a fresh visit, About focused", () => {
     const s = useWindowStore.getState();
     expect(s.windows.about.status).toBe("open");
+    expect(s.windows.skills.status).toBe("open");
     expect(s.windows.projects.status).toBe("closed");
     expect(s.focused).toBe("about");
-    expect(s.order).toEqual(["about"]);
+    expect(s.order).toEqual(["skills", "about"]);
+  });
+  it("resetLayout reopens About and Skills only", () => {
+    useWindowStore.getState().open("projects");
+    useWindowStore.getState().close("skills");
+    useWindowStore.getState().resetLayout();
+    const s = useWindowStore.getState();
+    expect(s.windows.projects.status).toBe("closed");
+    expect(s.windows.skills.status).toBe("open");
+    expect(s.windows.about.status).toBe("open");
   });
 });
 
@@ -115,8 +125,7 @@ describe("move / resize / bounds", () => {
 describe("cycleFocus", () => {
   it("rotates through open windows", () => {
     useWindowStore.getState().open("projects");
-    useWindowStore.getState().open("skills");
     useWindowStore.getState().cycleFocus();
-    expect(useWindowStore.getState().focused).toBe("about");
+    expect(useWindowStore.getState().focused).toBe("skills");
   });
 });

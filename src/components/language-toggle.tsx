@@ -36,11 +36,11 @@ export function LanguageToggle({
             data-testid={`lang-${code}`}
             onClick={() => setLocale(code)}
             className={cn(
-              "focus-visible:outline-brand-blue h-7 rounded-[5px] px-2.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1",
+              "focus-visible:outline-brand-mid h-7 rounded-[5px] px-2.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1",
               active
                 ? onTaskbar
-                  ? "bg-brand-cream text-brand-navy"
-                  : "bg-brand-navy text-brand-cream"
+                  ? "bg-brand-paper text-brand-ink"
+                  : "bg-brand-ink text-brand-paper"
                 : onTaskbar
                   ? "text-taskbar-foreground/70 hover:text-taskbar-foreground"
                   : "text-muted-foreground hover:text-foreground",

@@ -5,9 +5,11 @@ import { useShallow } from "zustand/react/shallow";
 import { RotateCcw } from "lucide-react";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { PalettePicker } from "@/components/palette-picker";
 import { useI18n } from "@/i18n/context";
 import { cn } from "@/lib/utils";
 import { useWindowStore, selectRunning } from "@/store/window-store";
+import { useWidgetStore } from "@/store/widget-store";
 import { WINDOW_REGISTRY } from "./window-registry";
 import { StartMenu } from "./start-menu";
 import { Clock } from "./clock";
@@ -23,14 +25,19 @@ export function Taskbar() {
   const windows = useWindowStore((s) => s.windows);
   const focused = useWindowStore((s) => s.focused);
   const taskbarClick = useWindowStore((s) => s.taskbarClick);
-  const resetLayout = useWindowStore((s) => s.resetLayout);
+  const resetWindows = useWindowStore((s) => s.resetLayout);
+  const resetWidgets = useWidgetStore((s) => s.reset);
+  const resetLayout = () => {
+    resetWindows();
+    resetWidgets(window.innerWidth);
+  };
 
   return (
     <div
       role="toolbar"
       aria-label={t("os.system")}
       data-testid="taskbar"
-      className="border-brand-navy/40 bg-taskbar text-taskbar-foreground absolute inset-x-0 bottom-0 z-[100] flex h-12 items-center gap-2 border-t-2 px-2"
+      className="border-brand-ink/40 bg-taskbar text-taskbar-foreground absolute inset-x-0 bottom-0 z-[100] flex h-12 items-center gap-2 border-t-2 px-2"
     >
       <StartMenu />
       <div className="bg-taskbar-foreground/20 mx-1 h-6 w-px" />
@@ -53,7 +60,7 @@ export function Taskbar() {
               aria-pressed={active}
               onClick={() => taskbarClick(id)}
               className={cn(
-                "focus-visible:outline-brand-blue relative flex h-9 shrink-0 items-center gap-2 rounded-md px-3 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
+                "focus-visible:outline-brand-mid relative flex h-9 shrink-0 items-center gap-2 rounded-md px-3 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
                 active
                   ? "bg-taskbar-foreground/15"
                   : "hover:bg-taskbar-foreground/10",
@@ -68,7 +75,7 @@ export function Taskbar() {
                 aria-hidden
                 className={cn(
                   "absolute inset-x-3 bottom-0.5 h-0.5 rounded-full",
-                  active ? "bg-brand-red" : "bg-taskbar-foreground/40",
+                  active ? "bg-brand-accent" : "bg-taskbar-foreground/40",
                 )}
               />
             </button>
@@ -77,6 +84,7 @@ export function Taskbar() {
       </div>
       <div className="flex items-center gap-1">
         <LanguageToggle />
+        <PalettePicker />
         <ThemeToggle />
         <Tooltip>
           <TooltipTrigger
@@ -86,7 +94,7 @@ export function Taskbar() {
                 aria-label={t("os.resetLayout")}
                 data-testid="reset-layout"
                 onClick={resetLayout}
-                className="text-taskbar-foreground/80 hover:bg-taskbar-foreground/10 hover:text-taskbar-foreground focus-visible:outline-brand-blue inline-flex size-9 items-center justify-center rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="text-taskbar-foreground/80 hover:bg-taskbar-foreground/10 hover:text-taskbar-foreground focus-visible:outline-brand-mid inline-flex size-9 items-center justify-center rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
               />
             }
           >

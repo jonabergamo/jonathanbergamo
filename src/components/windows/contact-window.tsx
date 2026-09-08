@@ -33,7 +33,7 @@ export default function ContactWindow() {
         </p>
       </div>
 
-      <div className="border-brand-navy shadow-hard dark:border-brand-cream/30 flex items-stretch overflow-hidden rounded-md border-2">
+      <div className="border-brand-ink shadow-hard dark:border-brand-paper/30 flex items-stretch overflow-hidden rounded-md border-2">
         <a
           href={`mailto:${profile.email}`}
           className="bg-primary text-primary-foreground flex min-w-0 flex-1 items-center gap-3 px-4 py-3 hover:brightness-110"
@@ -45,10 +45,10 @@ export default function ContactWindow() {
           type="button"
           onClick={copy}
           aria-label={copied ? t("contact.copied") : t("contact.copy")}
-          className="border-brand-navy bg-card hover:bg-accent dark:border-brand-cream/30 grid w-12 place-items-center border-l-2"
+          className="border-brand-ink bg-card hover:bg-accent dark:border-brand-paper/30 grid w-12 place-items-center border-l-2"
         >
           {copied ? (
-            <Check className="text-brand-red size-4" />
+            <Check className="text-brand-accent size-4" />
           ) : (
             <Copy className="size-4" />
           )}
@@ -74,7 +74,7 @@ export default function ContactWindow() {
         />
       </ul>
 
-      <div className="border-brand-navy/15 mt-auto border-t-2 pt-4 text-sm">
+      <div className="border-brand-ink/15 mt-auto border-t-2 pt-4 text-sm">
         <p className="text-muted-foreground mb-1 text-xs font-medium">
           {t("contact.languages")}
         </p>
@@ -103,7 +103,7 @@ function ContactLink({
         download={download ? true : undefined}
         target={download ? undefined : "_blank"}
         rel={download ? undefined : "noreferrer"}
-        className="border-brand-navy/30 hover:border-brand-navy hover:bg-accent dark:hover:border-brand-cream/60 flex h-11 items-center gap-2 rounded-md border-2 px-3 text-sm font-medium"
+        className="border-brand-ink/30 hover:border-brand-ink hover:bg-accent dark:hover:border-brand-paper/60 flex h-11 items-center gap-2 rounded-md border-2 px-3 text-sm font-medium"
       >
         <Icon className="size-4" />
         <span className="flex-1">{label}</span>

@@ -25,7 +25,8 @@ jobs:
             | grep -v "avatar-materials.ts" \
             | grep -v "avatar-fallback.tsx" \
             | grep -v "src/app/layout.tsx" \
-            | grep -v "src/app/manifest.ts"; then
+            | grep -v "src/app/manifest.ts" \
+            | grep -v "src/data/palettes.ts"; then
             echo "Hex colours belong in globals.css or the avatar materials."; exit 1; fi
       - run: pnpm build
 

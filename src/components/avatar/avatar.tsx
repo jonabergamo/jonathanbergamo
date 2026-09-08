@@ -4,13 +4,20 @@ import * as React from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
-import { COLORS, stripeTexture, toon, toonGradient } from "./avatar-materials";
+import {
+  paletteColors,
+  stripeTexture,
+  toon,
+  toonGradient,
+  type Brand,
+} from "./avatar-materials";
 
 type Props = {
   /** Normalised pointer position in [-1, 1], updated by the parent. */
   pointer: React.RefObject<{ x: number; y: number }>;
   waveRef: React.RefObject<number>;
   animate: boolean;
+  brand: Brand;
 };
 
 const HAIR_TUFTS: {
@@ -35,7 +42,7 @@ const HAIR_TUFTS: {
 
 const BASE_Y = -1.15;
 
-export function Avatar({ pointer, waveRef, animate }: Props) {
+export function Avatar({ pointer, waveRef, animate, brand }: Props) {
   const root = React.useRef<THREE.Group>(null);
   const head = React.useRef<THREE.Group>(null);
   const torso = React.useRef<THREE.Group>(null);
@@ -45,6 +52,7 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
 
   const m = React.useMemo(() => {
     toonGradient();
+    const COLORS = paletteColors(brand);
     return {
       skin: toon(COLORS.skin),
       hair: toon(COLORS.hair),
@@ -52,7 +60,7 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
       jacket: toon(COLORS.jacket),
       jacketTrim: toon(COLORS.jacketTrim),
       sweater: new THREE.MeshToonMaterial({
-        map: stripeTexture(),
+        map: stripeTexture(brand),
         gradientMap: toonGradient(),
       }),
       sweaterDark: toon(COLORS.sweaterDark),
@@ -73,7 +81,7 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
         roughness: 0.25,
       }),
     };
-  }, []);
+  }, [brand]);
 
   React.useEffect(
     () => () => Object.values(m).forEach((mat) => mat.dispose()),

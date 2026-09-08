@@ -11,7 +11,7 @@ test("windows open, drag, minimise, restore, close and persist", async ({
   await expect(page.locator("[data-window='about']")).toBeVisible();
 
   // Open Experience from the desktop icon.
-  await page.getByTestId("icon-experience").dblclick();
+  await page.getByTestId("icon-experience").click();
   const win = page.locator("[data-window='experience']");
   await expect(win).toBeVisible();
   await expect(win).toHaveAttribute("data-focused", "true");
@@ -81,4 +81,37 @@ test("resize handles change the window size", async ({ page }) => {
   const after = await about.boundingBox();
   expect(after!.width - before!.width).toBeGreaterThan(80);
   expect(after!.height - before!.height).toBeGreaterThan(50);
+});
+
+test("photography opens a gallery and a photo lightbox", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("icon-photography").click();
+  await expect(page.locator("[data-window='photography']")).toBeVisible();
+  await page.getByTestId("photo-DXPkqOiAUjN").click();
+  await expect(page.getByRole("link", { name: /instagram/i })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.locator("[data-window='photography']")).toBeVisible();
+});
+
+test("widgets are draggable and reset returns About and Skills", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const clock = page.locator("[data-widget='clock']");
+  const before = await clock.boundingBox();
+  const bar = clock.locator("div").first();
+  const b = await bar.boundingBox();
+  await page.mouse.move(b!.x + 60, b!.y + b!.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(b!.x + 60, b!.y + 200, { steps: 6 });
+  await page.mouse.up();
+  const after = await clock.boundingBox();
+  expect(after!.y - before!.y).toBeGreaterThan(150);
+
+  await page.locator("[data-window='skills']").getByTestId("win-close").click();
+  await page.getByTestId("reset-layout").click();
+  await expect(page.locator("[data-window='skills']")).toBeVisible();
+  await expect(page.locator("[data-window='about']")).toBeVisible();
+  const reset = await clock.boundingBox();
+  expect(Math.abs(reset!.y - before!.y)).toBeLessThan(2);
 });

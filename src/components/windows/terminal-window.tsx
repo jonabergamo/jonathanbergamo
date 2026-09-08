@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useTheme } from "next-themes";
+import { usePalette } from "@/hooks/use-palette";
+import { PALETTES, type PaletteId } from "@/data/palettes";
 import { useI18n } from "@/i18n/context";
 import { isLocale } from "@/i18n/config";
 import { profile } from "@/data/profile";
@@ -12,7 +13,7 @@ type Line = { kind: "in" | "out"; text: string };
 
 export default function TerminalWindow() {
   const { t, setLocale } = useI18n();
-  const { setTheme } = useTheme();
+  const { setMode, setPalette } = usePalette();
   const open = useWindowStore((s) => s.open);
   const [lines, setLines] = React.useState<Line[]>([
     { kind: "out", text: t("terminal.welcome") },
@@ -56,10 +57,19 @@ export default function TerminalWindow() {
         break;
       case "theme":
         if (args[0] === "light" || args[0] === "dark") {
-          setTheme(args[0]);
+          setMode(args[0]);
           out.push(t("terminal.themeSet", { theme: args[0] }));
         } else out.push(t("terminal.help"));
         break;
+      case "palette": {
+        const id = PALETTES.find((p) => p.id === args[0])?.id as
+          PaletteId | undefined;
+        if (id) {
+          setPalette(id);
+          out.push(t("terminal.paletteSet", { palette: id }));
+        } else out.push(PALETTES.map((p) => p.id).join("  "));
+        break;
+      }
       case "clear":
         setLines([]);
         return;
@@ -75,7 +85,7 @@ export default function TerminalWindow() {
 
   return (
     <div
-      className="bg-brand-navy text-brand-cream flex h-full flex-col p-4 font-mono text-[13px] leading-relaxed"
+      className="bg-brand-ink text-brand-paper flex h-full flex-col p-4 font-mono text-[13px] leading-relaxed"
       onClick={() => inputRef.current?.focus()}
     >
       <div className="min-h-0 flex-1 overflow-y-auto">
@@ -84,8 +94,8 @@ export default function TerminalWindow() {
             key={i}
             className={
               l.kind === "in"
-                ? "text-brand-blue"
-                : "text-brand-cream/90 whitespace-pre-wrap"
+                ? "text-brand-mid"
+                : "text-brand-paper/90 whitespace-pre-wrap"
             }
           >
             {l.kind === "in" ? `${t("terminal.prompt")} $ ${l.text}` : l.text}
@@ -101,7 +111,7 @@ export default function TerminalWindow() {
           setInput("");
         }}
       >
-        <label htmlFor="terminal-input" className="text-brand-blue shrink-0">
+        <label htmlFor="terminal-input" className="text-brand-mid shrink-0">
           {t("terminal.prompt")} $
         </label>
         <input
@@ -111,7 +121,7 @@ export default function TerminalWindow() {
           onChange={(e) => setInput(e.target.value)}
           autoComplete="off"
           spellCheck={false}
-          className="text-brand-cream caret-brand-red min-w-0 flex-1 bg-transparent outline-none"
+          className="text-brand-paper caret-brand-accent min-w-0 flex-1 bg-transparent outline-none"
         />
       </form>
     </div>

@@ -3,6 +3,7 @@
 import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 import {
+  Camera,
   Briefcase,
   FolderKanban,
   Mail,
@@ -15,6 +16,9 @@ import type { MessageKey } from "@/i18n/context";
 
 const AboutWindow = React.lazy(
   () => import("@/components/windows/about-window"),
+);
+const PhotographyWindow = React.lazy(
+  () => import("@/components/windows/photography-window"),
 );
 const ExperienceWindow = React.lazy(
   () => import("@/components/windows/experience-window"),
@@ -47,6 +51,13 @@ export const WINDOW_REGISTRY: Record<WindowId, WindowMeta> = {
     icon: UserRound,
     titleKey: "windows.about",
     component: AboutWindow,
+    desktop: true,
+  },
+  photography: {
+    id: "photography",
+    icon: Camera,
+    titleKey: "windows.photography",
+    component: PhotographyWindow,
     desktop: true,
   },
   experience: {

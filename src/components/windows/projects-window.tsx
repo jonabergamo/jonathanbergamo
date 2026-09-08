@@ -25,7 +25,7 @@ export default function ProjectsWindow() {
   return (
     <div className="flex min-h-full flex-col">
       <div
-        className="no-scrollbar border-brand-navy/10 flex shrink-0 gap-1.5 overflow-x-auto border-b-2 px-6 py-3"
+        className="no-scrollbar border-brand-ink/10 flex shrink-0 gap-1.5 overflow-x-auto border-b-2 px-6 py-3"
         role="radiogroup"
         aria-label={t("projects.filterLabel")}
       >
@@ -56,9 +56,9 @@ export default function ProjectsWindow() {
                 data-testid={`project-${p.id}`}
                 onClick={() => setSelected(p)}
                 className={cn(
-                  "group border-brand-navy bg-card shadow-hard focus-visible:outline-brand-blue dark:border-brand-cream/30 flex w-full flex-col rounded-lg border-2 p-4 text-left transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-x-px active:translate-y-px active:shadow-none",
+                  "group border-brand-ink bg-card shadow-hard focus-visible:outline-brand-mid dark:border-brand-paper/30 flex w-full flex-col rounded-lg border-2 p-4 text-left transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-x-px active:translate-y-px active:shadow-none",
                   p.featured &&
-                    "border-brand-red dark:border-brand-red sm:col-span-1",
+                    "border-brand-accent dark:border-brand-accent sm:col-span-1",
                 )}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -70,7 +70,7 @@ export default function ProjectsWindow() {
                   </span>
                 </div>
                 {p.award && (
-                  <p className="text-brand-darkred dark:text-brand-blue mt-1 inline-flex items-center gap-1 text-xs font-semibold">
+                  <p className="text-brand-deep dark:text-brand-mid mt-1 inline-flex items-center gap-1 text-xs font-semibold">
                     <Award className="size-3.5" /> {l(p.award)}
                   </p>
                 )}
@@ -121,9 +121,9 @@ export default function ProjectsWindow() {
 function statusTone(status: Project["status"]) {
   switch (status) {
     case "live":
-      return "bg-brand-blue/25 text-brand-navy dark:text-brand-cream";
+      return "bg-brand-mid/25 text-brand-ink dark:text-brand-paper";
     case "wip":
-      return "bg-brand-red/15 text-brand-darkred dark:text-brand-cream";
+      return "bg-brand-accent/15 text-brand-deep dark:text-brand-paper";
     default:
       return "bg-muted text-muted-foreground";
   }
@@ -145,10 +145,10 @@ function Chip({
       aria-checked={active}
       onClick={onClick}
       className={cn(
-        "focus-visible:outline-brand-blue h-7 shrink-0 rounded-full border px-2.5 font-mono text-[11px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-1",
+        "focus-visible:outline-brand-mid h-7 shrink-0 rounded-full border px-2.5 font-mono text-[11px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-1",
         active
-          ? "border-brand-navy bg-brand-navy text-brand-cream dark:border-brand-cream dark:bg-brand-cream dark:text-brand-navy"
-          : "border-brand-navy/25 hover:border-brand-navy/60",
+          ? "border-brand-ink bg-brand-ink text-brand-paper dark:border-brand-paper dark:bg-brand-paper dark:text-brand-ink"
+          : "border-brand-ink/25 hover:border-brand-ink/60",
       )}
     >
       {children}

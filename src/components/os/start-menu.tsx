@@ -7,6 +7,7 @@ import { useI18n } from "@/i18n/context";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib/utils";
 import { useWindowStore } from "@/store/window-store";
+import { useWidgetStore } from "@/store/widget-store";
 import { WINDOW_LIST } from "./window-registry";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
@@ -14,7 +15,12 @@ export function StartMenu() {
   const { t, locale } = useI18n();
   const [open, setOpen] = React.useState(false);
   const openWindow = useWindowStore((s) => s.open);
-  const resetLayout = useWindowStore((s) => s.resetLayout);
+  const resetWindows = useWindowStore((s) => s.resetLayout);
+  const resetWidgets = useWidgetStore((s) => s.reset);
+  const resetLayout = () => {
+    resetWindows();
+    resetWidgets(window.innerWidth);
+  };
   const windows = useWindowStore((s) => s.windows);
   const ref = React.useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -44,13 +50,13 @@ export function StartMenu() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "font-display focus-visible:outline-brand-blue flex h-9 items-center gap-2 rounded-md px-3 text-sm font-bold tracking-tight transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
+          "font-display focus-visible:outline-brand-mid flex h-9 items-center gap-2 rounded-md px-3 text-sm font-bold tracking-tight transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
           open
-            ? "bg-brand-cream text-brand-navy"
-            : "bg-brand-red text-brand-cream hover:brightness-110",
+            ? "bg-brand-paper text-brand-ink"
+            : "bg-brand-accent text-brand-paper hover:brightness-110",
         )}
       >
-        <span className="bg-brand-cream text-brand-red grid size-5 place-items-center rounded-sm text-[10px] font-black">
+        <span className="bg-brand-paper text-brand-accent grid size-5 place-items-center rounded-sm text-[10px] font-black">
           JB
         </span>
         {t("os.start")}
@@ -66,7 +72,7 @@ export function StartMenu() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduced ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.14 }}
-            className="border-brand-navy bg-card text-card-foreground shadow-window absolute bottom-12 left-0 w-72 origin-bottom-left overflow-hidden rounded-lg border-2"
+            className="border-brand-ink bg-card text-card-foreground shadow-window absolute bottom-12 left-0 w-72 origin-bottom-left overflow-hidden rounded-lg border-2"
           >
             <div className="bg-titlebar text-titlebar-foreground px-4 py-3">
               <p className="font-display text-base leading-tight font-bold">
@@ -93,12 +99,12 @@ export function StartMenu() {
                     }}
                     className="hover:bg-accent focus-visible:bg-accent flex w-full items-center gap-3 rounded-md px-2 py-2 text-left text-sm focus-visible:outline-none"
                   >
-                    <Icon className="text-brand-navy dark:text-brand-blue size-4" />
+                    <Icon className="text-brand-ink dark:text-brand-mid size-4" />
                     <span className="flex-1">{t(w.titleKey)}</span>
                     {running && (
                       <span
                         aria-hidden
-                        className="bg-brand-red size-1.5 rounded-full"
+                        className="bg-brand-accent size-1.5 rounded-full"
                       />
                     )}
                   </button>
@@ -114,7 +120,7 @@ export function StartMenu() {
                 download
                 className="hover:bg-accent focus-visible:bg-accent flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm focus-visible:outline-none"
               >
-                <Download className="text-brand-navy dark:text-brand-blue size-4" />
+                <Download className="text-brand-ink dark:text-brand-mid size-4" />
                 {t("os.downloadCv")}
               </a>
               <button
@@ -126,7 +132,7 @@ export function StartMenu() {
                 }}
                 className="hover:bg-accent focus-visible:bg-accent flex w-full items-center gap-3 rounded-md px-2 py-2 text-left text-sm focus-visible:outline-none"
               >
-                <RotateCcw className="text-brand-navy dark:text-brand-blue size-4" />
+                <RotateCcw className="text-brand-ink dark:text-brand-mid size-4" />
                 {t("os.resetLayout")}
               </button>
             </div>

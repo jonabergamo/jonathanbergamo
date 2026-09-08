@@ -22,7 +22,7 @@ export function ProjectDetail({
   const { t, l } = useI18n();
   return (
     <Dialog open={!!project} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="border-brand-navy shadow-window max-h-[85dvh] overflow-y-auto rounded-lg border-2 p-0 sm:max-w-2xl">
+      <DialogContent className="border-brand-ink shadow-window max-h-[85dvh] overflow-y-auto rounded-lg border-2 p-0 sm:max-w-2xl">
         {project && (
           <>
             <DialogHeader className="bg-titlebar text-titlebar-foreground space-y-1 px-6 py-4 text-left">
@@ -35,7 +35,7 @@ export function ProjectDetail({
             </DialogHeader>
             <div className="space-y-5 px-6 py-5">
               {project.award && (
-                <p className="bg-brand-red/10 text-brand-darkred dark:text-brand-cream inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-semibold">
+                <p className="bg-brand-accent/10 text-brand-deep dark:text-brand-paper inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-semibold">
                   <Award className="size-4" /> {l(project.award)}
                 </p>
               )}
@@ -46,7 +46,7 @@ export function ProjectDetail({
                 {project.tags.map((tg) => (
                   <li
                     key={tg}
-                    className="border-brand-navy/25 text-muted-foreground rounded-sm border px-1.5 py-0.5 font-mono text-[11px]"
+                    className="border-brand-ink/25 text-muted-foreground rounded-sm border px-1.5 py-0.5 font-mono text-[11px]"
                   >
                     {tg}
                   </li>
@@ -64,7 +64,7 @@ export function ProjectDetail({
                           href={lnk.url}
                           target="_blank"
                           rel="noreferrer"
-                          className="border-brand-navy bg-card shadow-hard dark:border-brand-cream/30 inline-flex h-9 items-center gap-2 rounded-md border-2 px-3 text-sm font-semibold hover:-translate-y-0.5"
+                          className="border-brand-ink bg-card shadow-hard dark:border-brand-paper/30 inline-flex h-9 items-center gap-2 rounded-md border-2 px-3 text-sm font-semibold hover:-translate-y-0.5"
                         >
                           {lnk.label} <ExternalLink className="size-3.5" />
                         </a>

@@ -18,7 +18,7 @@ export function Wallpaper({ variant }: { variant: "desktop" | "mobile" }) {
             : "pointer-events-none absolute top-6 right-8 max-w-[42vw] text-right"
         }
       >
-        <p className="font-display text-brand-navy/85 dark:text-brand-cream/85 text-[clamp(2rem,6vw,5.5rem)] leading-[0.92] font-bold tracking-tight">
+        <p className="font-display text-brand-ink/85 dark:text-brand-paper/85 text-[clamp(2rem,6vw,5.5rem)] leading-[0.92] font-bold tracking-tight">
           {profile.shortName.split(" ")[0]}
           <br />
           {profile.shortName.split(" ").slice(1).join(" ")}
@@ -27,7 +27,7 @@ export function Wallpaper({ variant }: { variant: "desktop" | "mobile" }) {
       <div
         className={
           mobile
-            ? "absolute inset-x-0 top-[28dvh] bottom-[calc(30dvh)]"
+            ? "absolute inset-x-0 top-[16dvh] bottom-[47dvh]"
             : "absolute right-[4vw] bottom-0 h-[min(72vh,760px)] w-[min(44vw,620px)]"
         }
       >

@@ -69,7 +69,7 @@ export function WindowTitleBar({
         id={`${id}-title`}
         tabIndex={0}
         onKeyDown={onKeyDown}
-        className="font-display focus-visible:decoration-brand-blue min-w-0 flex-1 truncate text-sm font-semibold tracking-tight outline-none focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4"
+        className="font-display focus-visible:decoration-brand-mid min-w-0 flex-1 truncate text-sm font-semibold tracking-tight outline-none focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4"
       >
         {title}
       </h2>
@@ -130,9 +130,9 @@ function TitleButton({
       data-testid={testId}
       onClick={onClick}
       className={cn(
-        "focus-visible:outline-brand-blue inline-flex size-8 items-center justify-center rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
+        "focus-visible:outline-brand-mid inline-flex size-8 items-center justify-center rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
         danger
-          ? "hover:bg-brand-red hover:text-brand-cream"
+          ? "hover:bg-brand-accent hover:text-brand-paper"
           : "hover:bg-titlebar-foreground/15",
       )}
     >

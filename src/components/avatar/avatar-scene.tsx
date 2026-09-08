@@ -4,7 +4,8 @@ import * as React from "react";
 import { Canvas } from "@react-three/fiber";
 import { AdaptiveDpr, ContactShadows } from "@react-three/drei";
 import { Avatar } from "./avatar";
-import { BRAND } from "./avatar-materials";
+import { readBrand, type Brand } from "./avatar-materials";
+import { useTheme } from "next-themes";
 import type { AvatarVariant } from "./avatar-lazy";
 
 export default function AvatarScene({
@@ -17,6 +18,12 @@ export default function AvatarScene({
   const pointer = React.useRef({ x: 0, y: 0 });
   const wave = React.useRef(0);
   const [visible, setVisible] = React.useState(true);
+  const { theme } = useTheme();
+  // Re-read the CSS palette whenever the theme string changes.
+  const brand = React.useMemo<Brand>(() => {
+    void theme;
+    return readBrand();
+  }, [theme]);
 
   // Follow the cursor anywhere on the page, not just over the canvas.
   React.useEffect(() => {
@@ -51,21 +58,26 @@ export default function AvatarScene({
       }}
       style={{ touchAction: "pan-y" }}
     >
-      <ambientLight color={BRAND.cream} intensity={0.9} />
+      <ambientLight color={brand.paper} intensity={0.9} />
       <directionalLight
-        color={BRAND.cream}
+        color={brand.paper}
         intensity={1.6}
         position={[2.5, 4, 3]}
       />
-      <pointLight color={BRAND.blue} intensity={6} position={[-3, 1.5, -2]} />
-      <Avatar pointer={pointer} waveRef={wave} animate={animate} />
+      <pointLight color={brand.mid} intensity={6} position={[-3, 1.5, -2]} />
+      <Avatar
+        pointer={pointer}
+        waveRef={wave}
+        animate={animate}
+        brand={brand}
+      />
       <ContactShadows
         position={[0, -1.17, 0]}
         opacity={0.35}
         scale={3}
         blur={2.2}
         far={1.2}
-        color={BRAND.navy}
+        color={brand.ink}
       />
       <AdaptiveDpr pixelated />
     </Canvas>
