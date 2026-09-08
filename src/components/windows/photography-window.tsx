@@ -40,7 +40,7 @@ export default function PhotographyWindow() {
         </a>
       </header>
 
-      <ul className="grid grid-cols-2 gap-2 px-6 pb-6 sm:grid-cols-3">
+      <ul className="grid grid-cols-3 gap-2 px-6 pb-6">
         {photos.map((p) => (
           <li
             key={p.code}
