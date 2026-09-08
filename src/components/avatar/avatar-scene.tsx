@@ -39,9 +39,12 @@ export default function AvatarScene({
   }, []);
 
   const mobile = variant === "mobile";
+  // Camera is level (it looks at a point at its own height) so the avatar
+  // stands perfectly vertical, no top-down perspective.
+  const eye = mobile ? 0.12 : 0.05;
   const camera = mobile
-    ? { position: [0, 0.1, 2.9] as [number, number, number], fov: 28 }
-    : { position: [0, 0.05, 2.6] as [number, number, number], fov: 26 };
+    ? { position: [0, eye, 2.9] as [number, number, number], fov: 28 }
+    : { position: [0, eye, 2.6] as [number, number, number], fov: 26 };
 
   return (
     <Canvas
@@ -52,6 +55,7 @@ export default function AvatarScene({
       gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
       frameloop={animate && visible ? "always" : "demand"}
       performance={{ min: 0.5 }}
+      onCreated={({ camera: cam }) => cam.lookAt(0, eye, 0)}
       onPointerDown={() => {
         wave.current = 1;
       }}

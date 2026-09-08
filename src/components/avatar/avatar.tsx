@@ -16,6 +16,32 @@ type Props = {
   animate: boolean;
 };
 
+const FORWARD = new THREE.Vector3(0, 0, 1);
+const dir = new THREE.Vector3();
+const qDelta = new THREE.Quaternion();
+const qParent = new THREE.Quaternion();
+const qGoal = new THREE.Quaternion();
+const qIdentity = new THREE.Quaternion();
+
+/**
+ * Turn `bone` so that its straight-ahead world orientation `forward` is
+ * rotated by `delta` (scaled by `amount`), easing over time.
+ */
+function aimBone(
+  bone: THREE.Object3D,
+  forward: THREE.Quaternion,
+  delta: THREE.Quaternion,
+  amount: number,
+  dt: number,
+) {
+  qGoal.copy(qIdentity).slerp(delta, amount).multiply(forward); // world goal
+  if (bone.parent) {
+    bone.parent.getWorldQuaternion(qParent).invert();
+    qGoal.premultiply(qParent); // to local
+  }
+  bone.quaternion.slerp(qGoal, 1 - Math.exp(-7 * dt));
+}
+
 /** Drives the eyesClosed morph target on every mesh that has it. */
 function applyBlink(root: THREE.Object3D, v: number) {
   root.traverse((o) => {
@@ -58,7 +84,16 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
     neck: THREE.Object3D | null;
     spine: THREE.Object3D | null;
     rest: Map<THREE.Object3D, THREE.Quaternion>;
-  }>({ head: null, neck: null, spine: null, rest: new Map() });
+    headForward: THREE.Quaternion;
+    neckForward: THREE.Quaternion;
+  }>({
+    head: null,
+    neck: null,
+    spine: null,
+    rest: new Map(),
+    headForward: new THREE.Quaternion(),
+    neckForward: new THREE.Quaternion(),
+  });
   const phase = React.useRef<"idle" | "waving" | "restoring">("idle");
   const restoreT = React.useRef(0);
   const blink = React.useRef({ next: 2.5, t: 0 });
@@ -80,21 +115,26 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
         m.frustumCulled = false;
       }
     });
-    // Keep the model's own head and neck orientation (the clip starts with a
-    // slight turn); everything else takes its rest pose from frame 0 of the
-    // wave, which is a relaxed stance with the arms down.
-    const bindHead = b.head?.quaternion.clone();
-    const bindNeck = b.neck?.quaternion.clone();
+    // Rest pose: the model's own bind pose (upright, facing the camera) for
+    // the body, and frame 0 of the wave clip for the arms only, which brings
+    // them down from the A-pose to a relaxed stance.
+    const bind = new Map<THREE.Object3D, THREE.Quaternion>();
+    scene.traverse((o) => {
+      if ((o as THREE.Bone).isBone) bind.set(o, o.quaternion.clone());
+    });
     action.reset().play();
     mixer.update(0);
     b.rest.clear();
-    scene.traverse((o) => {
-      if ((o as THREE.Bone).isBone) b.rest.set(o, o.quaternion.clone());
-    });
-    if (b.head && bindHead) b.rest.set(b.head, bindHead);
-    if (b.neck && bindNeck) b.rest.set(b.neck, bindNeck);
+    for (const [bone, q] of bind) {
+      const arm = /Shoulder|Arm|Hand/.test(bone.name);
+      b.rest.set(bone, arm ? bone.quaternion.clone() : q);
+    }
     action.stop();
     for (const [bone, q] of b.rest) bone.quaternion.copy(q);
+    // World orientation of the head and neck when looking straight ahead.
+    scene.updateMatrixWorld(true);
+    if (b.head) b.head.getWorldQuaternion(b.headForward);
+    if (b.neck) b.neck.getWorldQuaternion(b.neckForward);
   }, [scene, actions, mixer]);
 
   // Wave: play once, then ease back to the rest pose so the arms do not stay up.
@@ -116,9 +156,6 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
     mixer.addEventListener("finished", onFinished);
     return () => mixer.removeEventListener("finished", onFinished);
   }, [actions, mixer]);
-
-  const target = React.useMemo(() => new THREE.Vector3(), []);
-  const tmpQ = React.useMemo(() => new THREE.Quaternion(), []);
 
   useFrame((state, delta) => {
     if (!animate) return;
@@ -145,30 +182,29 @@ export function Avatar({ pointer, waveRef, animate }: Props) {
     if (phase.current !== "waving") {
       // Breathing on the chest, gentle sway on the whole body.
       if (b.spine) b.spine.rotation.x = Math.sin(t * 1.6) * 0.02;
-      if (group.current) group.current.rotation.y = Math.sin(t * 0.5) * 0.03;
 
-      // Head follows the cursor.
+      // Head follows the cursor, computed in world space: rotate the "straight
+      // ahead" orientation by the rotation that takes +Z to the look direction,
+      // then convert back into the bone's local space.
       if (b.head) {
         const p = pointer.current ?? { x: 0, y: 0 };
-        const yaw = THREE.MathUtils.clamp(p.x * 0.6, -0.6, 0.6);
-        const pitch = THREE.MathUtils.clamp(p.y * 0.35, -0.3, 0.35);
-        target.set(Math.sin(yaw), -pitch, Math.cos(yaw));
-        tmpQ.setFromEuler(new THREE.Euler(-pitch * 0.9, yaw * 0.7, 0));
-        const restHead = b.rest.get(b.head);
-        if (restHead) {
-          const goal = restHead.clone().multiply(tmpQ);
-          b.head.quaternion.slerp(goal, 1 - Math.exp(-6 * delta));
-        }
-        if (b.neck) {
-          const restNeck = b.rest.get(b.neck);
-          if (restNeck) {
-            tmpQ.setFromEuler(new THREE.Euler(-pitch * 0.3, yaw * 0.3, 0));
-            b.neck.quaternion.slerp(
-              restNeck.clone().multiply(tmpQ),
-              1 - Math.exp(-6 * delta),
-            );
-          }
-        }
+        dir
+          .set(
+            THREE.MathUtils.clamp(p.x, -1, 1) * 0.85,
+            THREE.MathUtils.clamp(-p.y, -1, 1) * 0.55,
+            1,
+          )
+          .normalize();
+        qDelta.setFromUnitVectors(FORWARD, dir);
+        aimBone(b.head, b.headForward, qDelta, 1, delta);
+        if (b.neck) aimBone(b.neck, b.neckForward, qDelta, 0.35, delta);
+        if (group.current)
+          group.current.rotation.y = THREE.MathUtils.damp(
+            group.current.rotation.y,
+            p.x * 0.08,
+            4,
+            delta,
+          );
       }
     }
 
