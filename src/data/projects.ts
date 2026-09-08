@@ -14,45 +14,36 @@ export const projects: Project[] = [
       "Prisma",
       "PostgreSQL",
       "Auth.js",
-      "Kubernetes",
     ],
     summary: {
-      en: "On-call rotation and PR-review routing tool that replaced my team's spreadsheet. Built solo in eight days, adopted by the whole tech team.",
-      pt: "Ferramenta de rodízio de plantão e roteamento de revisão de PRs que substituiu a planilha do time. Feita sozinho em oito dias, adotada por todo o time técnico.",
+      en: "Internal tool for on-call rotation and pull-request review routing, built on my own initiative and adopted by the engineering team.",
+      pt: "Ferramenta interna de rodízio de plantão e roteamento de revisão de PRs, construída por iniciativa própria e adotada pelo time de engenharia.",
     },
     description: {
-      en: `Nobody asked for this. The team's weekly on-call and reviewer rotation lived in a shared spreadsheet, so the rules were enforced by memory and swaps were negotiated by hand.
-
-I designed, built and deployed a replacement in eight days, then iterated on real feedback from the people using it.
+      en: `The team's weekly on-call and reviewer rotation lived in a spreadsheet, so the rules depended on memory and swaps were negotiated by hand. I designed, built and deployed a replacement, then iterated on feedback from the people using it.
 
 **What it does**
 
-- Weekly rotation of primary and secondary on-call plus a frontend and a backend reviewer, with the constraints enforced by the system: four distinct people every week.
-- Fair unavailability swaps modelled as turn trades, so covering for someone earns your slot back later.
-- PR review requests with the right reviewer pinned automatically, never your own PR.
-- Notifications that get noticed: a chime, a desktop notification and a tab-title nag, scoped to what needs you.
+- Weekly rotation with the constraints enforced by the system rather than by convention.
+- Fair unavailability swaps modelled as turn trades.
+- Pull-request review requests routed to the right reviewer automatically.
+- Notifications scoped to what actually needs your attention.
 
 **Engineering**
 
-Roughly 8,600 lines of TypeScript across 112 files. The scheduling and rotation engines are pure, unit-tested modules; the UI is thin. A reconciliation tool diffs the database against the old spreadsheet with a dry run by default.
-
-Adopted team-wide on 13 August 2026. Improvements now arrive as Jira tickets and the app is moving into the company Kubernetes cluster. The code is internal, so there is no public link.`,
-      pt: `Ninguém pediu isso. O rodízio semanal de plantão e revisores do time vivia numa planilha compartilhada, então as regras eram cumpridas de memória e as trocas negociadas na mão.
-
-Projetei, construí e publiquei um substituto em oito dias e depois iterei com o feedback real de quem usava.
+Next.js, React, TypeScript, Prisma and PostgreSQL. The scheduling and rotation rules are pure, unit-tested modules; the UI is thin. The code is internal, so there is no public link.`,
+      pt: `O rodízio semanal de plantão e revisores do time vivia numa planilha, então as regras dependiam da memória e as trocas eram negociadas na mão. Projetei, construí e publiquei um substituto e iterei com o feedback de quem usa.
 
 **O que faz**
 
-- Rodízio semanal de plantão primário e secundário mais um revisor de frontend e um de backend, com as restrições garantidas pelo sistema: quatro pessoas distintas toda semana.
+- Rodízio semanal com as restrições garantidas pelo sistema, não por convenção.
 - Trocas de indisponibilidade justas, modeladas como troca de turnos.
-- Pedidos de revisão de PR com o revisor certo fixado automaticamente, nunca o seu próprio PR.
-- Notificações que chamam atenção: som, notificação de desktop e aviso no título da aba, só para o que precisa de você.
+- Pedidos de revisão de PR roteados automaticamente para o revisor certo.
+- Notificações só para o que realmente precisa de você.
 
 **Engenharia**
 
-Cerca de 8.600 linhas de TypeScript em 112 arquivos. Os motores de agenda e rodízio são módulos puros com testes unitários; a UI é fina. Uma ferramenta de reconciliação compara o banco com a planilha antiga, em modo dry run por padrão.
-
-Adotada por todo o time em 13 de agosto de 2026. Melhorias agora chegam como tickets no Jira e o app está migrando para o cluster Kubernetes da empresa. O código é interno, então não há link público.`,
+Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio são módulos puros com testes unitários; a UI é fina. O código é interno, então não há link público.`,
     },
   },
   {
