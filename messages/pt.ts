@@ -35,6 +35,9 @@ export const pt: Messages = {
     contact: "Contato",
     terminal: "Terminal",
     photography: "Fotografia",
+    volunteering: "Voluntariado",
+    now: "Agora",
+    recycle: "Lixeira",
   },
   about: {
     greeting: "Oi, eu sou o Jonathan.",
@@ -94,6 +97,24 @@ export const pt: Messages = {
     themeSet: "Tema definido para {theme}",
     paletteSet: "Paleta definida para {palette}",
     prompt: "guest@jonathan-os",
+  },
+  volunteering: {
+    intro:
+      "Trabalho que não tem nada a ver com software. Me ensinou mais sobre coordenar pessoas do que qualquer sprint.",
+  },
+  now: {
+    updated: "Atualizado em {date}",
+    intro:
+      "Um retrato curto e honesto do que estou fazendo. Isso muda; o resto do site quase não.",
+  },
+  recycle: {
+    intro: "{n} itens. Tecnologias que eu usava e fiquei feliz em apagar.",
+    empty: "Esvaziar Lixeira",
+    emptied: "Já foram embora de vez. Nada aqui volta.",
+    name: "Nome",
+    deleted: "Apagado",
+    size: "Tamanho",
+    noRestore: "Restaurar está desativado de propósito.",
   },
   photography: {
     heading: "Pelo visor",

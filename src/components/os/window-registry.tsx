@@ -4,6 +4,9 @@ import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   Camera,
+  HeartHandshake,
+  Sparkles,
+  Trash2,
   Briefcase,
   FolderKanban,
   Mail,
@@ -31,6 +34,13 @@ const SkillsWindow = React.lazy(
 );
 const ContactWindow = React.lazy(
   () => import("@/components/windows/contact-window"),
+);
+const VolunteeringWindow = React.lazy(
+  () => import("@/components/windows/volunteering-window"),
+);
+const NowWindow = React.lazy(() => import("@/components/windows/now-window"));
+const RecycleWindow = React.lazy(
+  () => import("@/components/windows/recycle-window"),
 );
 const TerminalWindow = React.lazy(
   () => import("@/components/windows/terminal-window"),
@@ -94,6 +104,28 @@ export const WINDOW_REGISTRY: Record<WindowId, WindowMeta> = {
     titleKey: "windows.terminal",
     component: TerminalWindow,
     desktop: true,
+  },
+  volunteering: {
+    id: "volunteering",
+    icon: HeartHandshake,
+    titleKey: "windows.volunteering",
+    component: VolunteeringWindow,
+    desktop: true,
+  },
+  now: {
+    id: "now",
+    icon: Sparkles,
+    titleKey: "windows.now",
+    component: NowWindow,
+    desktop: true,
+  },
+  recycle: {
+    id: "recycle",
+    icon: Trash2,
+    titleKey: "windows.recycle",
+    component: RecycleWindow,
+    /** Lives in the bottom-right corner, not the icon column. */
+    desktop: false,
   },
 };
 

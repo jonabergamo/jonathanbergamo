@@ -8,6 +8,9 @@ export const WINDOW_IDS = [
   "skills",
   "contact",
   "terminal",
+  "volunteering",
+  "now",
+  "recycle",
 ] as const;
 export type WindowId = (typeof WINDOW_IDS)[number];
 
@@ -28,6 +31,9 @@ export const MIN_SIZE: Record<WindowId, Size> = {
   skills: { w: 320, h: 260 },
   contact: { w: 320, h: 260 },
   terminal: { w: 320, h: 220 },
+  volunteering: { w: 360, h: 300 },
+  now: { w: 340, h: 280 },
+  recycle: { w: 420, h: 300 },
 };
 
 const DEFAULT_SIZE: Record<WindowId, Size> = {
@@ -38,6 +44,9 @@ const DEFAULT_SIZE: Record<WindowId, Size> = {
   skills: { w: 560, h: 420 },
   contact: { w: 460, h: 420 },
   terminal: { w: 520, h: 340 },
+  volunteering: { w: 620, h: 520 },
+  now: { w: 560, h: 520 },
+  recycle: { w: 680, h: 460 },
 };
 
 export function defaultRects(bounds: Size): Record<WindowId, Rect> {
@@ -72,6 +81,17 @@ export function defaultRects(bounds: Size): Record<WindowId, Rect> {
     experience: { x: pad + 60, y: gap + 40, ...fit(DEFAULT_SIZE.experience) },
     skills: { x: pad, y: skillsTop, ...skills },
     contact: { x: pad + 180, y: gap + 120, ...fit(DEFAULT_SIZE.contact) },
+    volunteering: {
+      x: pad + 80,
+      y: gap + 60,
+      ...fit(DEFAULT_SIZE.volunteering),
+    },
+    now: { x: pad + 140, y: gap + 100, ...fit(DEFAULT_SIZE.now) },
+    recycle: {
+      x: Math.max(pad, bounds.w - 680 - gap * 3),
+      y: Math.max(gap, bounds.h - 460 - gap * 2),
+      ...fit(DEFAULT_SIZE.recycle),
+    },
     terminal: {
       x: pad + 40,
       y: Math.max(gap, bounds.h - 340 - gap),

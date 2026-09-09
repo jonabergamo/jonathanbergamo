@@ -33,6 +33,9 @@ export const en = {
     contact: "Contact",
     terminal: "Terminal",
     photography: "Photography",
+    volunteering: "Volunteering",
+    now: "Now",
+    recycle: "Recycle Bin",
   },
   about: {
     greeting: "Hi, I'm Jonathan.",
@@ -92,6 +95,24 @@ export const en = {
     themeSet: "Theme set to {theme}",
     paletteSet: "Palette set to {palette}",
     prompt: "guest@jonathan-os",
+  },
+  volunteering: {
+    intro:
+      "Work that has nothing to do with software. It taught me more about coordinating people than any sprint did.",
+  },
+  now: {
+    updated: "Updated {date}",
+    intro:
+      "A short, honest snapshot of what I'm up to. It changes; the rest of the site mostly doesn't.",
+  },
+  recycle: {
+    intro: "{n} items. Technologies I used to ship and was glad to delete.",
+    empty: "Empty Recycle Bin",
+    emptied: "Already gone for good. Nothing here comes back.",
+    name: "Name",
+    deleted: "Deleted",
+    size: "Size",
+    noRestore: "Restore is disabled on purpose.",
   },
   photography: {
     heading: "Through the viewfinder",
