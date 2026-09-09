@@ -24,7 +24,7 @@ export const volunteering: Volunteering[] = [
     url: "https://www.rotary.org/en/get-involved/rotaract-clubs",
     summary: {
       en: "Rotaract is Rotary's network of young leaders. In Sorocaba I helped organise community response and fundraising. None of it involves code. All of it involves getting people to show up.",
-      pt: "O Rotaract é a rede de jovens líderes do Rotary. Em Sorocaba ajudei a organizar ações de resposta comunitária e arrecadação. Nada disso envolve código. Tudo isso envolve fazer as pessoas aparecerem.",
+      pt: "O Rotaract é a rede de jovens líderes do Rotary. Em Sorocaba ajudei a organizar ações de resposta comunitária e arrecadação. Nada disso envolve código. Tudo envolve fazer gente aparecer no dia.",
     },
     initiatives: {
       en: [

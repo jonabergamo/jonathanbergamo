@@ -54,7 +54,7 @@ export const now = {
       value: { en: "58 s", pt: "58 s" },
       body: {
         en: "Personal best on a 3×3. The goal is under a minute every time, not once.",
-        pt: "Recorde pessoal no 3×3. A meta é abaixo de um minuto toda vez, não uma vez.",
+        pt: "Recorde pessoal no 3×3. A meta é fechar abaixo de um minuto sempre, não só uma vez.",
       },
     },
     {
@@ -110,7 +110,7 @@ export const now = {
       },
       body: {
         en: "The coffee level on the desktop is accurate.",
-        pt: "O nível de café na área de trabalho é preciso.",
+        pt: "O medidor de café na área de trabalho não mente.",
       },
     },
   ] satisfies NowItem[],

@@ -19,7 +19,7 @@ export const recycled: RecycledItem[] = [
     size: "1.4 GB",
     reason: {
       en: "Migrated page by page to React. $scope has left the building.",
-      pt: "Migrado tela a tela para React. O $scope saiu do prédio.",
+      pt: "Migrado tela a tela para React. O $scope foi embora e não deixou recado.",
     },
   },
   {

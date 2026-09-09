@@ -22,11 +22,11 @@ export const howIWork: Principle[] = [
     id: "legacy",
     title: {
       en: "Migrations without stopping the line",
-      pt: "Migrações sem parar a linha",
+      pt: "Migração sem parar a fábrica",
     },
     body: {
       en: "Legacy code pays the bills, so I replace it in slices. One screen at a time, each with tests and Storybook before it ships, while new features keep landing. Big rewrites are how migrations die.",
-      pt: "Código legado paga as contas, então eu troco em fatias. Uma tela por vez, cada uma com testes e Storybook antes de ir ao ar, enquanto as features novas continuam saindo. Reescrever tudo de uma vez é como as migrações morrem.",
+      pt: "Código legado paga as contas, então eu troco em fatias. Uma tela por vez, cada uma com testes e Storybook antes de ir ao ar, enquanto as features novas continuam saindo. Reescrever tudo de uma vez é o jeito mais rápido de matar uma migração.",
     },
   },
   {
@@ -53,7 +53,7 @@ export const howIWork: Principle[] = [
   },
   {
     id: "product",
-    title: { en: "Product in the loop", pt: "Produto no circuito" },
+    title: { en: "Product in the loop", pt: "Produto junto desde o começo" },
     body: {
       en: "I work directly with product managers and designers. I turn Figma into interfaces that feel finished, and I write the discovery docs and tickets that let other people pick up the work. A good spec is a form of kindness.",
       pt: "Trabalho direto com gerentes de produto e designers. Transformo Figma em interfaces com cara de terminadas e escrevo as discoveries e os tickets que deixam outras pessoas pegarem o trabalho. Uma boa spec é uma forma de gentileza.",
