@@ -1,10 +1,12 @@
 "use client";
 
 import {
+  Aperture,
   ArrowUpRight,
   BookOpen,
   Box,
   Camera,
+  Dumbbell,
   Gamepad2,
   Hammer,
   MapPin,
@@ -23,6 +25,8 @@ const ICONS: Record<NowItem["icon"], LucideIcon> = {
   cube: Box,
   music: Music2,
   camera: Camera,
+  aperture: Aperture,
+  dumbbell: Dumbbell,
   hammer: Hammer,
   search: Search,
   pin: MapPin,

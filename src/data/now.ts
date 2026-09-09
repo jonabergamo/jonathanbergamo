@@ -13,6 +13,8 @@ export type NowItem = {
     | "cube"
     | "music"
     | "camera"
+    | "aperture"
+    | "dumbbell"
     | "hammer"
     | "search"
     | "pin";
@@ -68,13 +70,26 @@ export const now = {
       },
     },
     {
-      id: "shooting",
-      icon: "camera",
-      label: { en: "Shooting", pt: "Fotografando" },
-      value: { en: "São Paulo streets", pt: "Ruas de São Paulo" },
+      id: "training",
+      icon: "dumbbell",
+      label: { en: "Training", pt: "Treinando" },
+      value: {
+        en: "Gym, 5 weeks straight",
+        pt: "Academia, 5 semanas seguidas",
+      },
       body: {
-        en: "Street and travel photos from walks around the city. New ones show up in the Photography window.",
-        pt: "Cenas de rua e viagem em caminhadas pela cidade. As novas aparecem na janela Fotografia.",
+        en: "Five weeks without skipping a session. The streak is the whole point.",
+        pt: "Cinco semanas sem furar nenhum treino. A sequência é o que importa.",
+      },
+    },
+    {
+      id: "camera",
+      icon: "aperture",
+      label: { en: "In the bag", pt: "Na mochila" },
+      value: { en: "Nikon D3100, 35mm lens", pt: "Nikon D3100, lente 35mm" },
+      body: {
+        en: "An old DSLR and one prime lens. No zoom, so I walk until the frame is right.",
+        pt: "Uma DSLR antiga e uma única lente fixa. Sem zoom, então eu ando até o enquadramento ficar certo.",
       },
       open: "photography",
     },
