@@ -47,9 +47,9 @@ export function PalettePicker({
             className="flex items-center gap-3"
           >
             <span className="border-foreground/30 flex overflow-hidden rounded-sm border">
-              {p.swatches.map((c) => (
+              {p.swatches.map((c, i) => (
                 <span
-                  key={c}
+                  key={`${p.id}-${i}`}
                   className="size-4"
                   style={{ backgroundColor: c }}
                 />
