@@ -1,38 +1,38 @@
 "use client";
 
+import { Download } from "lucide-react";
 import { useI18n } from "@/i18n/context";
-import { skills } from "@/data/skills";
-import { cn } from "@/lib/utils";
+import { howIWork } from "@/data/how-i-work";
+import { profile } from "@/data/profile";
 
+/** Window id stays "skills" for saved layouts; the content is how I work. */
 export default function SkillsWindow() {
-  const { t, l } = useI18n();
+  const { t, l, locale } = useI18n();
   return (
-    <div className="space-y-7 p-6 sm:p-8">
-      <p className="text-muted-foreground max-w-[60ch] text-sm">
+    <div className="p-6 sm:p-8">
+      <p className="text-muted-foreground max-w-[60ch] text-sm leading-relaxed">
         {t("skills.intro")}
       </p>
-      {skills.map((group) => (
-        <section key={group.id}>
-          <h3 className="font-display mb-2 text-base font-bold">
-            {l(group.label)}
-          </h3>
-          <ul className="flex flex-wrap gap-1.5">
-            {group.skills.map((s) => (
-              <li
-                key={s.name}
-                className={cn(
-                  "rounded-md border px-2 py-1 text-[13px] leading-none",
-                  s.core
-                    ? "border-brand-ink bg-brand-ink text-brand-paper dark:border-brand-paper dark:bg-brand-paper dark:text-brand-ink font-semibold"
-                    : "border-brand-ink/25 text-foreground/90",
-                )}
-              >
-                {s.name}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+      <ol className="mt-6 space-y-6">
+        {howIWork.map((p) => (
+          <li key={p.id} className="max-w-[66ch]">
+            <h3 className="font-display text-lg leading-tight font-bold">
+              {l(p.title)}
+            </h3>
+            <p className="mt-1.5 text-[15px] leading-relaxed">{l(p.body)}</p>
+          </li>
+        ))}
+      </ol>
+      <p className="border-brand-ink/10 text-muted-foreground mt-8 flex flex-wrap items-center gap-x-2 gap-y-1 border-t-2 pt-4 text-xs">
+        {t("skills.cvNote")}
+        <a
+          href={profile.cv[locale]}
+          download
+          className="text-foreground inline-flex items-center gap-1 font-medium hover:underline"
+        >
+          <Download className="size-3.5" /> {t("contact.cv")}
+        </a>
+      </p>
     </div>
   );
 }

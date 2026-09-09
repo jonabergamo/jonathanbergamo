@@ -12,7 +12,7 @@ import {
   Mail,
   SquareTerminal,
   UserRound,
-  Wrench,
+  Compass,
 } from "lucide-react";
 import type { WindowId } from "@/store/window-defaults";
 import type { MessageKey } from "@/i18n/context";
@@ -86,7 +86,7 @@ export const WINDOW_REGISTRY: Record<WindowId, WindowMeta> = {
   },
   skills: {
     id: "skills",
-    icon: Wrench,
+    icon: Compass,
     titleKey: "windows.skills",
     component: SkillsWindow,
     desktop: true,

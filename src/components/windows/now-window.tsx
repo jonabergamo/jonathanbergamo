@@ -1,10 +1,32 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  BookOpen,
+  Box,
+  Camera,
+  Gamepad2,
+  Hammer,
+  MapPin,
+  Music2,
+  Search,
+  type LucideIcon,
+} from "lucide-react";
 import { useI18n } from "@/i18n/context";
 import { HTML_LANG } from "@/i18n/config";
-import { now } from "@/data/now";
+import { now, type NowItem } from "@/data/now";
 import { useWindowStore } from "@/store/window-store";
+
+const ICONS: Record<NowItem["icon"], LucideIcon> = {
+  book: BookOpen,
+  gamepad: Gamepad2,
+  cube: Box,
+  music: Music2,
+  camera: Camera,
+  hammer: Hammer,
+  search: Search,
+  pin: MapPin,
+};
 
 export default function NowWindow() {
   const { t, l, locale } = useI18n();
@@ -25,31 +47,42 @@ export default function NowWindow() {
       <p className="text-muted-foreground mt-2 max-w-[56ch] text-sm leading-relaxed">
         {t("now.intro")}
       </p>
-      <dl className="divide-brand-ink/10 mt-6 divide-y-2">
-        {now.items.map((item) => (
-          <div
-            key={item.id}
-            className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-4"
-          >
-            <dt className="font-display text-base font-bold">
-              {l(item.label)}
-            </dt>
-            <dd className="text-sm leading-relaxed">
-              {l(item.body)}
-              {item.open && (
-                <button
-                  type="button"
-                  onClick={() => open(item.open!)}
-                  className="text-brand-accent dark:text-brand-mid ml-2 inline-flex items-center gap-0.5 hover:underline"
-                >
-                  {t(`windows.${item.open}`)}{" "}
-                  <ArrowUpRight className="size-3.5" />
-                </button>
-              )}
-            </dd>
-          </div>
-        ))}
-      </dl>
+      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+        {now.items.map((item) => {
+          const Icon = ICONS[item.icon];
+          return (
+            <li
+              key={item.id}
+              className="border-brand-ink/25 flex gap-3 rounded-lg border-2 p-4"
+            >
+              <span className="border-brand-ink/60 bg-muted grid size-9 shrink-0 place-items-center rounded-md border-2">
+                <Icon className="size-4" aria-hidden />
+              </span>
+              <div className="min-w-0">
+                <p className="text-muted-foreground text-[11px] font-medium">
+                  {l(item.label)}
+                </p>
+                <p className="font-display text-base leading-tight font-bold">
+                  {l(item.value)}
+                </p>
+                <p className="text-muted-foreground mt-1 text-[13px] leading-relaxed">
+                  {l(item.body)}
+                  {item.open && (
+                    <button
+                      type="button"
+                      onClick={() => open(item.open!)}
+                      className="text-brand-accent dark:text-brand-mid ml-1.5 inline-flex items-center gap-0.5 hover:underline"
+                    >
+                      {t(`windows.${item.open}`)}{" "}
+                      <ArrowUpRight className="size-3.5" />
+                    </button>
+                  )}
+                </p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

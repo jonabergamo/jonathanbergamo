@@ -31,7 +31,7 @@ export const pt: Messages = {
     about: "Sobre mim",
     experience: "Experiência",
     projects: "Projetos",
-    skills: "Habilidades",
+    skills: "Como eu trabalho",
     contact: "Contato",
     terminal: "Terminal",
     photography: "Fotografia",
@@ -72,7 +72,8 @@ export const pt: Messages = {
   },
   skills: {
     intro:
-      "Agrupadas por onde uso no dia a dia. Os chips em destaque são os que mais uso.",
+      "Não é uma lista. Seis hábitos que descrevem como eu construo as coisas; os nomes das ferramentas ficam no currículo.",
+    cvNote: "Procurando a lista de palavras-chave?",
   },
   contact: {
     heading: "Vamos conversar",

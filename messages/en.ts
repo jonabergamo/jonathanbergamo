@@ -29,7 +29,7 @@ export const en = {
     about: "About me",
     experience: "Experience",
     projects: "Projects",
-    skills: "Skills",
+    skills: "How I work",
     contact: "Contact",
     terminal: "Terminal",
     photography: "Photography",
@@ -70,7 +70,8 @@ export const en = {
   },
   skills: {
     intro:
-      "Grouped by where I use them day to day. Bolder chips are the ones I reach for most.",
+      "Not a checklist. Six habits that describe how I build things; the tool names live on the CV.",
+    cvNote: "Looking for the keyword list?",
   },
   contact: {
     heading: "Let's talk",
