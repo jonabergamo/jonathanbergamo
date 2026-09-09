@@ -82,11 +82,12 @@ export function defaultRects(bounds: Size): Record<WindowId, Rect> {
 }
 
 /** Which windows start open on a fresh visit for this viewport. */
+/** Which windows start open on a fresh visit for this viewport. */
 export function defaultOpen(bounds: Size): WindowId[] {
-  // About and Skills open by default, stacked on the left so the avatar and
-  // the widgets on the right stay visible. Last item is focused.
-  if (bounds.w >= 1024) return ["skills", "about"];
-  return ["about"];
+  // On laptops there is no room for windows, the widget column and the
+  // avatar side by side, so the desktop starts clear and the avatar shows.
+  if (bounds.w >= 1380 && bounds.h >= 800) return ["skills", "about"];
+  return [];
 }
 
 export function defaultWindows(bounds: Size): Record<WindowId, WindowState> {

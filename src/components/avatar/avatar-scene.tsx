@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { PCFShadowMap } from "three";
 import {
   AdaptiveDpr,
@@ -45,7 +45,6 @@ export default function AvatarScene({
   // Camera is level (it looks at a point at its own height) so the avatar
   // stands perfectly vertical, no top-down perspective.
   const eye = mobile ? 0.2 : 0.18;
-  const offsetX = mobile ? 0 : 0.05;
   const camera = mobile
     ? { position: [0, eye, 2.35] as [number, number, number], fov: 30 }
     : { position: [0, eye, 3.18] as [number, number, number], fov: 26 };
@@ -116,24 +115,56 @@ export default function AvatarScene({
         position={[-1.5, 2.5, -3]}
       />
       <React.Suspense fallback={null}>
-        <Avatar
-          pointer={pointer}
-          waveRef={wave}
-          dancing={dancing}
-          animate={animate}
-          offsetX={offsetX}
-          bpm={bpm}
-        />
+        <Placed mobile={mobile} fov={camera.fov} distance={camera.position[2]}>
+          {(offsetX) => (
+            <>
+              <Avatar
+                pointer={pointer}
+                waveRef={wave}
+                dancing={dancing}
+                animate={animate}
+                offsetX={offsetX}
+                bpm={bpm}
+              />
+              <ContactShadows
+                position={[offsetX, -1.52, 0]}
+                opacity={0.35}
+                scale={3}
+                blur={2.2}
+                far={1.5}
+                color="#000000"
+              />
+            </>
+          )}
+        </Placed>
       </React.Suspense>
-      <ContactShadows
-        position={[offsetX, -1.52, 0]}
-        opacity={0.35}
-        scale={3}
-        blur={2.2}
-        far={1.5}
-        color="#000000"
-      />
       <AdaptiveDpr pixelated />
     </Canvas>
   );
+}
+
+/**
+ * Keeps the avatar a fixed distance from the right edge of the canvas
+ * (in pixels) whatever the canvas width, so he never hides behind widgets
+ * on narrower desktops. Converts pixels to world units at the avatar's depth.
+ */
+function Placed({
+  mobile,
+  fov,
+  distance,
+  children,
+}: {
+  mobile: boolean;
+  fov: number;
+  distance: number;
+  children: (offsetX: number) => React.ReactNode;
+}) {
+  const { size } = useThree();
+  if (mobile) return <>{children(0)}</>;
+  const visibleHeight = 2 * distance * Math.tan((fov * Math.PI) / 360);
+  const worldPerPx = visibleHeight / size.height;
+  const centreFromRightPx = 430;
+  const offsetX =
+    (size.width - centreFromRightPx - size.width / 2) * worldPerPx;
+  return <>{children(offsetX)}</>;
 }

@@ -4,6 +4,7 @@ import * as React from "react";
 import { useShallow } from "zustand/react/shallow";
 import { useWindowStore, selectVisibleOrder } from "@/store/window-store";
 import { OsWindow } from "./os-window";
+import { firstVisit } from "./store-hydrator";
 
 /** Renders every running window inside the desktop bounds and keeps the store's bounds in sync. */
 export function WindowLayer() {
@@ -16,6 +17,11 @@ export function WindowLayer() {
     if (!el) return;
     const update = () => setBounds({ w: el.clientWidth, h: el.clientHeight });
     update();
+    if (firstVisit.windows) {
+      // Fresh visit: pick the default windows for this screen, not the server's.
+      firstVisit.windows = false;
+      useWindowStore.getState().resetLayout();
+    }
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();

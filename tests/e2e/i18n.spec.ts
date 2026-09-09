@@ -12,6 +12,9 @@ test("language toggle switches copy, sets html lang and persists", async ({
   await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
   if (isMobile) {
     await page.getByTestId("mstart-about").click();
+  } else {
+    // Laptop-sized desktops start with no windows open.
+    await page.getByTestId("icon-about").click();
   }
   await expect(page.getByText("Oi, eu sou o Jonathan.")).toBeVisible();
 

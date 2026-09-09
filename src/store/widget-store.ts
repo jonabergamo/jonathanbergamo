@@ -14,35 +14,51 @@ export type WidgetId = (typeof WIDGET_IDS)[number];
 type Pos = { x: number; y: number };
 
 /**
- * Default layout, taken from Jonathan's own arrangement on a 1408x1227 window:
- * a column between the About window and the avatar, with the music player to
- * its right at the top. Shorter screens get a tighter column that still ends
- * above the taskbar.
+ * Default layout by screen size.
+ * - Wide and tall (Jonathan's 1408x1227): his own arrangement, a column right
+ *   of the About window with the music player beside it.
+ * - Wide but shorter (e.g. 1440x900): the same column, tightened.
+ * - Laptops (narrower than 1380 or shorter than 820): no windows open by
+ *   default, so the widgets take the left side in two columns and the avatar
+ *   keeps the right side.
  */
 export function defaultWidgetPositions(
   width: number,
   height = 1227,
 ): Record<WidgetId, Pos> {
-  // Anchored just right of the About window, whatever the window width.
-  const x = Math.min(680, Math.max(360, width - 600));
+  const wide = width >= 1380;
   const tall = height >= 1000;
-  return tall
-    ? {
-        experience: { x, y: 34 },
-        clock: { x, y: 290 },
-        weather: { x, y: 426 },
-        status: { x, y: 623 },
-        github: { x, y: 780 },
-        music: { x: x + 248, y: 35 },
-      }
-    : {
-        experience: { x, y: 24 },
-        clock: { x, y: 292 },
-        weather: { x, y: 428 },
-        status: { x, y: 612 },
-        github: { x, y: 744 },
-        music: { x: x + 248, y: 24 },
-      };
+  const short = height < 820;
+  if (wide && !short) {
+    const x = Math.min(680, Math.max(360, width - 600));
+    return tall
+      ? {
+          experience: { x, y: 34 },
+          clock: { x, y: 290 },
+          weather: { x, y: 426 },
+          status: { x, y: 623 },
+          github: { x, y: 780 },
+          music: { x: x + 248, y: 35 },
+        }
+      : {
+          experience: { x, y: 24 },
+          clock: { x, y: 292 },
+          weather: { x, y: 428 },
+          status: { x, y: 612 },
+          github: { x, y: 744 },
+          music: { x: x + 248, y: 24 },
+        };
+  }
+  const x1 = 104;
+  const x2 = 352;
+  return {
+    experience: { x: x1, y: 24 },
+    clock: { x: x1, y: 292 },
+    weather: { x: x1, y: 428 },
+    music: { x: x2, y: 24 },
+    status: { x: x2, y: 372 },
+    github: { x: x2, y: 506 },
+  };
 }
 
 type WidgetStore = {
