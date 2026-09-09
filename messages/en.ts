@@ -88,13 +88,18 @@ export const en = {
   },
   terminal: {
     welcome: "jonathan-os 1.0. Type help to see the commands.",
-    help: "Commands you can run here. help, whoami, ls, open <section>, lang <en|pt>, theme <light|dark>, palette <name>, clear",
+    help: "Commands you can run here. help, whoami, ls, open <section>, lang <en|pt>, theme <light|dark|toggle>, palette (lists them), palette <name>, clear",
     unknown: "I don't know {cmd}. Try help.",
     opened: "Opened {name}",
     notFound: "No section called {name}",
     langSet: "Language set to {lang}",
     themeSet: "Theme set to {theme}",
     paletteSet: "Palette set to {palette}",
+    paletteList:
+      "Palettes. The * marks the one you are using. Try palette <name>.",
+    paletteUnknown: "No palette called {palette}.",
+    themeNow:
+      "You are on {theme} mode with the {palette} palette. Try theme light, theme dark or theme toggle.",
     prompt: "guest@jonathan-os",
   },
   volunteering: {

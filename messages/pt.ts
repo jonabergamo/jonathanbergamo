@@ -90,13 +90,18 @@ export const pt: Messages = {
   },
   terminal: {
     welcome: "jonathan-os 1.0. Digite help para ver os comandos.",
-    help: "Comandos que você pode rodar aqui. help, whoami, ls, open <seção>, lang <en|pt>, theme <light|dark>, palette <nome>, clear",
+    help: "Comandos que você pode rodar aqui. help, whoami, ls, open <seção>, lang <en|pt>, theme <light|dark|toggle>, palette (lista todas), palette <nome>, clear",
     unknown: "Não conheço {cmd}. Tente help.",
     opened: "Abri {name}",
     notFound: "Nenhuma seção chamada {name}",
     langSet: "Idioma agora é {lang}",
     themeSet: "Tema agora é {theme}",
     paletteSet: "Paleta agora é {palette}",
+    paletteList:
+      "Paletas. O * marca a que você está usando. Tente palette <nome>.",
+    paletteUnknown: "Não existe paleta chamada {palette}.",
+    themeNow:
+      "Você está no modo {theme} com a paleta {palette}. Tente theme light, theme dark ou theme toggle.",
     prompt: "guest@jonathan-os",
   },
   volunteering: {

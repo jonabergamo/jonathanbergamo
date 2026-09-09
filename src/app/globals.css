@@ -20,12 +20,12 @@
   --p-accent-fg: #fdf0d5;
 }
 [data-theme^="forest-"] {
-  --p-ink: #1e2d24;
-  --p-mid: #7fa08a;
-  --p-paper: #f2efe6;
-  --p-accent: #b3402e;
-  --p-deep: #6e2418;
-  --p-accent-fg: #f2efe6;
+  --p-ink: #1f3a2a;
+  --p-mid: #8bbf9f;
+  --p-paper: #f3f6ee;
+  --p-accent: #c2541b;
+  --p-deep: #7a3410;
+  --p-accent-fg: #f3f6ee;
 }
 :root,
 [data-theme^="slate-"] {
@@ -51,6 +51,38 @@
   --p-accent: #d9c5b2;
   --p-deep: #34312d;
   --p-accent-fg: #14110f;
+}
+[data-theme^="sand-"] {
+  --p-ink: #3a2e26;
+  --p-mid: #c2a878;
+  --p-paper: #f8f2e7;
+  --p-accent: #6b7f2a;
+  --p-deep: #46531b;
+  --p-accent-fg: #f8f2e7;
+}
+[data-theme^="midnight-"] {
+  --p-ink: #0d1b3d;
+  --p-mid: #5aa9e6;
+  --p-paper: #eef2f9;
+  --p-accent: #d4a017;
+  --p-deep: #8f6b0f;
+  --p-accent-fg: #0d1b3d;
+}
+[data-theme^="rose-"] {
+  --p-ink: #3a2430;
+  --p-mid: #d69fb4;
+  --p-paper: #fcf4f6;
+  --p-accent: #c43e63;
+  --p-deep: #86294a;
+  --p-accent-fg: #fcf4f6;
+}
+[data-theme^="mono-"] {
+  --p-ink: #111111;
+  --p-mid: #8a8a8a;
+  --p-paper: #ffffff;
+  --p-accent: #111111;
+  --p-deep: #000000;
+  --p-accent-fg: #ffffff;
 }
 
 @theme inline {
@@ -101,6 +133,8 @@
   --color-taskbar-foreground: var(--taskbar-foreground);
   --color-desktop: var(--desktop);
   --color-desktop-grid: var(--desktop-grid);
+  --color-terminal: var(--terminal);
+  --color-terminal-foreground: var(--terminal-foreground);
 
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
@@ -170,6 +204,8 @@
   --desktop: var(--color-brand-paper);
   --desktop-grid: color-mix(in oklch, var(--color-brand-ink) 16%, transparent);
   --window-shadow: var(--color-brand-ink);
+  --terminal: var(--color-brand-ink);
+  --terminal-foreground: var(--color-brand-paper);
 }
 
 [data-theme$="-dark"] {
@@ -219,6 +255,9 @@
   --desktop: var(--color-brand-ink);
   --desktop-grid: color-mix(in oklch, var(--color-brand-mid) 28%, transparent);
   --window-shadow: color-mix(in oklch, var(--color-brand-ink) 55%, black);
+  /* Darker than the desktop so the terminal still reads as a window. */
+  --terminal: color-mix(in oklch, var(--color-brand-ink) 60%, black);
+  --terminal-foreground: var(--color-brand-paper);
 }
 
 @layer base {

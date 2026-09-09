@@ -12,8 +12,8 @@ import { useWindowStore } from "@/store/window-store";
 type Line = { kind: "in" | "out"; text: string };
 
 export default function TerminalWindow() {
-  const { t, setLocale } = useI18n();
-  const { setMode, setPalette } = usePalette();
+  const { t, l, setLocale } = useI18n();
+  const { mode, palette, setMode, setPalette } = usePalette();
   const open = useWindowStore((s) => s.open);
   const [lines, setLines] = React.useState<Line[]>([
     { kind: "out", text: t("terminal.welcome") },
@@ -59,15 +59,31 @@ export default function TerminalWindow() {
         if (args[0] === "light" || args[0] === "dark") {
           setMode(args[0]);
           out.push(t("terminal.themeSet", { theme: args[0] }));
-        } else out.push(t("terminal.help"));
+        } else if (args[0] === "toggle") {
+          const next = mode === "dark" ? "light" : "dark";
+          setMode(next);
+          out.push(t("terminal.themeSet", { theme: next }));
+        } else {
+          out.push(t("terminal.themeNow", { theme: mode, palette }));
+        }
         break;
-      case "palette": {
+      case "palette":
+      case "palettes": {
         const id = PALETTES.find((p) => p.id === args[0])?.id as
           PaletteId | undefined;
         if (id) {
           setPalette(id);
           out.push(t("terminal.paletteSet", { palette: id }));
-        } else out.push(PALETTES.map((p) => p.id).join("  "));
+          break;
+        }
+        if (args[0])
+          out.push(t("terminal.paletteUnknown", { palette: args[0] }));
+        out.push(t("terminal.paletteList"));
+        for (const p of PALETTES) {
+          out.push(
+            `${p.id === palette ? "*" : " "} ${p.id.padEnd(9)} ${l(p.name)}`,
+          );
+        }
         break;
       }
       case "clear":
@@ -85,7 +101,7 @@ export default function TerminalWindow() {
 
   return (
     <div
-      className="bg-brand-ink text-brand-paper flex h-full flex-col p-4 font-mono text-[13px] leading-relaxed"
+      className="bg-terminal text-terminal-foreground flex h-full flex-col p-4 font-mono text-[13px] leading-relaxed"
       onClick={() => inputRef.current?.focus()}
     >
       <div className="min-h-0 flex-1 overflow-y-auto">
@@ -95,7 +111,7 @@ export default function TerminalWindow() {
             className={
               l.kind === "in"
                 ? "text-brand-mid"
-                : "text-brand-paper/90 whitespace-pre-wrap"
+                : "text-terminal-foreground/90 whitespace-pre-wrap"
             }
           >
             {l.kind === "in" ? `${t("terminal.prompt")} $ ${l.text}` : l.text}
@@ -121,7 +137,7 @@ export default function TerminalWindow() {
           onChange={(e) => setInput(e.target.value)}
           autoComplete="off"
           spellCheck={false}
-          className="text-brand-paper caret-brand-accent min-w-0 flex-1 bg-transparent outline-none"
+          className="text-terminal-foreground caret-brand-accent min-w-0 flex-1 bg-transparent outline-none"
         />
       </form>
     </div>
