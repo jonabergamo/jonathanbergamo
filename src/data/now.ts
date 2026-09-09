@@ -33,8 +33,8 @@ export const now = {
       label: { en: "Reading", pt: "Lendo" },
       value: { en: "The Fellowship of the Ring", pt: "A Sociedade do Anel" },
       body: {
-        en: "J. R. R. Tolkien. Book one of three; the hobbits have barely left the Shire.",
-        pt: "J. R. R. Tolkien. Livro um de três; os hobbits mal saíram do Condado.",
+        en: "J. R. R. Tolkien. Book one of three. The hobbits have barely left the Shire.",
+        pt: "J. R. R. Tolkien. Livro um de três. Os hobbits mal saíram do Condado.",
       },
     },
     {
@@ -63,8 +63,8 @@ export const now = {
       label: { en: "Listening to", pt: "Ouvindo" },
       value: { en: "This is Jonathan Bergamo", pt: "This is Jonathan Bergamo" },
       body: {
-        en: "The playlist in the player on the desktop. Press play and watch what happens.",
-        pt: "A playlist do player na área de trabalho. Dê play e veja o que acontece.",
+        en: "The playlist in the player on the desktop. Press play and watch what he does.",
+        pt: "A playlist do player na área de trabalho. Dê play e veja o que ele faz.",
       },
     },
     {
@@ -73,7 +73,7 @@ export const now = {
       label: { en: "Shooting", pt: "Fotografando" },
       value: { en: "São Paulo streets", pt: "Ruas de São Paulo" },
       body: {
-        en: "Street and travel frames on walks around the city. New ones land in the Photography window.",
+        en: "Street and travel photos from walks around the city. New ones show up in the Photography window.",
         pt: "Cenas de rua e viagem em caminhadas pela cidade. As novas aparecem na janela Fotografia.",
       },
       open: "photography",
@@ -84,8 +84,8 @@ export const now = {
       label: { en: "Building", pt: "Construindo" },
       value: { en: "This site", pt: "Este site" },
       body: {
-        en: "A desktop OS in the browser, a 3D version of me, and more widgets than strictly necessary.",
-        pt: "Um sistema operacional no navegador, uma versão 3D de mim e mais widgets do que o estritamente necessário.",
+        en: "A desktop in the browser, a 3D version of me, and more widgets than anyone needs.",
+        pt: "Uma área de trabalho no navegador, uma versão 3D de mim e mais widgets do que qualquer pessoa precisa.",
       },
       open: "projects",
     },
@@ -95,8 +95,8 @@ export const now = {
       label: { en: "Looking for", pt: "Procurando" },
       value: { en: "The next team", pt: "O próximo time" },
       body: {
-        en: "A remote full-stack or frontend role. English or Portuguese, product-minded, ships often.",
-        pt: "Uma vaga remota full-stack ou frontend. Em inglês ou português, com cabeça de produto, que entrega com frequência.",
+        en: "A remote full stack or front end role, in English or Portuguese, on a team that cares about the product and ships often.",
+        pt: "Uma vaga remota full stack ou front end, em inglês ou português, num time que se importa com o produto e entrega com frequência.",
       },
       open: "contact",
     },

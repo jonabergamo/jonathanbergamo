@@ -16,36 +16,36 @@ export const profile = {
     pt: "/cv/jonathan-bergamo-cv-pt.pdf",
   },
   summary: {
-    en: "Results-driven full-stack software engineer with over three years of experience architecting and deploying scalable web, mobile and distributed applications. Strong in the React and TypeScript ecosystem (Next.js, React Native) and in backend development with Node.js (NestJS), Python (Django) and Java. A track record of leading technical migrations, automating CI/CD pipelines and delivering features in high-scale environments, working in global, remote, English-speaking teams with a focus on software craftsmanship, clean architecture and SOLID principles.",
-    pt: "Engenheiro de software full-stack orientado a resultados, com mais de três anos de experiência arquitetando e publicando aplicações web, mobile e distribuídas escaláveis. Forte no ecossistema React e TypeScript (Next.js, React Native) e no backend com Node.js (NestJS), Python (Django) e Java. Histórico de liderar migrações técnicas, automatizar pipelines de CI/CD e entregar features em ambientes de alta escala, trabalhando em times globais, remotos e em inglês, com foco em software craftsmanship, arquitetura limpa e princípios SOLID.",
+    en: "I'm a full stack engineer with a bit over three years of shipping web, mobile and distributed systems. My home turf is React and TypeScript, on the web with Next.js and on phones with React Native. On the back end I work mostly in Python with Django, and I've shipped Node with NestJS and Java too. I've led migrations off legacy code, built the CI that teams rely on, and delivered features to a lot of users, always in remote teams that work in English. I care about clean code and about software that keeps working after I've moved on to the next thing.",
+    pt: "Sou engenheiro full stack com um pouco mais de três anos entregando sistemas web, mobile e distribuídos. Meu terreno é React e TypeScript, na web com Next.js e no celular com React Native. No back end trabalho principalmente com Python e Django, e já entreguei Node com NestJS e Java também. Liderei migrações de código legado, construí a CI que os times usam todo dia e entreguei features para muita gente, sempre em times remotos que trabalham em inglês. Me importo com código limpo e com software que continua funcionando depois que eu passo para a próxima coisa.",
   } satisfies Localized,
   traits: {
     en: [
       {
         title: "Whole stack, whole feature",
-        body: "From the migration and the Celery task to the screen and its tests. I would rather own the outcome than a layer.",
+        body: "From the migration and the background job to the screen and its tests. I'd rather own the result than one layer of it.",
       },
       {
         title: "Calm in production",
-        body: "When something breaks in production, I go find the root cause, fix it, and write down how it will not happen again.",
+        body: "When something breaks I look for the root cause, fix it, and write down what will stop it from happening again.",
       },
       {
         title: "Writes it down",
-        body: "Discoveries, specs and docs that let other people pick up the work. Bilingual, remote-first, Slack-native.",
+        body: "Discoveries, specs and docs that let other people pick up the work. Bilingual, remote first, comfortable in async.",
       },
     ],
     pt: [
       {
         title: "Stack inteira, feature inteira",
-        body: "Da migration e da task Celery até a tela e seus testes. Prefiro ser dono do resultado a ser dono de uma camada.",
+        body: "Da migration e do job em background até a tela e seus testes. Prefiro ser dono do resultado a ser dono de uma camada dele.",
       },
       {
         title: "Calmo em produção",
-        body: "Quando algo quebra em produção, vou atrás da causa raiz, corrijo e documento como não vai acontecer de novo.",
+        body: "Quando algo quebra eu procuro a causa raiz, corrijo e deixo escrito o que impede de acontecer de novo.",
       },
       {
         title: "Deixa escrito",
-        body: "Discoveries, specs e docs que permitem outras pessoas pegarem o trabalho. Bilíngue, remoto de raiz, fluente em Slack.",
+        body: "Discoveries, specs e docs que deixam outras pessoas pegarem o trabalho. Bilíngue, remoto de raiz, à vontade no assíncrono.",
       },
     ],
   } satisfies Localized<{ title: string; body: string }[]>,

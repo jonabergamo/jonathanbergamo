@@ -4,7 +4,7 @@ export const pt: Messages = {
   meta: {
     title: "Jonathan Bergamo",
     description:
-      "Engenheiro de software full-stack construindo sistemas web, mobile e distribuídos. Aberto a novas oportunidades.",
+      "Engenheiro de software full stack construindo sistemas web, mobile e distribuídos. Aberto a novas oportunidades.",
   },
   os: {
     start: "Iniciar",
@@ -25,7 +25,7 @@ export const pt: Messages = {
       "Nada aberto ainda. Escolha uma seção na área de trabalho ou no menu Iniciar.",
     windowMenu: "Seções",
     system: "Sistema",
-    tip: "Dica: arraste a barra de título para mover, as bordas para redimensionar, Esc fecha a janela em foco.",
+    tip: "Arraste a barra de título para mover uma janela e as bordas para redimensionar. Esc fecha a que está em foco.",
   },
   windows: {
     about: "Sobre mim",
@@ -41,11 +41,11 @@ export const pt: Messages = {
   },
   about: {
     greeting: "Oi, eu sou o Jonathan.",
-    role: "Engenheiro de software full-stack",
-    location: "São Paulo, Brasil · trabalhando remoto para Londres",
+    role: "Engenheiro de software full stack",
+    location: "São Paulo, Brasil, trabalhando remoto para Londres",
     status: "Aberto a novas oportunidades",
     statusHint:
-      "Vagas remotas, full-stack ou com foco em frontend. Inglês ou português.",
+      "Vagas remotas, full stack ou com foco em front end. Inglês ou português.",
     cta: "Fale comigo",
     seeProjects: "Ver projetos",
     avatarHint: "Mova o mouse para eu olhar. Clique para eu acenar.",
@@ -72,26 +72,26 @@ export const pt: Messages = {
   },
   skills: {
     intro:
-      "Não é uma lista. Seis hábitos que descrevem como eu construo as coisas; os nomes das ferramentas ficam no currículo.",
-    cvNote: "Procurando a lista de palavras-chave?",
+      "Não é uma lista. Seis hábitos que descrevem como eu construo as coisas. Os nomes das ferramentas ficam no currículo.",
+    cvNote: "Procurando a lista de tecnologias?",
   },
   contact: {
     heading: "Vamos conversar",
-    body: "Estou aberto a novas oportunidades. E-mail é o jeito mais rápido de me encontrar. Costumo responder em um dia.",
-    email: "E-mail",
+    body: "Estou aberto a novas oportunidades. Email é o jeito mais rápido de me encontrar. Costumo responder em um dia.",
+    email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",
     cv: "Currículo (PDF)",
-    copy: "Copiar e-mail",
+    copy: "Copiar email",
     copied: "Copiado",
     languages: "Idiomas",
     portuguese: "Português, nativo",
     english: "Inglês, fluente (C1)",
   },
   terminal: {
-    welcome: "jonathan-os 1.0 · digite `help` para ver os comandos",
-    help: "Comandos: help, whoami, ls, open <seção>, lang <en|pt>, theme <light|dark>, palette <nome>, clear",
-    unknown: "Comando desconhecido: {cmd}. Tente `help`.",
+    welcome: "jonathan-os 1.0. Digite help para ver os comandos.",
+    help: "Comandos que você pode rodar aqui. help, whoami, ls, open <seção>, lang <en|pt>, theme <light|dark>, palette <nome>, clear",
+    unknown: "Não conheço {cmd}. Tente help.",
     opened: "Abriu {name}",
     notFound: "Nenhuma seção chamada {name}",
     langSet: "Idioma definido para {lang}",
@@ -106,7 +106,7 @@ export const pt: Messages = {
   now: {
     updated: "Atualizado em {date}",
     intro:
-      "Um retrato curto e honesto do que estou fazendo. Isso muda; o resto do site quase não.",
+      "Um retrato curto e honesto do que estou fazendo. Esta página muda. O resto do site quase não.",
   },
   recycle: {
     intro: "{n} itens. Tecnologias que eu usava e fiquei feliz em apagar.",
@@ -120,7 +120,7 @@ export const pt: Messages = {
   photography: {
     heading: "Pelo visor",
     intro:
-      "Fotografia é como eu desligo. Quase sempre cenas de rua e viagem com cara de filme, postadas como jonab.img. Toque em uma para ver maior.",
+      "Fotografia é como eu desligo. Quase sempre fotos de rua e de viagem com cara de filme, postadas como jonab.img. Toque em uma para ver maior.",
     alt: "Foto de Jonathan, {date}",
     openInstagram: "Abrir no Instagram",
   },
@@ -147,14 +147,14 @@ export const pt: Messages = {
       title: "Status",
       coffee: "Nível de café",
       lines: {
-        0: "Agora: achando a causa raiz de algo que 'funcionava ontem'.",
-        1: "Agora: transformando uma planilha em app de verdade, de novo.",
-        2: "Agora: escrevendo o ticket para ninguém precisar adivinhar.",
-        3: "Agora: convencendo uma tela AngularJS legada a se aposentar com dignidade.",
-        4: "Agora: lendo release notes do Django por diversão. Sim, sério.",
-        5: "Agora: revisando um PR com mais testes que código. Aprovado.",
-        6: "Agora: deixando a CI vermelha de propósito para ela ficar verde depois.",
-        7: "Agora: na rua com a câmera. Volto já.",
+        0: "Agora estou caçando a causa raiz de algo que funcionava ontem.",
+        1: "Agora estou transformando uma planilha em app de verdade, de novo.",
+        2: "Agora estou escrevendo o ticket para ninguém precisar adivinhar.",
+        3: "Agora estou convencendo uma tela AngularJS legada a se aposentar com dignidade.",
+        4: "Agora estou lendo release notes do Django por diversão. Sim, sério.",
+        5: "Agora estou revisando um PR com mais testes que código. Aprovado.",
+        6: "Agora estou deixando a CI vermelha de propósito para ela ficar verde depois.",
+        7: "Agora estou na rua com a câmera. Volto já.",
       },
     },
     music: {
@@ -182,7 +182,7 @@ export const pt: Messages = {
     },
     github: {
       title: "Visto por último no GitHub",
-      pushed: "Enviou {count} commit(s) para",
+      pushed: "Enviou {count} commits para",
       active: "Ativo em",
       fallback: "Veja o que estou fazendo no GitHub",
     },

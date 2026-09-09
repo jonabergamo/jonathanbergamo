@@ -37,8 +37,8 @@ export const recycled: RecycledItem[] = [
     id: "proptypes",
     name: "PropTypes.js",
     kind: {
-      en: "Type checking, sort of",
-      pt: "Checagem de tipos, mais ou menos",
+      en: "Almost type checking",
+      pt: "Quase checagem de tipos",
     },
     deleted: "2025",
     size: "38 MB",
@@ -54,8 +54,8 @@ export const recycled: RecycledItem[] = [
     deleted: "2024",
     size: "97 MB",
     reason: {
-      en: "Hooks. componentDidMount and I had a good run.",
-      pt: "Hooks. Eu e o componentDidMount tivemos bons momentos.",
+      en: "Hooks won. componentDidMount and I had a good run.",
+      pt: "Os hooks venceram. Eu e o componentDidMount tivemos bons momentos.",
     },
   },
   {

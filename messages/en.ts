@@ -2,7 +2,7 @@ export const en = {
   meta: {
     title: "Jonathan Bergamo",
     description:
-      "Full-stack software engineer building web, mobile and distributed systems. Open to new opportunities.",
+      "Full stack software engineer building web, mobile and distributed systems. Open to new opportunities.",
   },
   os: {
     start: "Start",
@@ -23,7 +23,7 @@ export const en = {
       "Nothing open yet. Pick a section from the desktop or the Start menu.",
     windowMenu: "Sections",
     system: "System",
-    tip: "Tip: drag title bars to move, drag edges to resize, Esc closes the focused window.",
+    tip: "Drag a title bar to move a window and drag its edges to resize it. Esc closes the one in focus.",
   },
   windows: {
     about: "About me",
@@ -39,11 +39,11 @@ export const en = {
   },
   about: {
     greeting: "Hi, I'm Jonathan.",
-    role: "Full-stack software engineer",
-    location: "São Paulo, Brazil · working remotely for London",
+    role: "Full stack software engineer",
+    location: "São Paulo, Brazil, working remotely for London",
     status: "Open to new opportunities",
     statusHint:
-      "Remote, full-stack or frontend-leaning roles. English or Portuguese.",
+      "Remote roles, full stack or leaning front end. English or Portuguese.",
     cta: "Get in touch",
     seeProjects: "See projects",
     avatarHint: "Move your mouse to make me look. Click to wave.",
@@ -70,7 +70,7 @@ export const en = {
   },
   skills: {
     intro:
-      "Not a checklist. Six habits that describe how I build things; the tool names live on the CV.",
+      "Not a checklist. Six habits that describe how I build things. The tool names live on the CV.",
     cvNote: "Looking for the keyword list?",
   },
   contact: {
@@ -87,9 +87,9 @@ export const en = {
     english: "English, fluent (C1)",
   },
   terminal: {
-    welcome: "jonathan-os 1.0 · type `help` to see commands",
-    help: "Commands: help, whoami, ls, open <section>, lang <en|pt>, theme <light|dark>, palette <name>, clear",
-    unknown: "Unknown command: {cmd}. Try `help`.",
+    welcome: "jonathan-os 1.0. Type help to see the commands.",
+    help: "Commands you can run here. help, whoami, ls, open <section>, lang <en|pt>, theme <light|dark>, palette <name>, clear",
+    unknown: "I don't know {cmd}. Try help.",
     opened: "Opened {name}",
     notFound: "No section called {name}",
     langSet: "Language set to {lang}",
@@ -104,7 +104,7 @@ export const en = {
   now: {
     updated: "Updated {date}",
     intro:
-      "A short, honest snapshot of what I'm up to. It changes; the rest of the site mostly doesn't.",
+      "A short, honest snapshot of what I'm up to. This page changes. The rest of the site mostly doesn't.",
   },
   recycle: {
     intro: "{n} items. Technologies I used to ship and was glad to delete.",
@@ -118,7 +118,7 @@ export const en = {
   photography: {
     heading: "Through the viewfinder",
     intro:
-      "Photography is how I switch off. Mostly film-looking street and travel frames, posted as jonab.img. Tap one to see it bigger.",
+      "Photography is how I switch off. Mostly street and travel shots with a film look, posted as jonab.img. Tap one to see it bigger.",
     alt: "Photo by Jonathan, {date}",
     openInstagram: "Open on Instagram",
   },
@@ -131,7 +131,7 @@ export const en = {
       feels: "feels like {temp}°C",
       coldEnd: "hoodie",
       hotEnd: "melting",
-      freezing: "Freezing for a Brazilian. Hoodie and hot coffee.",
+      freezing: "Freezing, for a Brazilian. Hoodie and hot coffee.",
       cold: "Cold, by São Paulo standards. Sweater weather.",
       nice: "Perfectly fine. Ideal debugging temperature.",
       warm: "Warm. Windows open, fan on.",
@@ -141,14 +141,14 @@ export const en = {
       title: "Status",
       coffee: "Coffee level",
       lines: {
-        0: "Currently: root-causing something that 'worked yesterday'.",
-        1: "Currently: turning a spreadsheet into a real app, again.",
-        2: "Currently: writing the ticket so nobody has to guess.",
-        3: "Currently: convincing a legacy AngularJS page to retire gracefully.",
-        4: "Currently: reading Django release notes for fun. Yes, really.",
-        5: "Currently: reviewing a PR with more tests than code. Approved.",
-        6: "Currently: making the CI red on purpose so it stays green later.",
-        7: "Currently: out with a camera. Back in a bit.",
+        0: "Right now I'm chasing the root cause of something that worked yesterday.",
+        1: "Right now I'm turning a spreadsheet into a real app, again.",
+        2: "Right now I'm writing the ticket so nobody has to guess.",
+        3: "Right now I'm convincing a legacy AngularJS page to retire gracefully.",
+        4: "Right now I'm reading Django release notes for fun. Yes, really.",
+        5: "Right now I'm reviewing a PR with more tests than code. Approved.",
+        6: "Right now I'm making the CI red on purpose so it stays green later.",
+        7: "Right now I'm out with a camera. Back in a bit.",
       },
     },
     music: {
@@ -176,7 +176,7 @@ export const en = {
     },
     github: {
       title: "Last seen on GitHub",
-      pushed: "Pushed {count} commit(s) to",
+      pushed: "Pushed {count} commits to",
       active: "Active on",
       fallback: "See what I'm up to on GitHub",
     },

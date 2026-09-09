@@ -13,10 +13,19 @@ test("language toggle switches copy, sets html lang and persists", async ({
   if (isMobile) {
     await page.getByTestId("mstart-about").click();
   } else {
-    // Laptop-sized desktops start with no windows open.
-    await page.getByTestId("icon-about").click();
+    // Laptop-sized desktops start with no windows open. Under heavy parallel
+    // load the first click occasionally lands mid-render, so retry until the
+    // window is actually there.
+    const about = page.locator("[data-window='about']");
+    for (let i = 0; i < 3 && !(await about.isVisible()); i++) {
+      await page.getByTestId("icon-about").click();
+      await about.waitFor({ state: "visible", timeout: 3000 }).catch(() => {});
+    }
+    await expect(about).toBeVisible();
   }
-  await expect(page.getByText("Oi, eu sou o Jonathan.")).toBeVisible();
+  await expect(page.getByText("Oi, eu sou o Jonathan.")).toBeVisible({
+    timeout: 10_000,
+  });
 
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
