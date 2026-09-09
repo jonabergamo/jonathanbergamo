@@ -13,7 +13,7 @@ export const experience: Experience[] = [
       en: "Full-Stack Software Engineer",
       pt: "Engenheiro de Software Full-Stack",
     },
-    start: "2025-02",
+    start: "2025-01",
     end: null,
     summary: {
       en: "Global food-tech company. Full-stack work across business-critical internal systems and customer-facing web and mobile applications.",
