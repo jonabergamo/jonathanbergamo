@@ -11,6 +11,7 @@ import { DesktopIcons } from "./desktop-icons";
 import { WindowLayer } from "./window-layer";
 import { Taskbar } from "./taskbar";
 import { WidgetLayer } from "@/components/widgets/widget-layer";
+import { CursorTrail } from "./cursor-trail";
 import { MobileShell } from "./mobile-shell";
 import { useDesktopKeyboard } from "./use-window-keyboard";
 import { useI18n } from "@/i18n/context";
@@ -37,6 +38,7 @@ export function Desktop() {
       ) : (
         <>
           <Wallpaper variant="desktop" />
+          <CursorTrail />
           <WidgetLayer />
           <DesktopIcons />
           <WindowLayer />
