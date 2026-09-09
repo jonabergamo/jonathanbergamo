@@ -32,8 +32,8 @@ export const PALETTES: Palette[] = [
   },
   {
     id: "graphite",
-    name: { en: "Graphite", pt: "Grafite" },
-    swatches: ["#14110f", "#7e7f83", "#f3f3f4", "#d9c5b2", "#34312d"],
+    name: { en: "Graphite & caramel", pt: "Grafite e caramelo" },
+    swatches: ["#26221f", "#9a938a", "#eeeae4", "#a67c52", "#6f5236"],
   },
   {
     id: "forest",

@@ -11,6 +11,16 @@
  * written by next-themes before hydration so there is no flash. The list of
  * palettes with names and swatches lives in src/data/palettes.ts.
  */
+/* Defaults before hydration equal the slate palette. Every palette block below
+   comes later in the file, so it wins whenever data-theme is set. */
+:root {
+  --p-ink: #1b2430;
+  --p-mid: #7c9bb5;
+  --p-paper: #f1f4f7;
+  --p-accent: #0e7c86;
+  --p-deep: #0a4f56;
+  --p-accent-fg: #f1f4f7;
+}
 [data-theme^="natoora-"] {
   --p-ink: #003049;
   --p-mid: #669bbc;
@@ -27,7 +37,6 @@
   --p-deep: #7a3410;
   --p-accent-fg: #f3f6ee;
 }
-:root,
 [data-theme^="slate-"] {
   --p-ink: #1b2430;
   --p-mid: #7c9bb5;
@@ -45,12 +54,12 @@
   --p-accent-fg: #f7f1e9;
 }
 [data-theme^="graphite-"] {
-  --p-ink: #14110f;
-  --p-mid: #7e7f83;
-  --p-paper: #f3f3f4;
-  --p-accent: #d9c5b2;
-  --p-deep: #34312d;
-  --p-accent-fg: #14110f;
+  --p-ink: #26221f;
+  --p-mid: #9a938a;
+  --p-paper: #eeeae4;
+  --p-accent: #a67c52;
+  --p-deep: #6f5236;
+  --p-accent-fg: #26221f;
 }
 [data-theme^="sand-"] {
   --p-ink: #3a2e26;
