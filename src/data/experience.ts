@@ -16,25 +16,25 @@ export const experience: Experience[] = [
     start: "2025-01",
     end: null,
     summary: {
-      en: "A global food tech company. I work across the internal systems the business runs on and the web and mobile apps customers use.",
-      pt: "Uma empresa global de food tech. Trabalho nos sistemas internos que fazem o negócio rodar e nos apps web e mobile que os clientes usam.",
+      en: "A global food tech company. Full stack work across the internal systems the business runs on and the web and mobile apps customers use.",
+      pt: "Uma empresa global de food tech. Trabalho full stack nos sistemas internos que fazem o negócio rodar e nos apps web e mobile que os clientes usam.",
     },
     bullets: {
       en: [
-        "I deliver features end to end and coordinate what gets built between product owners, designers and the other squads.",
-        "I ship production features in React, React Native, TypeScript and Python with Django, on internal tools and on the apps customers use.",
-        "I led the move from legacy Angular screens to React, one screen at a time, which cut technical debt and made components reusable.",
-        "I design and maintain the REST APIs that keep distributed back end services and the front ends in sync.",
-        "I built the team's CI/CD in GitHub Actions, so deploys got less painful and the automated tests became something people trust.",
-        "I work directly with product managers and designers in the UK, turning Figma into finished interfaces, while refactoring critical legacy code without pausing feature work.",
+        "Feature delivery end to end, coordinating what gets built with product owners, designers and the other squads.",
+        "Production features in React, React Native, TypeScript and Python with Django, on internal tools and on the apps customers use.",
+        "Led the move from legacy Angular screens to React, one screen at a time. Less technical debt, components people actually reuse.",
+        "Designed and maintained the REST APIs that keep distributed back end services and the front ends in sync.",
+        "Built the team's CI/CD in GitHub Actions. Deploys got less painful and the automated tests became something people trust.",
+        "Direct work with product managers and designers in the UK, turning Figma into finished interfaces, while refactoring critical legacy code without pausing feature work.",
       ],
       pt: [
-        "Entrego features de ponta a ponta e alinho o que vai ser construído entre product owners, designers e os outros squads.",
-        "Coloco features em produção com React, React Native, TypeScript e Python com Django, em ferramentas internas e nos apps que os clientes usam.",
-        "Liderei a saída das telas legadas em Angular para React, uma tela por vez, o que reduziu dívida técnica e deixou os componentes reutilizáveis.",
-        "Desenho e mantenho as APIs REST que mantêm os serviços de back end distribuídos e os front ends em sincronia.",
-        "Construí a CI/CD do time no GitHub Actions, então os deploys ficaram menos dolorosos e os testes automatizados viraram algo em que as pessoas confiam.",
-        "Trabalho direto com gerentes de produto e designers no Reino Unido, transformando Figma em interfaces terminadas, enquanto refatoro código legado crítico sem pausar as features.",
+        "Entrega de features de ponta a ponta, alinhando o que vai ser construído com product owners, designers e os outros squads.",
+        "Features em produção com React, React Native, TypeScript e Python com Django, em ferramentas internas e nos apps que os clientes usam.",
+        "Liderei a saída das telas legadas em Angular para React, uma tela por vez. Menos dívida técnica e componentes que o time reaproveita de verdade.",
+        "Desenho e manutenção das APIs REST que mantêm os serviços de back end distribuídos e os front ends em sincronia.",
+        "Construí a CI/CD do time no GitHub Actions. Os deploys ficaram menos dolorosos e os testes automatizados viraram algo em que as pessoas confiam.",
+        "Trabalho direto com gerentes de produto e designers no Reino Unido, transformando Figma em interfaces terminadas, enquanto o código legado crítico é refatorado sem pausar as features.",
       ],
     },
     stack: [
@@ -65,9 +65,9 @@ export const experience: Experience[] = [
     },
     bullets: {
       en: [
-        "I built core features across the React Native app, the Next.js web app and the back end, including during the busiest traffic peaks.",
-        "I handled the hardest production incidents within SLA and wrote the migration scripts that moved data off legacy databases without losing a row.",
-        "I added Jest test suites that cut regressions during releases.",
+        "Core features across the React Native app, the Next.js web app and the back end, including during the busiest traffic peaks.",
+        "Handled the hardest production incidents within SLA and wrote the migration scripts that moved data off legacy databases without losing a row.",
+        "Added Jest test suites that cut regressions during releases.",
       ],
       pt: [
         "Construí features centrais no app React Native, no web app Next.js e no back end, inclusive nos picos de tráfego mais pesados.",
@@ -100,9 +100,9 @@ export const experience: Experience[] = [
     },
     bullets: {
       en: [
-        "I built an analytics portal in Next.js and Tailwind where clients explore the output of machine learning models.",
-        "I developed an inventory app for phones that keeps working on bad connections.",
-        "I prototyped in Figma, documented architectures in LaTeX, and ran internal workshops on React patterns for junior developers.",
+        "Built an analytics portal in Next.js and Tailwind where clients explore the output of machine learning models.",
+        "Developed an inventory app for phones that keeps working on bad connections.",
+        "Prototyped in Figma, documented architectures in LaTeX, and ran internal workshops on React patterns for junior developers.",
       ],
       pt: [
         "Construí um portal de analytics em Next.js e Tailwind onde os clientes exploram o resultado de modelos de machine learning.",
