@@ -90,17 +90,6 @@ export const now = {
       open: "projects",
     },
     {
-      id: "looking",
-      icon: "search",
-      label: { en: "Looking for", pt: "Procurando" },
-      value: { en: "The next team", pt: "O próximo time" },
-      body: {
-        en: "A remote full stack or front end role, in English or Portuguese, on a team that cares about the product and ships often.",
-        pt: "Uma vaga remota full stack ou front end, em inglês ou português, num time que se importa com o produto e entrega com frequência.",
-      },
-      open: "contact",
-    },
-    {
       id: "where",
       icon: "pin",
       label: { en: "Where", pt: "Onde" },
