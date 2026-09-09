@@ -33,7 +33,7 @@ export default function ContactWindow() {
         </p>
       </div>
 
-      <div className="border-brand-ink shadow-hard dark:border-brand-paper/30 flex items-stretch overflow-hidden rounded-md border-2">
+      <div className="border-brand-ink shadow-hard dark:border-brand-paper/30 flex shrink-0 items-stretch overflow-hidden rounded-md border-2">
         <a
           href={`mailto:${profile.email}`}
           className="bg-primary text-primary-foreground flex min-w-0 flex-1 items-center gap-3 px-4 py-3 hover:brightness-110"
