@@ -14,7 +14,31 @@ export const projects: Project[] = [
       "Socket.io",
       "Node",
       "Redis",
-      "Fly.io",
+      "Docker",
+    ],
+    images: [
+      {
+        src: "/projects/sharedmd.webp",
+        alt: {
+          en: "Three people editing the same trip plan, each with a named cursor",
+          pt: "Três pessoas editando o mesmo plano de viagem, cada uma com o cursor nomeado",
+        },
+      },
+      {
+        src: "/projects/sharedmd-paper.webp",
+        alt: {
+          en: "The Paper theme in light mode with the theme menu open",
+          pt: "O tema Paper no modo claro com o menu de temas aberto",
+        },
+      },
+      {
+        src: "/projects/sharedmd-mobile.webp",
+        wide: false,
+        alt: {
+          en: "Preview mode on a phone in the Forest theme",
+          pt: "Modo de leitura no celular com o tema Forest",
+        },
+      },
     ],
     links: [
       { label: "Live", url: "https://sharedmd.onrender.com" },
@@ -29,10 +53,14 @@ export const projects: Project[] = [
 
 Under the hood every document is a CRDT, using Yjs. Each client keeps its own copy and applies edits immediately, updates travel as small binary messages over Socket.io, and the maths guarantees every copy ends up identical whatever order the updates arrive in. I chose that over Operational Transformation because the server stays a dumb relay, reconnection is the same code path as normal editing, and optimistic updates come for free. The README goes into the trade offs.
 
+The first line of the document is its title, the way Obsidian does it. You can rename yourself from your avatar, jump back to any room you visited from this device, pick one of four themes in light or dark, and download the result as markdown or PDF.
+
 The server keeps a live document per room, saves a snapshot to Redis two seconds after the last edit, and unloads rooms a minute after they empty. One container on Render serves the API, the sockets and the React front end, on a free instance that naps when nobody is around. Presence, remote cursors, reconnection and persistence are all covered by tests I ran in real browsers, including killing the server while two tabs were typing.`,
       pt: `Abra um link e digite. Todo mundo na sala vê o que você escreve e onde está o seu cursor, com nome e cor. Caiu a conexão, você continua digitando. Quando ela volta, as suas mudanças se juntam às dos outros.
 
 Por baixo, cada documento é um CRDT, usando Yjs. Cada cliente guarda a própria cópia e aplica as edições na hora, as atualizações viajam como mensagens binárias pequenas pelo Socket.io, e a matemática garante que todas as cópias terminam iguais em qualquer ordem que as atualizações chegarem. Escolhi isso em vez de Operational Transformation porque o servidor continua sendo só um repassador, reconectar é o mesmo caminho de código da edição normal e as atualizações otimistas vêm de graça. O README entra nos detalhes.
+
+A primeira linha do documento é o título, do jeito que o Obsidian faz. Dá para trocar o seu nome pelo avatar, voltar para qualquer sala que você abriu naquele aparelho, escolher um de quatro temas em claro ou escuro e baixar o resultado em markdown ou PDF.
 
 O servidor mantém um documento vivo por sala, salva um snapshot no Redis dois segundos depois da última edição e descarrega salas um minuto depois de esvaziarem. Um container na Render serve a API, os sockets e o front end em React, numa instância gratuita que tira uma soneca quando não tem ninguém por perto. Presença, cursores remotos, reconexão e persistência foram todos testados em navegadores de verdade, inclusive matando o servidor enquanto duas abas digitavam.`,
     },

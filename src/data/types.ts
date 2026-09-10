@@ -15,6 +15,8 @@ export type Project = {
   tags: string[];
   links?: Link[];
   image?: string;
+  /** Screenshots shown in the detail dialog. */
+  images?: { src: string; alt: Localized; wide?: boolean }[];
   period: string;
   status: ProjectStatus;
   featured?: boolean;
