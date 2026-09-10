@@ -17,7 +17,7 @@ export const projects: Project[] = [
       "Fly.io",
     ],
     links: [
-      { label: "Live", url: "https://sharedmd.fly.dev" },
+      { label: "Live", url: "https://sharedmd.onrender.com" },
       { label: "GitHub", url: "https://github.com/jonabergamo/sharedmd" },
     ],
     summary: {
@@ -29,12 +29,12 @@ export const projects: Project[] = [
 
 Under the hood every document is a CRDT, using Yjs. Each client keeps its own copy and applies edits immediately, updates travel as small binary messages over Socket.io, and the maths guarantees every copy ends up identical whatever order the updates arrive in. I chose that over Operational Transformation because the server stays a dumb relay, reconnection is the same code path as normal editing, and optimistic updates come for free. The README goes into the trade offs.
 
-The server keeps a live document per room, saves a snapshot to Redis two seconds after the last edit, and unloads rooms a minute after they empty. One container on Fly.io serves the API, the sockets and the React front end. Presence, remote cursors, reconnection and persistence are all covered by tests I ran in real browsers, including killing the server while two tabs were typing.`,
+The server keeps a live document per room, saves a snapshot to Redis two seconds after the last edit, and unloads rooms a minute after they empty. One container on Render serves the API, the sockets and the React front end, on a free instance that naps when nobody is around. Presence, remote cursors, reconnection and persistence are all covered by tests I ran in real browsers, including killing the server while two tabs were typing.`,
       pt: `Abra um link e digite. Todo mundo na sala vê o que você escreve e onde está o seu cursor, com nome e cor. Caiu a conexão, você continua digitando. Quando ela volta, as suas mudanças se juntam às dos outros.
 
 Por baixo, cada documento é um CRDT, usando Yjs. Cada cliente guarda a própria cópia e aplica as edições na hora, as atualizações viajam como mensagens binárias pequenas pelo Socket.io, e a matemática garante que todas as cópias terminam iguais em qualquer ordem que as atualizações chegarem. Escolhi isso em vez de Operational Transformation porque o servidor continua sendo só um repassador, reconectar é o mesmo caminho de código da edição normal e as atualizações otimistas vêm de graça. O README entra nos detalhes.
 
-O servidor mantém um documento vivo por sala, salva um snapshot no Redis dois segundos depois da última edição e descarrega salas um minuto depois de esvaziarem. Um container na Fly.io serve a API, os sockets e o front end em React. Presença, cursores remotos, reconexão e persistência foram todos testados em navegadores de verdade, inclusive matando o servidor enquanto duas abas digitavam.`,
+O servidor mantém um documento vivo por sala, salva um snapshot no Redis dois segundos depois da última edição e descarrega salas um minuto depois de esvaziarem. Um container na Render serve a API, os sockets e o front end em React, numa instância gratuita que tira uma soneca quando não tem ninguém por perto. Presença, cursores remotos, reconexão e persistência foram todos testados em navegadores de verdade, inclusive matando o servidor enquanto duas abas digitavam.`,
     },
   },
   {
