@@ -67,6 +67,19 @@ export const en = {
     },
     empty: "No projects match that tag.",
     links: "Links",
+    feed: {
+      title: "Feed",
+      posts: "posts",
+      forYou: "For you",
+      pinned: "Pinned",
+      like: "Like",
+      liked: "Liked",
+      readMore: "Read more",
+      open: "Open",
+      code: "Code",
+      save: "Save",
+      end: "That's everything I've shipped so far. New posts land here first.",
+    },
   },
   skills: {
     intro:

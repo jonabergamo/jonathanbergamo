@@ -69,6 +69,19 @@ export const pt: Messages = {
     },
     empty: "Nenhum projeto com essa tag.",
     links: "Links",
+    feed: {
+      title: "Feed",
+      posts: "posts",
+      forYou: "Para você",
+      pinned: "Fixado",
+      like: "Curtir",
+      liked: "Curtido",
+      readMore: "Ler mais",
+      open: "Abrir",
+      code: "Código",
+      save: "Salvar",
+      end: "Isso é tudo que já coloquei no ar até agora. Coisa nova aparece aqui primeiro.",
+    },
   },
   skills: {
     intro:

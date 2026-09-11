@@ -122,13 +122,6 @@ Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio 
     award: { en: "1st place, COMBRAPI 2024", pt: "1º lugar, COMBRAPI 2024" },
     images: [
       {
-        src: "/projects/mundobee.webp",
-        alt: {
-          en: "Dashboard of one hive with entrance traffic, temperature and humidity charts",
-          pt: "Dashboard de uma colmeia com gráficos de movimento na entrada, temperatura e umidade",
-        },
-      },
-      {
         src: "/projects/mundobee-hives.webp",
         alt: {
           en: "Four simulated hives reporting live readings",
@@ -136,10 +129,32 @@ Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio 
         },
       },
       {
+        src: "/projects/mundobee.webp",
+        alt: {
+          en: "Dashboard of one hive with entrance traffic, temperature and humidity charts",
+          pt: "Dashboard de uma colmeia com gráficos de movimento na entrada, temperatura e umidade",
+        },
+      },
+      {
         src: "/projects/mundobee-presets.webp",
         alt: {
-          en: "Presets per bee species in the orange palette, dark mode",
-          pt: "Predefinições por espécie de abelha na paleta laranja, modo escuro",
+          en: "Presets per bee species, orange palette in dark mode",
+          pt: "Predefinições por espécie de abelha, paleta laranja no modo escuro",
+        },
+      },
+      {
+        src: "/projects/mundobee-login.webp",
+        alt: {
+          en: "Sign in page with the demo account and a note about the project",
+          pt: "Tela de entrada com a conta demo e uma nota sobre o projeto",
+        },
+      },
+      {
+        src: "/projects/mundobee-mobile.webp",
+        wide: false,
+        alt: {
+          en: "Hive cards on a phone",
+          pt: "Cards das colmeias no celular",
         },
       },
     ],
@@ -148,20 +163,20 @@ Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio 
       { label: "GitHub", url: "https://github.com/jonabergamo/mundobee" },
     ],
     summary: {
-      en: "An IoT platform that reads smart beehives in real time. It won first place at the Brazilian Conference of Beekeeping, and in 2026 it came back online with simulated hives.",
-      pt: "Uma plataforma IoT que lê colmeias inteligentes em tempo real. Ganhou o primeiro lugar no Congresso Brasileiro de Apicultura e em 2026 voltou ao ar com colmeias simuladas.",
+      en: "Live monitoring for beehives. ESP32 sensors, an MQTT broker embedded in the API and a dashboard that shows every hive in real time. Won COMBRAPI 2024 and came back online in 2026 with simulated hives you can try right now.",
+      pt: "Monitoramento de colmeias ao vivo. Sensores ESP32, um broker MQTT embutido na API e um dashboard que mostra cada colmeia em tempo real. Ganhou o COMBRAPI 2024 e voltou ao ar em 2026 com colmeias simuladas que você pode testar agora.",
     },
     description: {
-      en: `A complete IoT platform for beekeepers. An ESP32 in each hive reads brood temperature, humidity and the traffic of bees at the entrance, publishes it over MQTT, and a dashboard shows every hive live with the history behind it. It won first place at COMBRAPI 2024, the Brazilian Conference of Beekeeping.
+      en: `A beehive monitor for beekeepers. An ESP32 in each hive reads brood temperature, humidity and the traffic of bees at the entrance, publishes it over MQTT, and the dashboard shows every hive live with the history behind it. It won first place at COMBRAPI 2024, the Brazilian Conference of Beekeeping.
 
-The 2024 version needed nine Docker services behind Nginx and a machine of your own. In 2026 I cut it down to a NestJS API and a Next.js dashboard that run on free tiers. The MQTT broker now lives inside the API and speaks over WebSocket on the same port, which is what lets a real hive and the browser share one free web service. Readings land in Postgres and go out to the dashboard over Socket.io.
+The 2024 version needed nine Docker services behind Nginx and a machine of your own. In 2026 I cut it down to a NestJS API and a Next.js dashboard that run on free tiers. The MQTT broker moved inside the API and speaks over WebSocket on the same port, so a real hive and the browser share one free web service. Readings are folded into five minute windows before they reach Postgres, which keeps the database tiny while the dashboard still updates every fifteen seconds.
 
-Because the real sensors are back at the apiary, the API can simulate hives. Four virtual colonies follow what the sensors showed in 2024. Brood temperature held near 35 degrees, humidity in the fifties, traffic that peaks at midday and stops at night, and the odd cold snap or dropped connection so the alerts have something to do. Log in with the demo account and they are already publishing.`,
-      pt: `Uma plataforma IoT completa para apicultores. Um ESP32 em cada colmeia lê a temperatura da cria, a umidade e o vai e vem das abelhas na entrada, publica via MQTT, e um dashboard mostra todas as colmeias ao vivo com o histórico atrás. Ganhou o primeiro lugar no COMBRAPI 2024, o Congresso Brasileiro de Apicultura.
+Since the real sensors are back at the apiary, the API simulates hives. Four virtual colonies follow what the sensors showed in 2024, with brood held near 35 degrees, traffic that peaks at midday and stops at night, and the odd cold snap or dropped connection so the offline badge has something to do. The dashboard is in English with a Portuguese switch, has four colour palettes in light or dark, and lets you register hives, create presets per bee species and see the ideal band drawn on the charts. Open the demo and the hives are already publishing.`,
+      pt: `Um monitor de colmeias para apicultores. Um ESP32 em cada colmeia lê a temperatura da cria, a umidade e o vai e vem das abelhas na entrada, publica via MQTT, e o dashboard mostra cada colmeia ao vivo com o histórico atrás. Ganhou o primeiro lugar no COMBRAPI 2024, o Congresso Brasileiro de Apicultura.
 
-A versão de 2024 precisava de nove serviços Docker atrás de um Nginx e de uma máquina própria. Em 2026 enxuguei para uma API em NestJS e um dashboard em Next.js que rodam em planos gratuitos. O broker MQTT agora mora dentro da API e fala por WebSocket na mesma porta, e é isso que deixa uma colmeia de verdade e o navegador dividirem um único serviço web gratuito. As leituras caem no Postgres e saem para o dashboard por Socket.io.
+A versão de 2024 precisava de nove serviços Docker atrás de um Nginx e de uma máquina própria. Em 2026 enxuguei para uma API em NestJS e um dashboard em Next.js que rodam em planos gratuitos. O broker MQTT foi para dentro da API e fala por WebSocket na mesma porta, então uma colmeia de verdade e o navegador dividem um único serviço web gratuito. As leituras são agrupadas em janelas de cinco minutos antes de chegar no Postgres, o que mantém o banco minúsculo enquanto o dashboard segue atualizando a cada quinze segundos.
 
-Como os sensores de verdade ficaram no apiário, a API consegue simular colmeias. Quatro colônias virtuais seguem o que os sensores mostraram em 2024. Temperatura da cria perto de 35 graus, umidade na faixa dos cinquenta, movimento que tem pico ao meio dia e para à noite, e de vez em quando uma noite fria ou uma conexão que cai, para os alertas terem o que fazer. Entre com a conta demo e elas já estão publicando.`,
+Como os sensores de verdade ficaram no apiário, a API simula colmeias. Quatro colônias virtuais seguem o que os sensores mostraram em 2024, com a cria perto de 35 graus, movimento que tem pico ao meio dia e para à noite, e de vez em quando uma noite fria ou uma conexão que cai, para o aviso de sem sinal ter o que fazer. O dashboard está em inglês com troca para português, tem quatro paletas de cor em claro ou escuro, e deixa você cadastrar colmeias, criar predefinições por espécie de abelha e ver a faixa ideal desenhada nos gráficos. Abra a demo e as colmeias já estão publicando.`,
     },
   },
   {

@@ -40,7 +40,7 @@ const DEFAULT_SIZE: Record<WindowId, Size> = {
   about: { w: 560, h: 500 },
   photography: { w: 720, h: 600 },
   experience: { w: 640, h: 560 },
-  projects: { w: 700, h: 580 },
+  projects: { w: 620, h: 660 },
   skills: { w: 560, h: 420 },
   contact: { w: 460, h: 420 },
   terminal: { w: 520, h: 340 },
