@@ -137,7 +137,7 @@ Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio 
       },
     ],
     links: [
-      { label: "Live", url: "https://mundobee-one.vercel.app" },
+      { label: "Live", url: "https://mundobee.vercel.app" },
       { label: "GitHub", url: "https://github.com/jonabergamo/mundobee" },
     ],
     summary: {
