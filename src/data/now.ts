@@ -27,7 +27,7 @@ export type NowItem = {
 };
 
 export const now = {
-  updated: "2026-09-10",
+  updated: "2026-09-11",
   items: [
     {
       id: "reading",
@@ -97,10 +97,10 @@ export const now = {
       id: "building",
       icon: "hammer",
       label: { en: "Building", pt: "Construindo" },
-      value: { en: "SharedMD", pt: "SharedMD" },
+      value: { en: "MundoBee, again", pt: "MundoBee, de novo" },
       body: {
-        en: "A markdown editor where several people type at once. CRDTs, live cursors, offline edits that merge back.",
-        pt: "Um editor markdown em que várias pessoas digitam ao mesmo tempo. CRDTs, cursores ao vivo, edições offline que se juntam de volta.",
+        en: "Bringing my beehive monitor back online. The MQTT broker now lives inside the API and four virtual hives keep the demo alive.",
+        pt: "Colocando meu monitor de colmeias de volta no ar. O broker MQTT agora mora dentro da API e quatro colmeias virtuais mantêm a demo viva.",
       },
       open: "projects",
     },

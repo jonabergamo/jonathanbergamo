@@ -108,25 +108,53 @@ Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio 
     id: "mundobee",
     title: "MundoBee",
     featured: true,
-    status: "archived",
-    period: "2024",
-    tags: ["NestJS", "Next.js", "MQTT", "ESP32", "MariaDB", "Docker", "Nginx"],
+    status: "live",
+    period: "2024 to 2026",
+    tags: [
+      "NestJS",
+      "Next.js",
+      "MQTT",
+      "ESP32",
+      "Postgres",
+      "Socket.io",
+      "Docker",
+    ],
     award: { en: "1st place, COMBRAPI 2024", pt: "1º lugar, COMBRAPI 2024" },
+    images: [
+      {
+        src: "/projects/mundobee.webp",
+        alt: {
+          en: "Dashboard of one hive with entrance traffic, temperature and humidity charts",
+          pt: "Dashboard de uma colmeia com gráficos de movimento na entrada, temperatura e umidade",
+        },
+      },
+      {
+        src: "/projects/mundobee-hives.webp",
+        alt: {
+          en: "Four simulated hives reporting live readings",
+          pt: "Quatro colmeias simuladas enviando leituras ao vivo",
+        },
+      },
+    ],
+    links: [
+      { label: "Live", url: "https://mundobee.vercel.app" },
+      { label: "GitHub", url: "https://github.com/jonabergamo/mundobee" },
+    ],
     summary: {
-      en: "An IoT platform that reads smart beehives in real time. It won first place at the Brazilian Conference of Beekeeping.",
-      pt: "Uma plataforma IoT que lê colmeias inteligentes em tempo real. Ganhou o primeiro lugar no Congresso Brasileiro de Apicultura.",
+      en: "An IoT platform that reads smart beehives in real time. It won first place at the Brazilian Conference of Beekeeping, and in 2026 it came back online with simulated hives.",
+      pt: "Uma plataforma IoT que lê colmeias inteligentes em tempo real. Ganhou o primeiro lugar no Congresso Brasileiro de Apicultura e em 2026 voltou ao ar com colmeias simuladas.",
     },
     description: {
-      en: `A complete IoT platform for beekeepers. ESP32 sensors on each hive publish weight, temperature and humidity over MQTT. A NestJS service ingests the stream into MariaDB, and a Next.js dashboard shows hive health and alerts.
+      en: `A complete IoT platform for beekeepers. An ESP32 in each hive reads brood temperature, humidity and the traffic of bees at the entrance, publishes it over MQTT, and a dashboard shows every hive live with the history behind it. It won first place at COMBRAPI 2024, the Brazilian Conference of Beekeeping.
 
-Everything runs as Docker Compose services behind an Nginx reverse proxy, so a beekeeper can host it on a single cheap box.
+The 2024 version needed nine Docker services behind Nginx and a machine of your own. In 2026 I cut it down to a NestJS API and a Next.js dashboard that run on free tiers. The MQTT broker now lives inside the API and speaks over WebSocket on the same port, which is what lets a real hive and the browser share one free web service. Readings land in Postgres and go out to the dashboard over Socket.io.
 
-It won first place at COMBRAPI 2024, the Brazilian Conference of Beekeeping.`,
-      pt: `Uma plataforma IoT completa para apicultores. Sensores ESP32 em cada colmeia publicam peso, temperatura e umidade via MQTT. Um serviço NestJS ingere o fluxo no MariaDB, e um dashboard em Next.js mostra a saúde das colmeias e os alertas.
+Because the real sensors are back at the apiary, the API can simulate hives. Four virtual colonies follow what the sensors showed in 2024. Brood temperature held near 35 degrees, humidity in the fifties, traffic that peaks at midday and stops at night, and the odd cold snap or dropped connection so the alerts have something to do. Log in with the demo account and they are already publishing.`,
+      pt: `Uma plataforma IoT completa para apicultores. Um ESP32 em cada colmeia lê a temperatura da cria, a umidade e o vai e vem das abelhas na entrada, publica via MQTT, e um dashboard mostra todas as colmeias ao vivo com o histórico atrás. Ganhou o primeiro lugar no COMBRAPI 2024, o Congresso Brasileiro de Apicultura.
 
-Tudo roda como serviços Docker Compose atrás de um proxy reverso Nginx, então um apicultor consegue hospedar numa única máquina barata.
+A versão de 2024 precisava de nove serviços Docker atrás de um Nginx e de uma máquina própria. Em 2026 enxuguei para uma API em NestJS e um dashboard em Next.js que rodam em planos gratuitos. O broker MQTT agora mora dentro da API e fala por WebSocket na mesma porta, e é isso que deixa uma colmeia de verdade e o navegador dividirem um único serviço web gratuito. As leituras caem no Postgres e saem para o dashboard por Socket.io.
 
-Ganhou o primeiro lugar no COMBRAPI 2024, o Congresso Brasileiro de Apicultura.`,
+Como os sensores de verdade ficaram no apiário, a API consegue simular colmeias. Quatro colônias virtuais seguem o que os sensores mostraram em 2024. Temperatura da cria perto de 35 graus, umidade na faixa dos cinquenta, movimento que tem pico ao meio dia e para à noite, e de vez em quando uma noite fria ou uma conexão que cai, para os alertas terem o que fazer. Entre com a conta demo e elas já estão publicando.`,
     },
   },
   {
