@@ -135,6 +135,13 @@ Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio 
           pt: "Quatro colmeias simuladas enviando leituras ao vivo",
         },
       },
+      {
+        src: "/projects/mundobee-presets.webp",
+        alt: {
+          en: "Presets per bee species in the orange palette, dark mode",
+          pt: "Predefinições por espécie de abelha na paleta laranja, modo escuro",
+        },
+      },
     ],
     links: [
       { label: "Live", url: "https://mundobee.vercel.app" },
