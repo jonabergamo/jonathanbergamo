@@ -17,6 +17,7 @@ import { profile } from "@/data/profile";
 import type { Project } from "@/data/types";
 import { cn } from "@/lib/utils";
 import { ProjectDetail } from "./project-detail";
+import { ShotCarousel } from "./shot-carousel";
 
 const HANDLE = "@jonabergamo";
 
@@ -106,7 +107,6 @@ function Post({
   const { t, l } = useI18n();
   const [liked, setLiked] = useLocal(`like:${p.id}`);
   const [saved, setSaved] = useLocal(`save:${p.id}`);
-  const [shot, setShot] = React.useState(0);
   const shots = p.images ?? [];
   const live = p.links?.find((x) => x.label === "Live");
   const repo = p.links?.find((x) => x.label === "GitHub");
@@ -158,45 +158,7 @@ function Post({
       </button>
 
       {shots.length > 0 && (
-        <div className="mt-3">
-          <button
-            type="button"
-            onClick={onOpen}
-            className="bg-brand-ink/5 dark:bg-brand-paper/5 relative block aspect-[16/10] w-full overflow-hidden"
-          >
-            <Image
-              key={shots[shot].src}
-              src={shots[shot].src}
-              alt={l(shots[shot].alt)}
-              fill
-              sizes="560px"
-              className={cn(
-                "object-cover",
-                shots[shot].wide === false && "object-contain",
-              )}
-            />
-          </button>
-          {shots.length > 1 && (
-            <div className="flex justify-center gap-1.5 py-2" role="tablist">
-              {shots.map((s, i) => (
-                <button
-                  key={s.src}
-                  type="button"
-                  role="tab"
-                  aria-selected={i === shot}
-                  aria-label={l(s.alt)}
-                  onClick={() => setShot(i)}
-                  className={cn(
-                    "size-1.5 rounded-full transition-colors",
-                    i === shot
-                      ? "bg-brand-accent"
-                      : "bg-brand-ink/25 dark:bg-brand-paper/30",
-                  )}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        <ShotCarousel shots={shots} onOpen={onOpen} className="mt-3" />
       )}
 
       <div className="flex flex-wrap gap-1 px-4 pt-3">
