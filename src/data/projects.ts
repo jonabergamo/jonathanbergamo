@@ -239,24 +239,46 @@ No celular as mesmas janelas viram telas cheias com uma barra inferior, comparti
     tags: [
       "Django",
       "Django REST Framework",
+      "Channels",
+      "WebSocket",
       "Next.js",
       "TypeScript",
       "Postgres",
-      "Tailwind",
     ],
     images: [
       {
+        src: "/projects/ninebox-landing.webp",
+        alt: {
+          en: "Landing page with the animated 9 box grid",
+          pt: "Página inicial com o grid 9 box animado",
+        },
+      },
+      {
         src: "/projects/ninebox.webp",
         alt: {
-          en: "Teacher overview with the class placed on two 9 box grids",
-          pt: "Visão do professor com a turma posicionada em dois grids 9 box",
+          en: "Teacher overview with the class placed on the grids, levels on each initial",
+          pt: "Visão do professor com a turma posicionada nos grids, nível em cada inicial",
+        },
+      },
+      {
+        src: "/projects/ninebox-exam.webp",
+        alt: {
+          en: "Exam lobby with the live countdown and who is connected",
+          pt: "Sala da prova com o cronômetro ao vivo e quem está conectado",
+        },
+      },
+      {
+        src: "/projects/ninebox-exam-student.webp",
+        alt: {
+          en: "A student answering the quiz against the clock",
+          pt: "Uma aluna respondendo a prova contra o relógio",
         },
       },
       {
         src: "/projects/ninebox-timeline.webp",
         alt: {
-          en: "A student's grid, grade history and progression",
-          pt: "O grid de uma aluna, o histórico de notas e a progressão",
+          en: "A student's own progression, activities and exams",
+          pt: "A progressão de uma aluna, atividades e provas",
         },
       },
       {
@@ -266,38 +288,30 @@ No celular as mesmas janelas viram telas cheias com uma barra inferior, comparti
           pt: "Entregas de uma atividade esperando correção",
         },
       },
-      {
-        src: "/projects/ninebox-login.webp",
-        alt: {
-          en: "Sign in page with demo logins for both roles",
-          pt: "Tela de entrada com logins demo para os dois papéis",
-        },
-      },
-      {
-        src: "/projects/ninebox-mobile.webp",
-        wide: false,
-        alt: { en: "Student view on a phone", pt: "Visão do aluno no celular" },
-      },
     ],
     links: [
       { label: "Live", url: "https://ninebox-seven.vercel.app" },
       { label: "GitHub", url: "https://github.com/jonabergamo/Ninebox" },
     ],
     summary: {
-      en: "A school platform where grades move students across a 9 box grid of performance and potential. Rewritten in 2026 with Django 5 and Next.js, with a demo school you can grade right now.",
-      pt: "Uma plataforma escolar em que as notas movem os alunos por um grid 9 box de desempenho e potencial. Refeita em 2026 com Django 5 e Next.js, com uma escola demo que você pode corrigir agora.",
+      en: "A school platform where grades move students across a 9 box grid of performance and potential, with timed exams over WebSocket. Rewritten in 2026 with Django 5 and Next.js, with a demo school you can grade right now.",
+      pt: "Uma plataforma escolar em que as notas movem os alunos por um grid 9 box de desempenho e potencial, com provas cronometradas por WebSocket. Refeita em 2026 com Django 5 e Next.js, com uma escola demo que você pode corrigir agora.",
     },
     description: {
       en: `Teachers create classes, hand out activities with weighted criteria and mark each student's work with four letters. Every grade moves the student across a 3x3 board of performance and potential, with levels on top, following a small set of rules I wrote in 2023. Fail twice and you drop a cell. Score high on something harder than your level and you climb two. Students see where they stand, what is due and the path that brought them there.
 
 The first version was two repos, a Django 4 API on SQLite with Gmail for emails and a Next 13 front end full of UI kits. In 2026 I merged them into one repo, kept the API history, and rewrote both halves. Django 5 with JWT and Postgres, the grid rules as pure functions with a test per branch, a service layer that records every move, and object level permissions so a teacher only sees their own classes. Students join with a six character class code, no email anywhere.
 
-The dashboard is Next.js 16 with Tailwind 4 and shadcn. It has a heatmap with every student placed on every grid, a progression timeline per student with the grade behind each move, a grading dialog, CSV export and one click demo logins for the teacher and for a student. With the seed flag on, the API builds a demo school with twelve students and eight weeks of graded work on boot, leaving the newest activity ungraded so there is always something to do.`,
+Exams run live. The teacher writes a multiple choice quiz, opens it when the class is in the room, and every student's page flips at the same moment with a countdown. The clock belongs to the server, a Django Channels consumer over WebSocket, which closes the exam when time is up, grades whatever each student answered and tells every page. Scores feed the same grid rules as activities.
+
+The dashboard is Next.js 16 with Tailwind 4 and shadcn. It has a heatmap with every student placed on every grid with their level, a progression timeline per student with the grade behind each move, grading with keyboard shortcuts, CSV export and one click demo logins for both roles. On every deploy the API wipes and rebuilds a demo school with two teachers, 26 students and a semester of graded work, leaving work to grade and a quiz ready to open.`,
       pt: `Professores criam turmas, passam atividades com critérios ponderados e avaliam o trabalho de cada aluno com quatro letras. Cada nota move o aluno por um quadro 3x3 de desempenho e potencial, com níveis por cima, seguindo um conjunto pequeno de regras que escrevi em 2023. Duas notas baixas seguidas e você desce uma casa. Nota alta em algo acima do seu nível e você sobe duas. Alunos veem onde estão, o que tem para entregar e o caminho que os trouxe até ali.
 
 A primeira versão eram dois repositórios, uma API Django 4 em SQLite com Gmail para emails e um front end Next 13 cheio de kits de UI. Em 2026 juntei os dois num repositório só, mantive o histórico da API e reescrevi as duas metades. Django 5 com JWT e Postgres, as regras do grid como funções puras com um teste por ramo, uma camada de serviço que registra cada movimento e permissões por objeto para um professor ver só as próprias turmas. Alunos entram com um código de seis caracteres, sem email em lugar nenhum.
 
-O dashboard é Next.js 16 com Tailwind 4 e shadcn. Tem um mapa com cada aluno posicionado em cada grid, uma linha do tempo de progressão por aluno com a nota atrás de cada movimento, um diálogo de correção, exportação em CSV e logins demo de um clique para o professor e para um aluno. Com a flag de seed ligada, a API monta uma escola demo com doze alunos e oito semanas de trabalhos corrigidos ao iniciar, deixando a atividade mais nova sem correção para sempre ter o que fazer.`,
+As provas acontecem ao vivo. O professor escreve um questionário de múltipla escolha, abre quando a turma está na sala, e a página de cada aluno vira no mesmo instante com uma contagem regressiva. O relógio pertence ao servidor, um consumer do Django Channels por WebSocket, que encerra a prova quando o tempo acaba, corrige o que cada aluno respondeu e avisa todas as páginas. As notas alimentam as mesmas regras do grid que as atividades.
+
+O dashboard é Next.js 16 com Tailwind 4 e shadcn. Tem um mapa com cada aluno posicionado em cada grid com o nível, uma linha do tempo de progressão por aluno com a nota atrás de cada movimento, correção com atalhos de teclado, exportação em CSV e logins demo de um clique para os dois papéis. A cada deploy a API apaga e reconstrói uma escola demo com dois professores, 26 alunos e um semestre de trabalhos corrigidos, deixando trabalho para corrigir e uma prova pronta para abrir.`,
     },
   },
 ];
