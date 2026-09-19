@@ -27,7 +27,7 @@ export type NowItem = {
 };
 
 export const now = {
-  updated: "2026-09-11",
+  updated: "2026-09-19",
   items: [
     {
       id: "reading",
@@ -97,10 +97,10 @@ export const now = {
       id: "building",
       icon: "hammer",
       label: { en: "Building", pt: "Construindo" },
-      value: { en: "MundoBee, again", pt: "MundoBee, de novo" },
+      value: { en: "Ninebox", pt: "Ninebox" },
       body: {
-        en: "Bringing my beehive monitor back online. The MQTT broker now lives inside the API and four virtual hives keep the demo alive.",
-        pt: "Colocando meu monitor de colmeias de volta no ar. O broker MQTT agora mora dentro da API e quatro colmeias virtuais mantêm a demo viva.",
+        en: "Reviving my 2023 school platform. Two repos became one, Django 5 and Next.js 16, and a demo school where grades move students across a 9 box grid.",
+        pt: "Revivendo minha plataforma escolar de 2023. Dois repositórios viraram um, Django 5 e Next.js 16, e uma escola demo em que as notas movem os alunos num grid 9 box.",
       },
       open: "projects",
     },

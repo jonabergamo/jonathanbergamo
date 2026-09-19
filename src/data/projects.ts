@@ -231,18 +231,73 @@ No celular as mesmas janelas viram telas cheias com uma barra inferior, comparti
     },
   },
   {
-    id: "27box",
-    title: "27Box Educational Portal",
-    status: "archived",
-    period: "2023",
-    tags: ["TypeScript", "Next.js", "Python", "Django REST Framework"],
+    id: "ninebox",
+    title: "Ninebox",
+    featured: true,
+    status: "live",
+    period: "2023 to 2026",
+    tags: [
+      "Django",
+      "Django REST Framework",
+      "Next.js",
+      "TypeScript",
+      "Postgres",
+      "Tailwind",
+    ],
+    images: [
+      {
+        src: "/projects/ninebox.webp",
+        alt: {
+          en: "Teacher overview with the class placed on two 9 box grids",
+          pt: "Visão do professor com a turma posicionada em dois grids 9 box",
+        },
+      },
+      {
+        src: "/projects/ninebox-timeline.webp",
+        alt: {
+          en: "A student's grid, grade history and progression",
+          pt: "O grid de uma aluna, o histórico de notas e a progressão",
+        },
+      },
+      {
+        src: "/projects/ninebox-activity.webp",
+        alt: {
+          en: "Submissions of one activity waiting for a grade",
+          pt: "Entregas de uma atividade esperando correção",
+        },
+      },
+      {
+        src: "/projects/ninebox-login.webp",
+        alt: {
+          en: "Sign in page with demo logins for both roles",
+          pt: "Tela de entrada com logins demo para os dois papéis",
+        },
+      },
+      {
+        src: "/projects/ninebox-mobile.webp",
+        wide: false,
+        alt: { en: "Student view on a phone", pt: "Visão do aluno no celular" },
+      },
+    ],
+    links: [
+      { label: "Live", url: "https://ninebox.vercel.app" },
+      { label: "GitHub", url: "https://github.com/jonabergamo/Ninebox" },
+    ],
     summary: {
-      en: "An academic portal built around the 9 Box talent assessment method.",
-      pt: "Um portal acadêmico construído em torno do método 9 Box de avaliação de talentos.",
+      en: "A school platform where grades move students across a 9 box grid of performance and potential. Rewritten in 2026 with Django 5 and Next.js, with a demo school you can grade right now.",
+      pt: "Uma plataforma escolar em que as notas movem os alunos por um grid 9 box de desempenho e potencial. Refeita em 2026 com Django 5 e Next.js, com uma escola demo que você pode corrigir agora.",
     },
     description: {
-      en: `An academic portal that applies the 9 Box talent assessment to students and cohorts. A Next.js front end talks to authenticated Django REST APIs.`,
-      pt: `Um portal acadêmico que aplica a avaliação de talentos 9 Box a alunos e turmas. Um front end Next.js conversa com APIs Django REST autenticadas.`,
+      en: `Teachers create classes, hand out activities with weighted criteria and mark each student's work with four letters. Every grade moves the student across a 3x3 board of performance and potential, with levels on top, following a small set of rules I wrote in 2023. Fail twice and you drop a cell. Score high on something harder than your level and you climb two. Students see where they stand, what is due and the path that brought them there.
+
+The first version was two repos, a Django 4 API on SQLite with Gmail for emails and a Next 13 front end full of UI kits. In 2026 I merged them into one repo, kept the API history, and rewrote both halves. Django 5 with JWT and Postgres, the grid rules as pure functions with a test per branch, a service layer that records every move, and object level permissions so a teacher only sees their own classes. Students join with a six character class code, no email anywhere.
+
+The dashboard is Next.js 16 with Tailwind 4 and shadcn. It has a heatmap with every student placed on every grid, a progression timeline per student with the grade behind each move, a grading dialog, CSV export and one click demo logins for the teacher and for a student. With the seed flag on, the API builds a demo school with twelve students and eight weeks of graded work on boot, leaving the newest activity ungraded so there is always something to do.`,
+      pt: `Professores criam turmas, passam atividades com critérios ponderados e avaliam o trabalho de cada aluno com quatro letras. Cada nota move o aluno por um quadro 3x3 de desempenho e potencial, com níveis por cima, seguindo um conjunto pequeno de regras que escrevi em 2023. Duas notas baixas seguidas e você desce uma casa. Nota alta em algo acima do seu nível e você sobe duas. Alunos veem onde estão, o que tem para entregar e o caminho que os trouxe até ali.
+
+A primeira versão eram dois repositórios, uma API Django 4 em SQLite com Gmail para emails e um front end Next 13 cheio de kits de UI. Em 2026 juntei os dois num repositório só, mantive o histórico da API e reescrevi as duas metades. Django 5 com JWT e Postgres, as regras do grid como funções puras com um teste por ramo, uma camada de serviço que registra cada movimento e permissões por objeto para um professor ver só as próprias turmas. Alunos entram com um código de seis caracteres, sem email em lugar nenhum.
+
+O dashboard é Next.js 16 com Tailwind 4 e shadcn. Tem um mapa com cada aluno posicionado em cada grid, uma linha do tempo de progressão por aluno com a nota atrás de cada movimento, um diálogo de correção, exportação em CSV e logins demo de um clique para o professor e para um aluno. Com a flag de seed ligada, a API monta uma escola demo com doze alunos e oito semanas de trabalhos corrigidos ao iniciar, deixando a atividade mais nova sem correção para sempre ter o que fazer.`,
     },
   },
 ];
