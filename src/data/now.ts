@@ -97,10 +97,10 @@ export const now = {
       id: "building",
       icon: "hammer",
       label: { en: "Building", pt: "Construindo" },
-      value: { en: "Ninebox", pt: "Ninebox" },
+      value: { en: "Kilobyte", pt: "Kilobyte" },
       body: {
-        en: "Reviving my 2023 school platform. Two repos became one, Django 5 and Next.js 16, and a demo school where grades move students across a 9 box grid.",
-        pt: "Revivendo minha plataforma escolar de 2023. Dois repositórios viraram um, Django 5 e Next.js 16, e uma escola demo em que as notas movem os alunos num grid 9 box.",
+        en: "Turning my 2023 college store into a real one. Next.js 16, Drizzle on Postgres, Stripe Checkout in test mode and a manager area.",
+        pt: "Transformando minha loja da faculdade de 2023 numa loja de verdade. Next.js 16, Drizzle no Postgres, Stripe Checkout em modo de teste e uma área de gerente.",
       },
       open: "projects",
     },

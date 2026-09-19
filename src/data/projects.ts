@@ -216,18 +216,88 @@ No celular as mesmas janelas viram telas cheias com uma barra inferior, comparti
     },
   },
   {
-    id: "ecommerce",
-    title: "Online Store",
-    status: "archived",
-    period: "2023",
-    tags: ["Next.js", "Django", "PostgreSQL", "Tailwind CSS", "Docker"],
+    id: "kilobyte",
+    title: "Kilobyte",
+    featured: true,
+    status: "live",
+    period: "2023 to 2026",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Drizzle",
+      "Postgres",
+      "Stripe",
+      "Auth.js",
+      "Tailwind",
+    ],
+    images: [
+      {
+        src: "/projects/kilobyte.webp",
+        alt: {
+          en: "Store home with the hero, categories and picks",
+          pt: "Home da loja com destaque, categorias e escolhidos",
+        },
+      },
+      {
+        src: "/projects/kilobyte-product.webp",
+        alt: {
+          en: "Product page with specs, stock and the buy box",
+          pt: "Página de produto com especificações, estoque e caixa de compra",
+        },
+      },
+      {
+        src: "/projects/kilobyte-checkout.webp",
+        alt: {
+          en: "Checkout with the address form and the order summary before Stripe",
+          pt: "Checkout com o endereço e o resumo do pedido antes do Stripe",
+        },
+      },
+      {
+        src: "/projects/kilobyte-order.webp",
+        alt: {
+          en: "A paid order with its timeline",
+          pt: "Um pedido pago com a linha do tempo",
+        },
+      },
+      {
+        src: "/projects/kilobyte-manage.webp",
+        alt: {
+          en: "Manager dashboard with sales per day, low stock and reviews",
+          pt: "Painel do gerente com vendas por dia, estoque baixo e avaliações",
+        },
+      },
+      {
+        src: "/projects/kilobyte-manage-product.webp",
+        alt: {
+          en: "Editing a product in the manager area",
+          pt: "Editando um produto na área do gerente",
+        },
+      },
+      {
+        src: "/projects/kilobyte-mobile.webp",
+        wide: false,
+        alt: { en: "The store on a phone", pt: "A loja no celular" },
+      },
+    ],
+    links: [
+      { label: "Live", url: "https://kilobyte.vercel.app" },
+      { label: "GitHub", url: "https://github.com/jonabergamo/kilobyte" },
+    ],
     summary: {
-      en: "An online store with JWT login, inventory management and a secure checkout.",
-      pt: "Uma loja online com login por JWT, gestão de estoque e checkout seguro.",
+      en: "An electronics store that works end to end. Search, cart, coupons, Stripe Checkout in test mode, orders with a status timeline, reviews, and a manager area for the catalogue. My 2023 college store rebuilt in 2026.",
+      pt: "Uma loja de eletrônicos que funciona de ponta a ponta. Busca, carrinho, cupons, Stripe Checkout em modo de teste, pedidos com linha do tempo, avaliações e uma área de gerente para o catálogo. Minha loja da faculdade de 2023 refeita em 2026.",
     },
     description: {
-      en: `A complete storefront and back office. Login with JWT, a live product inventory, a secure checkout and a PostgreSQL schema built to grow. Next.js on the front, Django on the back, Docker so local matches production.`,
-      pt: `Loja e back office completos. Login com JWT, estoque de produtos ao vivo, checkout seguro e um esquema PostgreSQL feito para crescer. Next.js na frente, Django atrás, Docker para o local bater com a produção.`,
+      en: `The 2023 version was a college project called Informática, a Django API and a Next 13 front end with a cart and a checkout button that only decremented stock. In 2026 I kept the repo, renamed it and rebuilt it as a real store on one Next.js 16 app. Server components read straight from Postgres through Drizzle, server actions write, Auth.js handles accounts with a customer or manager role.
+
+Checkout is the real thing. The order is written first with a snapshot of names and prices, Stripe gets a Checkout Session for exactly that, and its webhook marks the order paid, takes the stock, counts the coupon and empties the cart. The success page polls until that happened, because Stripe sends you back before its webhook may have arrived. Money is integer cents everywhere and the pricing rules are pure functions with tests. Coupons the manager creates are mirrored as Stripe coupons so the discount shows on Stripe's page too.
+
+Customers get search with filters and sorting, a cart that follows the browser and merges into the account on sign in, a wishlist, reviews only for products they paid for, and an order timeline from paid to delivered. The manager area has a dashboard with sales per day and low stock, products with specs and images, categories, brands, orders with the status flow, coupons, review moderation and customers. Everything runs in Stripe test mode with the demo card, and a nightly cron reseeds the store.`,
+      pt: `A versão de 2023 era um projeto da faculdade chamado Informática, uma API Django e um front end Next 13 com carrinho e um botão de finalizar que só baixava o estoque. Em 2026 mantive o repositório, renomeei e refiz como uma loja de verdade num único app Next.js 16. Server components leem direto do Postgres pelo Drizzle, server actions escrevem, Auth.js cuida das contas com papel de cliente ou gerente.
+
+O checkout é de verdade. O pedido é gravado primeiro com uma cópia dos nomes e preços, o Stripe recebe uma Checkout Session exatamente para aquilo, e o webhook dele marca o pedido como pago, baixa o estoque, conta o cupom e esvazia o carrinho. A página de sucesso fica consultando até isso acontecer, porque o Stripe te devolve antes do webhook chegar. Dinheiro é inteiro em centavos em todo lugar e as regras de preço são funções puras com testes. Cupons que o gerente cria são espelhados como cupons do Stripe, então o desconto aparece na página do Stripe também.
+
+O cliente tem busca com filtros e ordenação, um carrinho que acompanha o navegador e se junta à conta ao entrar, favoritos, avaliações só de produtos que pagou, e uma linha do tempo do pedido de pago a entregue. A área do gerente tem um painel com vendas por dia e estoque baixo, produtos com especificações e imagens, categorias, marcas, pedidos com o fluxo de status, cupons, moderação de avaliações e clientes. Tudo roda no modo de teste do Stripe com o cartão demo, e um cron noturno reinicia a loja.`,
     },
   },
   {
