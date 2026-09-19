@@ -280,7 +280,7 @@ No celular as mesmas janelas viram telas cheias com uma barra inferior, comparti
       },
     ],
     links: [
-      { label: "Live", url: "https://ninebox.vercel.app" },
+      { label: "Live", url: "https://ninebox-seven.vercel.app" },
       { label: "GitHub", url: "https://github.com/jonabergamo/Ninebox" },
     ],
     summary: {
