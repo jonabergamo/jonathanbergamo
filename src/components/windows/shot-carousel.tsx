@@ -54,11 +54,14 @@ export function ShotCarousel({
     const up = () => {
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
-      el.style.scrollSnapType = "";
       const dx = el.scrollLeft - start.left;
       const from = Math.round(start.left / el.clientWidth);
-      // a short flick still turns the page
+      // a short flick still turns the page. snap comes back only once the page has settled,
+      // otherwise it pulls the strip back to where it started
       go(Math.abs(dx) > el.clientWidth * 0.15 ? from + Math.sign(dx) : from);
+      window.setTimeout(() => {
+        el.style.scrollSnapType = "";
+      }, 500);
       if (!start.moved) onOpen?.();
     };
     window.addEventListener("pointermove", move);
