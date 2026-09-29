@@ -385,6 +385,27 @@ As provas acontecem ao vivo. O professor escreve um questionário de múltipla e
 O dashboard é Next.js 16 com Tailwind 4 e shadcn. Tem um mapa com cada aluno posicionado em cada grid com o nível, uma linha do tempo de progressão por aluno com a nota atrás de cada movimento, correção com atalhos de teclado, exportação em CSV e logins demo de um clique para os dois papéis. A cada deploy a API apaga e reconstrói uma escola demo com dois professores, 26 alunos e um semestre de trabalhos corrigidos, deixando trabalho para corrigir e uma prova pronta para abrir.`,
     },
   },
+  {
+    id: "openbox",
+    title: "Openbox",
+    featured: false,
+    status: "wip",
+    period: "2026",
+    tags: ["TypeScript", "Node", "discord.js", "yt-dlp", "FFmpeg", "Docker"],
+    links: [{ label: "GitHub", url: "https://github.com/jonabergamo/openbox" }],
+    summary: {
+      en: "An open source Discord music bot you host yourself, playing YouTube and Spotify links in voice chat from a single Docker container.",
+      pt: "Um bot de música para Discord open source que você hospeda por conta própria, tocando links do YouTube e do Spotify na call a partir de um único container Docker.",
+    },
+    description: {
+      en: `Every public music bot my friend and I used either got shut down or started charging, so I wrote one anyone can run for their own server. You drop a YouTube link, a Spotify track, album or playlist, or just a few words, and it joins your voice channel and plays. There's a queue, skip, pause and stop, and it leaves on its own when nobody is listening.
+
+Audio comes from YouTube through yt-dlp, piped into FFmpeg and straight to Discord without touching the disk. Spotify doesn't let apps stream its audio, and since the February 2026 API changes a developer app can't even read other people's playlists. So the bot reads the public embed page Spotify serves for every link, takes artist and title for each song and only searches YouTube for it when it reaches the front of the queue, which makes a 50 song playlist queue instantly and means nobody needs a Spotify account. It ships as one Docker container with no database, updates yt-dlp every time it starts, and runs best on a machine at home, where YouTube blocks it far less than on a cloud server.`,
+      pt: `Todo bot de música público que eu e um amigo usávamos ou saiu do ar ou começou a cobrar, então escrevi um que qualquer pessoa pode rodar no próprio servidor. Você manda um link do YouTube, uma música, álbum ou playlist do Spotify, ou só algumas palavras, e ele entra na sua call e toca. Tem fila, pular, pausar e parar, e ele sai sozinho quando ninguém está ouvindo.
+
+O áudio vem do YouTube pelo yt-dlp, passa pelo FFmpeg e vai direto para o Discord sem tocar no disco. O Spotify não deixa apps tocarem o áudio dele, e desde as mudanças na API de fevereiro de 2026 um app de desenvolvedor nem consegue ler playlists dos outros. Então o bot lê a página de embed pública que o Spotify serve para cada link, pega artista e título de cada música e só procura no YouTube quando ela chega na frente da fila, o que faz uma playlist de 50 músicas entrar na fila na hora e dispensa conta no Spotify. Ele vem num único container Docker sem banco de dados, atualiza o yt-dlp toda vez que sobe e funciona melhor numa máquina em casa, onde o YouTube bloqueia bem menos do que num servidor na nuvem.`,
+    },
+  },
 ];
 
 export const allTags = Array.from(
