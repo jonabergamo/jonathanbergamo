@@ -406,6 +406,31 @@ Audio comes from YouTube through yt-dlp, piped into FFmpeg and straight to Disco
 O áudio vem do YouTube pelo yt-dlp, passa pelo FFmpeg e vai direto para o Discord sem tocar no disco. O Spotify não deixa apps tocarem o áudio dele, e desde as mudanças na API de fevereiro de 2026 um app de desenvolvedor nem consegue ler playlists dos outros. Então o bot lê a página de embed pública que o Spotify serve para cada link, pega artista e título de cada música e só procura no YouTube quando ela chega na frente da fila, o que faz uma playlist de 50 músicas entrar na fila na hora e dispensa conta no Spotify. Ele vem num único container Docker sem banco de dados, atualiza o yt-dlp toda vez que sobe e funciona melhor numa máquina em casa, onde o YouTube bloqueia bem menos do que num servidor na nuvem.`,
     },
   },
+  {
+    id: "karaoke-box",
+    title: "Karaoke Box",
+    featured: false,
+    status: "wip",
+    period: "2026",
+    tags: ["Python", "FastAPI", "PyTorch", "Demucs", "Whisper", "React", "Web Audio API"],
+    links: [{ label: "GitHub", url: "https://github.com/jonabergamo/karaoke-box" }],
+    summary: {
+      en: "A karaoke machine I run at home. I drop in a song or a YouTube link and it strips the vocals, finds the lyrics, times every word and runs my mic through live effects.",
+      pt: "Um karaokê que roda em casa. Mando uma música ou um link do YouTube e ele tira a voz, acha a letra, sincroniza cada palavra e passa meu microfone por efeitos ao vivo.",
+    },
+    description: {
+      en: `I wanted to sing songs karaoke apps don't have, with my own mic and audio interface. So the app takes any song file or YouTube link and a few minutes later it's ready to sing, with the words filling in on screen like at a karaoke bar.
+
+Demucs splits the track into vocals and instrumental on the GPU. The lyrics come from LRCLIB, a crowdsourced database, matched by artist, title and song length so placeholder entries and the wrong version get skipped. Then Whisper force aligns that text against the isolated vocal track, which gives a start and end for every word. When the aligner gets a line wrong I fall back to LRCLIB's line timings, shifted by the median offset between the two so a different release of the song still lines up.
+
+The heavy work runs on my Linux machine and the app runs in the browser on my Mac over Tailscale. The browser downloads both stems once and plays them in sync with the Web Audio API, so the original voice is a fader I can bring back in to learn a song. The mic chain is Web Audio too, with input channel selection for the interface, EQ, compression, reverb, echo, chorus and presets. Nothing live crosses the network, so my voice comes back in the headphones in about 40 ms.`,
+      pt: `Eu queria cantar músicas que os apps de karaokê não têm, com o meu microfone e a minha interface de áudio. Então o app aceita qualquer arquivo de música ou link do YouTube e alguns minutos depois está pronto para cantar, com as palavras se pintando na tela como em bar de karaokê.
+
+O Demucs separa a voz do instrumental na GPU. A letra vem do LRCLIB, uma base colaborativa, buscada por artista, título e duração para pular cadastros vazios e versões erradas. Depois o Whisper alinha esse texto contra a voz isolada, o que dá início e fim para cada palavra. Quando o alinhador erra uma linha, uso o tempo de linha do próprio LRCLIB, deslocado pela diferença mediana entre os dois, para que até outra versão da música fique certinha.
+
+O trabalho pesado roda na minha máquina Linux e o app roda no navegador do Mac pelo Tailscale. O navegador baixa as duas faixas uma vez e toca as duas juntas com a Web Audio API, então a voz original vira um fader que eu posso subir para aprender a música. A cadeia do microfone também é Web Audio, com escolha do canal da interface, equalizador, compressor, reverb, eco, chorus e presets. Nada ao vivo passa pela rede, então a minha voz volta no fone em uns 40 ms.`,
+    },
+  },
 ];
 
 export const allTags = Array.from(
