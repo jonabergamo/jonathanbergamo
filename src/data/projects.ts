@@ -460,7 +460,15 @@ O áudio vem do YouTube pelo yt-dlp, passa pelo FFmpeg e vai direto para o Disco
     featured: false,
     status: "wip",
     period: "2026",
-    tags: ["Python", "FastAPI", "PyTorch", "Demucs", "Whisper", "React", "Web Audio API"],
+    tags: [
+      "Python",
+      "FastAPI",
+      "PyTorch",
+      "Demucs",
+      "Whisper",
+      "React",
+      "Web Audio API",
+    ],
     video: {
       src: "/projects/karaoke-box.mp4",
       poster: "/projects/karaoke-box-poster.webp",
@@ -469,22 +477,36 @@ O áudio vem do YouTube pelo yt-dlp, passa pelo FFmpeg e vai direto para o Disco
         pt: "Vídeo de lançamento do Karaoke Box",
       },
     },
-    links: [{ label: "GitHub", url: "https://github.com/jonabergamo/karaoke-box" }],
+    links: [
+      { label: "GitHub", url: "https://github.com/jonabergamo/karaoke-box" },
+    ],
     summary: {
-      en: "A karaoke machine I run at home. I drop in a song or a YouTube link and it strips the vocals, finds the lyrics, times every word and runs my mic through live effects.",
-      pt: "Um karaokê que roda em casa. Mando uma música ou um link do YouTube e ele tira a voz, acha a letra, sincroniza cada palavra e passa meu microfone por efeitos ao vivo.",
+      en: "A karaoke machine for home and for parties. Any song or YouTube link becomes a track with every word timed, guests join from their phones, and every note I sing gets scored.",
+      pt: "Um karaokê para casa e para festa. Qualquer música ou link do YouTube vira uma faixa com cada palavra sincronizada, os convidados entram pelo celular e cada nota que eu canto ganha pontos.",
     },
     description: {
       en: `I wanted to sing songs karaoke apps don't have, with my own mic and audio interface. So the app takes any song file or YouTube link and a few minutes later it's ready to sing, with the words filling in on screen like at a karaoke bar.
 
 Demucs splits the track into vocals and instrumental on the GPU. The lyrics come from LRCLIB, a crowdsourced database, matched by artist, title and song length so placeholder entries and the wrong version get skipped. Then Whisper force aligns that text against the isolated vocal track, which gives a start and end for every word. When the aligner gets a line wrong I fall back to LRCLIB's line timings, shifted by the median offset between the two so a different release of the song still lines up.
 
-The heavy work runs on my Linux machine and the app runs in the browser on my Mac over Tailscale. The browser downloads both stems once and plays them in sync with the Web Audio API, so the original voice is a fader I can bring back in to learn a song. The mic chain is Web Audio too, with input channel selection for the interface, EQ, compression, reverb, echo, chorus and presets. Nothing live crosses the network, so my voice comes back in the headphones in about 40 ms.`,
+Singing is a game. Every note is scored against the melody, with the delay from the speaker to the mic measured and taken out. Golden notes are worth double, each line gets a rating, and holding a combo lights up a frame around the notes. The frames are looping videos I render myself, each one unlocked by a mission. After a take a report shows which lines were off and which way, next to the last take. There's also a voice test that names your range, a warm up, a practice mode that slows a stretch down without changing the key, levels, achievements and a daily challenge.
+
+Party mode is where it gets loud. Guests scan a QR code, name themselves and add songs from their phones. The queue rotates fairly and the phone buzzes when they're next. They cheer and rate whoever is on stage, the stage keeps a live ranking, and at the end of the night it hands out awards and cuts a one minute video from everyone's best moment. When I sing alone the phone becomes a remote with the whole mixing desk on it.
+
+Most of the extras are plugins. A plugin can bring song and lyrics sources, separation engines, color themes, voice effects, combo frames with their missions, or screens of its own like a song roulette and a year in review. Even the Portuguese is a language plugin.
+
+It installs with one command on macOS and Linux or a .exe on Windows and opens as a desktop app. The heavy work can run on another computer on the network, which is how I use it, the Mac plays and the Linux box with the GPU prepares. The browser downloads both stems once and plays them in sync with the Web Audio API, so the original voice is just a fader. The mic chain is Web Audio too, with EQ, compression, reverb and presets, and my voice comes back in the headphones in about 40 ms.`,
       pt: `Eu queria cantar músicas que os apps de karaokê não têm, com o meu microfone e a minha interface de áudio. Então o app aceita qualquer arquivo de música ou link do YouTube e alguns minutos depois está pronto para cantar, com as palavras se pintando na tela como em bar de karaokê.
 
 O Demucs separa a voz do instrumental na GPU. A letra vem do LRCLIB, uma base colaborativa, buscada por artista, título e duração para pular cadastros vazios e versões erradas. Depois o Whisper alinha esse texto contra a voz isolada, o que dá início e fim para cada palavra. Quando o alinhador erra uma linha, uso o tempo de linha do próprio LRCLIB, deslocado pela diferença mediana entre os dois, para que até outra versão da música fique certinha.
 
-O trabalho pesado roda na minha máquina Linux e o app roda no navegador do Mac pelo Tailscale. O navegador baixa as duas faixas uma vez e toca as duas juntas com a Web Audio API, então a voz original vira um fader que eu posso subir para aprender a música. A cadeia do microfone também é Web Audio, com escolha do canal da interface, equalizador, compressor, reverb, eco, chorus e presets. Nada ao vivo passa pela rede, então a minha voz volta no fone em uns 40 ms.`,
+Cantar vira jogo. Cada nota é pontuada contra a melodia, com o atraso entre a caixa de som e o microfone medido e descontado. Notas douradas valem o dobro, cada linha ganha uma nota, e segurar o combo acende uma moldura em volta das notas. As molduras são vídeos em loop que eu mesmo renderizo, e cada uma é liberada por uma missão. Depois de cantar, um relatório mostra quais linhas saíram do tom e para que lado, comparando com a última vez. Também tem um teste de voz que diz a sua extensão, aquecimento, um modo de treino que deixa um trecho mais lento sem mudar o tom, níveis, conquistas e um desafio do dia.
+
+O modo festa é onde a coisa esquenta. Os convidados leem um QR code, colocam o nome e escolhem músicas pelo celular. A fila gira de um jeito justo e o celular vibra quando a vez está chegando. Eles torcem e dão estrelas para quem está cantando, o palco mostra o ranking ao vivo e no fim da noite entrega os prêmios e monta um vídeo de um minuto com o melhor momento de cada um. Quando eu canto sozinho, o celular vira um controle remoto com a mesa de som inteira.
+
+Quase tudo que é extra vem de plugin. Um plugin pode trazer fontes de música e de letra, motores de separação, temas de cor, efeitos de voz, molduras com as suas missões ou telas próprias, como uma roleta de músicas e uma retrospectiva do ano. Até o português é um plugin de idioma.
+
+Instala com um comando no macOS e no Linux ou com um .exe no Windows e abre como app de desktop. O trabalho pesado pode rodar em outro computador da rede, que é como eu uso, o Mac toca e a máquina Linux com a GPU prepara. O navegador baixa as duas faixas uma vez e toca as duas juntas com a Web Audio API, então a voz original é só um fader. A cadeia do microfone também é Web Audio, com equalizador, compressor, reverb e presets, e a minha voz volta no fone em uns 40 ms.`,
     },
   },
 ];
