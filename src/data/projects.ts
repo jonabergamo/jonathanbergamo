@@ -40,6 +40,14 @@ export const projects: Project[] = [
         },
       },
     ],
+    video: {
+      src: "/projects/sharedmd.mp4",
+      poster: "/projects/sharedmd-poster.webp",
+      alt: {
+        en: "Launch video for SharedMD",
+        pt: "Vídeo de lançamento do SharedMD",
+      },
+    },
     links: [
       { label: "Live", url: "https://sharedmd.onrender.com" },
       { label: "GitHub", url: "https://github.com/jonabergamo/sharedmd" },
@@ -158,6 +166,14 @@ Next.js, React, TypeScript, Prisma e PostgreSQL. As regras de agenda e rodízio 
         },
       },
     ],
+    video: {
+      src: "/projects/mundobee.mp4",
+      poster: "/projects/mundobee-poster.webp",
+      alt: {
+        en: "Launch video for MundoBee",
+        pt: "Vídeo de lançamento do MundoBee",
+      },
+    },
     links: [
       { label: "Live", url: "https://mundobee.vercel.app" },
       { label: "GitHub", url: "https://github.com/jonabergamo/mundobee" },
@@ -193,6 +209,14 @@ Como os sensores de verdade ficaram no apiário, a API simula colmeias. Quatro c
       "Zustand",
       "Playwright",
     ],
+    video: {
+      src: "/projects/portfolio-os.mp4",
+      poster: "/projects/portfolio-os-poster.webp",
+      alt: {
+        en: "Launch video for This portfolio",
+        pt: "Vídeo de lançamento do This portfolio",
+      },
+    },
     links: [
       {
         label: "GitHub",
@@ -280,6 +304,14 @@ No celular as mesmas janelas viram telas cheias com uma barra inferior, comparti
         alt: { en: "The store on a phone", pt: "A loja no celular" },
       },
     ],
+    video: {
+      src: "/projects/kilobyte.mp4",
+      poster: "/projects/kilobyte-poster.webp",
+      alt: {
+        en: "Launch video for Kilobyte",
+        pt: "Vídeo de lançamento do Kilobyte",
+      },
+    },
     links: [
       { label: "Live", url: "https://kilobyte-rho.vercel.app" },
       { label: "GitHub", url: "https://github.com/jonabergamo/kilobyte" },
@@ -360,6 +392,14 @@ O cliente tem busca com filtros e ordenação, um carrinho que acompanha o naveg
         },
       },
     ],
+    video: {
+      src: "/projects/ninebox.mp4",
+      poster: "/projects/ninebox-poster.webp",
+      alt: {
+        en: "Launch video for Ninebox",
+        pt: "Vídeo de lançamento do Ninebox",
+      },
+    },
     links: [
       { label: "Live", url: "https://ninebox-seven.vercel.app" },
       { label: "GitHub", url: "https://github.com/jonabergamo/Ninebox" },
@@ -392,6 +432,14 @@ O dashboard é Next.js 16 com Tailwind 4 e shadcn. Tem um mapa com cada aluno po
     status: "wip",
     period: "2026",
     tags: ["TypeScript", "Node", "discord.js", "yt-dlp", "FFmpeg", "Docker"],
+    video: {
+      src: "/projects/openbox.mp4",
+      poster: "/projects/openbox-poster.webp",
+      alt: {
+        en: "Launch video for Openbox",
+        pt: "Vídeo de lançamento do Openbox",
+      },
+    },
     links: [{ label: "GitHub", url: "https://github.com/jonabergamo/openbox" }],
     summary: {
       en: "An open source Discord music bot you host yourself, playing YouTube and Spotify links in voice chat from a single Docker container.",
@@ -413,6 +461,14 @@ O áudio vem do YouTube pelo yt-dlp, passa pelo FFmpeg e vai direto para o Disco
     status: "wip",
     period: "2026",
     tags: ["Python", "FastAPI", "PyTorch", "Demucs", "Whisper", "React", "Web Audio API"],
+    video: {
+      src: "/projects/karaoke-box.mp4",
+      poster: "/projects/karaoke-box-poster.webp",
+      alt: {
+        en: "Launch video for Karaoke Box",
+        pt: "Vídeo de lançamento do Karaoke Box",
+      },
+    },
     links: [{ label: "GitHub", url: "https://github.com/jonabergamo/karaoke-box" }],
     summary: {
       en: "A karaoke machine I run at home. I drop in a song or a YouTube link and it strips the vocals, finds the lyrics, times every word and runs my mic through live effects.",
