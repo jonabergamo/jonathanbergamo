@@ -157,8 +157,13 @@ function Post({
         <p className="mt-2 text-[15px] leading-relaxed">{l(p.summary)}</p>
       </button>
 
-      {shots.length > 0 && (
-        <ShotCarousel shots={shots} onOpen={onOpen} className="mt-3" />
+      {(shots.length > 0 || p.video) && (
+        <ShotCarousel
+          shots={shots}
+          video={p.video}
+          onOpen={onOpen}
+          className="mt-3"
+        />
       )}
 
       <div className="flex flex-wrap gap-1 px-4 pt-3">

@@ -17,6 +17,8 @@ export type Project = {
   image?: string;
   /** Screenshots shown in the detail dialog. */
   images?: { src: string; alt: Localized; wide?: boolean }[];
+  /** Launch video, shown before the screenshots. */
+  video?: { src: string; poster: string; alt: Localized };
   period: string;
   status: ProjectStatus;
   featured?: boolean;

@@ -8,16 +8,22 @@ import type { Project } from "@/data/types";
 import { cn } from "@/lib/utils";
 
 type Shot = NonNullable<Project["images"]>[number];
+type Video = NonNullable<Project["video"]>;
 
-// a strip of screenshots you can drag, swipe, click through with arrows or step with the keyboard
+// a strip of screenshots you can drag, swipe, click through with arrows or step with the keyboard.
+// a launch video, when there is one, goes first
 export function ShotCarousel({
   shots,
+  video,
+  controls = false,
   onOpen,
   className,
   aspect = "aspect-[16/10]",
   fit = "cover",
 }: {
   shots: Shot[];
+  video?: Video;
+  controls?: boolean;
   onOpen?: () => void;
   className?: string;
   aspect?: string;
@@ -44,6 +50,8 @@ export function ShotCarousel({
   const down = (e: React.PointerEvent) => {
     const el = track.current;
     if (e.pointerType !== "mouse" || !el) return;
+    // leave the native video controls alone, seeking would drag the strip
+    if (controls && e.target instanceof HTMLVideoElement) return;
     const start = { x: e.clientX, left: el.scrollLeft, moved: false };
     el.style.scrollSnapType = "none";
     const move = (ev: PointerEvent) => {
@@ -68,7 +76,11 @@ export function ShotCarousel({
     window.addEventListener("pointerup", up);
   };
 
-  const many = shots.length > 1;
+  const slides = [
+    ...(video ? [{ key: video.src, alt: video.alt }] : []),
+    ...shots.map((s) => ({ key: s.src, alt: s.alt })),
+  ];
+  const many = slides.length > 1;
 
   return (
     <div className={cn("group relative", className)}>
@@ -89,6 +101,11 @@ export function ShotCarousel({
           aspect,
         )}
       >
+        {video && (
+          <div className="relative w-full shrink-0 snap-start">
+            <Clip video={video} controls={controls} />
+          </div>
+        )}
         {shots.map((s) => (
           <div key={s.src} className="relative w-full shrink-0 snap-start">
             <Image
@@ -115,13 +132,13 @@ export function ShotCarousel({
           />
           <Arrow
             side="right"
-            disabled={index === shots.length - 1}
+            disabled={index === slides.length - 1}
             onClick={() => go(index + 1)}
           />
           <div className="flex justify-center gap-1.5 py-2" role="tablist">
-            {shots.map((s, i) => (
+            {slides.map((s, i) => (
               <button
-                key={s.src}
+                key={s.key}
                 type="button"
                 role="tab"
                 aria-selected={i === index}
@@ -139,6 +156,42 @@ export function ShotCarousel({
         </>
       )}
     </div>
+  );
+}
+
+// plays muted while on screen and pauses when scrolled away, so a feed of them stays cheap
+function Clip({ video, controls }: { video: Video; controls: boolean }) {
+  const { l } = useI18n();
+  const ref = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) el.play().catch(() => {});
+        else el.pause();
+      },
+      { threshold: 0.6 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={video.src}
+      poster={video.poster}
+      aria-label={l(video.alt)}
+      muted
+      loop
+      playsInline
+      preload="none"
+      controls={controls}
+      draggable={false}
+      className="absolute inset-0 size-full bg-black object-contain"
+    />
   );
 }
 

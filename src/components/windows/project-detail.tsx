@@ -35,9 +35,11 @@ export function ProjectDetail({
                 {project.period} · {t(`projects.status.${project.status}`)}
               </DialogDescription>
             </DialogHeader>
-            {shots.length > 0 && (
+            {(shots.length > 0 || project.video) && (
               <ShotCarousel
                 shots={shots}
+                video={project.video}
+                controls
                 fit="contain"
                 aspect="aspect-[16/10]"
                 className="border-brand-ink/15 border-b"
